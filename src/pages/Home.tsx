@@ -60,51 +60,114 @@ const Home = () => {
               <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
             </div>
 
-            {/* Floating Objects */}
+            {/* Minecraft Floating Objects */}
+            {/* Grass Block */}
             <motion.div
-              animate={{ y: [-20, 20, -20], rotate: [0, 10, 0] }}
+              animate={{ y: [-20, 20, -20], rotate: [0, 5, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[15%] left-[10%] w-16 h-16 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30 backdrop-blur-sm"
+              className="absolute top-[15%] left-[10%] w-14 h-14 shadow-lg"
+              style={{
+                background: 'linear-gradient(to bottom, #5d8c3e 0%, #5d8c3e 30%, #8b5a2b 30%, #8b5a2b 100%)',
+                boxShadow: '0 0 20px rgba(93, 140, 62, 0.4)',
+                imageRendering: 'pixelated'
+              }}
             />
+            
+            {/* Diamond Block */}
             <motion.div
-              animate={{ y: [20, -20, 20], rotate: [0, -15, 0] }}
+              animate={{ y: [20, -20, 20], rotate: [0, -5, 0] }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[20%] right-[15%] w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/20 to-yellow-500/20 border border-orange-500/30 backdrop-blur-sm"
+              className="absolute top-[20%] right-[15%] w-12 h-12"
+              style={{
+                background: 'linear-gradient(135deg, #4aedd9 0%, #2dd4bf 50%, #1a9988 100%)',
+                boxShadow: '0 0 25px rgba(74, 237, 217, 0.5)',
+              }}
             />
+            
+            {/* TNT Block */}
             <motion.div
-              animate={{ y: [-15, 25, -15], x: [-10, 10, -10] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[25%] left-[8%] w-20 h-20 rounded-2xl bg-gradient-to-br from-red-600/15 to-red-400/15 border border-red-500/20 backdrop-blur-sm rotate-12"
-            />
-            <motion.div
-              animate={{ y: [15, -25, 15], rotate: [45, 90, 45] }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[30%] right-[10%] w-14 h-14 rounded-lg bg-gradient-to-br from-orange-400/20 to-red-500/20 border border-orange-400/30 backdrop-blur-sm"
-            />
-            <motion.div
-              animate={{ y: [-10, 30, -10], scale: [1, 1.1, 1] }}
+              animate={{ y: [-15, 25, -15], scale: [1, 1.05, 1] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[40%] left-[5%] w-8 h-8 rounded-full bg-gradient-to-br from-red-500/30 to-orange-500/30 border border-red-400/40"
+              className="absolute bottom-[25%] left-[8%] w-16 h-16 flex items-center justify-center"
+              style={{
+                background: 'linear-gradient(to bottom, #dc2626 0%, #dc2626 100%)',
+                boxShadow: '0 0 20px rgba(220, 38, 38, 0.5)',
+              }}
+            >
+              <span className="text-white font-bold text-xs" style={{ fontFamily: 'monospace' }}>TNT</span>
+            </motion.div>
+            
+            {/* Creeper Face */}
+            <motion.div
+              animate={{ y: [15, -25, 15], rotate: [0, 3, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-[30%] right-[10%] w-14 h-14 relative"
+              style={{
+                background: '#4ade80',
+                boxShadow: '0 0 20px rgba(74, 222, 128, 0.4)',
+              }}
+            >
+              {/* Creeper Eyes */}
+              <div className="absolute top-2 left-2 w-3 h-3 bg-black" />
+              <div className="absolute top-2 right-2 w-3 h-3 bg-black" />
+              {/* Creeper Mouth */}
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 w-2 h-4 bg-black" />
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 w-6 h-2 bg-black" />
+            </motion.div>
+            
+            {/* Gold Block */}
+            <motion.div
+              animate={{ y: [-10, 30, -10], rotate: [0, -3, 0] }}
+              transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-[40%] left-[5%] w-10 h-10"
+              style={{
+                background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
+                boxShadow: '0 0 20px rgba(251, 191, 36, 0.5)',
+              }}
             />
+            
+            {/* Dirt Block */}
             <motion.div
               animate={{ y: [25, -15, 25], x: [5, -5, 5] }}
-              transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[60%] right-[8%] w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-500/15 to-orange-500/15 border border-yellow-500/20 backdrop-blur-sm rotate-45"
-            />
-            <motion.div
-              animate={{ y: [-20, 15, -20], rotate: [0, 360] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-              className="absolute top-[70%] left-[15%] w-6 h-6 rounded-md bg-gradient-to-br from-red-400/25 to-orange-400/25 border border-red-400/30"
-            />
-            <motion.div
-              animate={{ y: [10, -20, 10], scale: [1, 0.9, 1] }}
               transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[25%] left-[25%] w-5 h-5 rounded-full bg-red-500/40"
+              className="absolute top-[60%] right-[8%] w-11 h-11"
+              style={{
+                background: '#8b5a2b',
+                boxShadow: '0 0 15px rgba(139, 90, 43, 0.4)',
+              }}
             />
+            
+            {/* Redstone Block */}
+            <motion.div
+              animate={{ y: [-20, 15, -20], scale: [1, 1.1, 1] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-[70%] left-[15%] w-9 h-9"
+              style={{
+                background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+                boxShadow: '0 0 25px rgba(239, 68, 68, 0.6)',
+              }}
+            />
+            
+            {/* Emerald Block */}
+            <motion.div
+              animate={{ y: [10, -20, 10], rotate: [0, 5, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-[25%] left-[25%] w-8 h-8"
+              style={{
+                background: 'linear-gradient(135deg, #22c55e 0%, #15803d 100%)',
+                boxShadow: '0 0 20px rgba(34, 197, 94, 0.5)',
+              }}
+            />
+            
+            {/* Lapis Block */}
             <motion.div
               animate={{ y: [-25, 10, -25], x: [-8, 8, -8] }}
-              transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[40%] right-[20%] w-7 h-7 rounded-lg bg-gradient-to-br from-orange-500/25 to-yellow-500/25 border border-orange-400/35 rotate-12"
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-[40%] right-[20%] w-10 h-10"
+              style={{
+                background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)',
+              }}
             />
 
             <div className="container mx-auto px-4 relative z-10">
