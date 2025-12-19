@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -58,25 +58,29 @@ const Index = () => {
         <link rel="canonical" href="https://frictionhost.com" />
       </Helmet>
 
-      <AnimatePresence>
-        {isLoading && (
-          <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <LoadingScreen key="loading" onLoadingComplete={() => setIsLoading(false)} />
+        ) : (
+          <motion.main
+            key="main"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="min-h-screen bg-[#0a0a0a]"
+          >
+            <Navbar />
+            <HeroSection />
+            <FeaturesSection />
+            <TeamSection />
+            <RamCalculator />
+            <TestimonialsSection />
+            <FAQSection />
+            <SupportSection />
+            <Footer />
+          </motion.main>
         )}
       </AnimatePresence>
-
-      {!isLoading && (
-        <main className="min-h-screen bg-[#0a0a0a]">
-          <Navbar />
-          <HeroSection />
-          <FeaturesSection />
-          <TeamSection />
-          <RamCalculator />
-          <TestimonialsSection />
-          <FAQSection />
-          <SupportSection />
-          <Footer />
-        </main>
-      )}
     </>
   );
 };
