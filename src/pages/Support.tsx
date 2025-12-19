@@ -13,7 +13,7 @@ const supportChannels = [
     icon: MessageCircle,
     title: "Discord Community",
     description: "Join our active Discord server for instant help and community support.",
-    link: "https://discord.gg/frictionhost",
+    link: "https://discord.gg/93mRrFkutF",
     linkText: "Join Discord",
     highlight: true,
   },
