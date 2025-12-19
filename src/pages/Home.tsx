@@ -1,20 +1,35 @@
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Flame, Zap, Copy, Check, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [copied, setCopied] = useState(false);
   const offerCode = "FRICTION20";
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(offerCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
+  }
 
   return (
     <>
@@ -26,7 +41,12 @@ const Home = () => {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-[#0a0a0a]">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="min-h-screen bg-[#0a0a0a]"
+      >
         <Navbar />
         
         <main className="pt-16">
@@ -136,12 +156,16 @@ const Home = () => {
                   transition={{ delay: 1 }}
                   className="flex flex-col sm:flex-row gap-4 justify-center"
                 >
-                  <Button variant="hero" size="lg" className="gap-2 text-lg px-8">
-                    Get Started <ArrowRight className="w-5 h-5" />
-                  </Button>
-                  <Button variant="outline" size="lg" className="gap-2 text-lg px-8 border-zinc-700 hover:border-red-500/50">
-                    View Plans
-                  </Button>
+                  <Link to="/pricing">
+                    <Button variant="hero" size="lg" className="gap-2 text-lg px-8">
+                      Get Started <ArrowRight className="w-5 h-5" />
+                    </Button>
+                  </Link>
+                  <Link to="/pricing">
+                    <Button variant="outline" size="lg" className="gap-2 text-lg px-8 border-zinc-700 hover:border-red-500/50">
+                      View Plans
+                    </Button>
+                  </Link>
                 </motion.div>
 
                 {/* Stats */}
@@ -171,7 +195,7 @@ const Home = () => {
         </main>
 
         <Footer />
-      </div>
+      </motion.div>
     </>
   );
 };
