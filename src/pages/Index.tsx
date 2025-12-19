@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -14,12 +14,16 @@ import SupportSection from "@/components/SupportSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const mountTime = useRef(Date.now());
   const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    // Reset loading state on mount (handles browser refresh)
+    setIsLoading(true);
+  }, []);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
-    setTimeout(() => setShowContent(true), 100);
   };
 
   return (
