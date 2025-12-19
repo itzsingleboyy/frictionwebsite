@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Copy, Check, CreditCard, Clock } from "lucide-react";
+import { X, Copy, Check, CreditCard, Clock, Tag, Percent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
@@ -20,18 +20,76 @@ interface PaymentModalProps {
   plan: Plan | null;
 }
 
+interface Coupon {
+  code: string;
+  discount: number; // percentage
+  description: string;
+}
+
+// Available coupons - you can modify these
+const COUPONS: Coupon[] = [
+  { code: "WELCOME10", discount: 10, description: "10% off for new users" },
+  { code: "FRICTION20", discount: 20, description: "20% special discount" },
+  { code: "SUMMER25", discount: 25, description: "25% summer sale" },
+  { code: "MEGA50", discount: 50, description: "50% mega discount" },
+];
+
 const UPI_ID = "shashankfan@axl";
 
 const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
   const [transactionId, setTransactionId] = useState("");
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
+  const [couponLoading, setCouponLoading] = useState(false);
 
   const copyUPI = async () => {
     await navigator.clipboard.writeText(UPI_ID);
     setCopied(true);
     toast.success("UPI ID copied!");
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const applyCoupon = () => {
+    if (!couponCode.trim()) {
+      toast.error("Please enter a coupon code");
+      return;
+    }
+
+    setCouponLoading(true);
+    
+    // Simulate API call delay
+    setTimeout(() => {
+      const foundCoupon = COUPONS.find(
+        (c) => c.code.toLowerCase() === couponCode.trim().toLowerCase()
+      );
+
+      if (foundCoupon) {
+        setAppliedCoupon(foundCoupon);
+        toast.success(`Coupon applied! ${foundCoupon.discount}% off`);
+      } else {
+        toast.error("Invalid coupon code");
+      }
+      setCouponLoading(false);
+    }, 500);
+  };
+
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode("");
+    toast.info("Coupon removed");
+  };
+
+  const getDiscountedPrice = () => {
+    if (!plan) return 0;
+    if (!appliedCoupon) return plan.price;
+    return Math.round(plan.price * (1 - appliedCoupon.discount / 100));
+  };
+
+  const getDiscount = () => {
+    if (!plan || !appliedCoupon) return 0;
+    return plan.price - getDiscountedPrice();
   };
 
   const handleSubmitOrder = async () => {
@@ -55,7 +113,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
       const { error } = await supabase.from("orders").insert({
         user_id: user.id,
         plan_name: plan.name,
-        plan_price: plan.price,
+        plan_price: getDiscountedPrice(),
         ram: plan.ram,
         cpu: plan.cpu,
         storage: plan.storage,
@@ -67,6 +125,8 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
 
       toast.success("Order placed successfully! Admin will verify your payment.");
       setTransactionId("");
+      setCouponCode("");
+      setAppliedCoupon(null);
       onClose();
     } catch (error: any) {
       console.error("Order error:", error);
@@ -127,12 +187,78 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
                 <span className="text-zinc-400">Storage</span>
                 <span className="text-white">{plan.storage}</span>
               </div>
-              <div className="border-t border-zinc-700 mt-4 pt-4 flex justify-between items-center">
-                <span className="text-white font-semibold">Total</span>
-                <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
-                  ₹{plan.price}/mo
-                </span>
+              <div className="border-t border-zinc-700 mt-4 pt-4">
+                {appliedCoupon && (
+                  <>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-zinc-400">Subtotal</span>
+                      <span className="text-zinc-400">₹{plan.price}/mo</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-green-400 flex items-center gap-1">
+                        <Percent className="w-4 h-4" />
+                        Discount ({appliedCoupon.discount}%)
+                      </span>
+                      <span className="text-green-400">-₹{getDiscount()}</span>
+                    </div>
+                  </>
+                )}
+                <div className="flex justify-between items-center">
+                  <span className="text-white font-semibold">Total</span>
+                  <div className="text-right">
+                    {appliedCoupon && (
+                      <span className="text-sm text-zinc-500 line-through mr-2">
+                        ₹{plan.price}
+                      </span>
+                    )}
+                    <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      ₹{getDiscountedPrice()}/mo
+                    </span>
+                  </div>
+                </div>
               </div>
+            </div>
+
+            {/* Coupon Code */}
+            <div className="mb-6">
+              <label className="block text-sm text-zinc-400 mb-2 flex items-center gap-2">
+                <Tag className="w-4 h-4" />
+                Coupon Code
+              </label>
+              {appliedCoupon ? (
+                <div className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+                  <div>
+                    <span className="text-green-400 font-semibold">{appliedCoupon.code}</span>
+                    <p className="text-xs text-green-300/70">{appliedCoupon.description}</p>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={removeCoupon}
+                    className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Input
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                    placeholder="Enter coupon code"
+                    className="bg-zinc-800 border-zinc-700 text-white uppercase"
+                    onKeyDown={(e) => e.key === "Enter" && applyCoupon()}
+                  />
+                  <Button
+                    variant="outline"
+                    onClick={applyCoupon}
+                    disabled={couponLoading}
+                    className="border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-800"
+                  >
+                    {couponLoading ? "..." : "Apply"}
+                  </Button>
+                </div>
+              )}
             </div>
 
             {/* UPI Payment */}
