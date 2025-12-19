@@ -16,12 +16,12 @@ const Navbar = () => {
     { name: "Support", href: "#support" },
   ];
 
-  const games = [
-    { name: "Minecraft", href: "#" },
-    { name: "Rust", href: "#" },
-    { name: "Palworld", href: "#" },
-    { name: "GTA V", href: "#" },
-    { name: "Terraria", href: "#" },
+  const gameCategories = [
+    { name: "All Games", href: "#games", category: "all" },
+    { name: "Popular", href: "#games", category: "popular" },
+    { name: "Survival", href: "#games", category: "survival" },
+    { name: "Sandbox", href: "#games", category: "sandbox" },
+    { name: "Roleplay", href: "#games", category: "roleplay" },
   ];
 
   return (
@@ -80,13 +80,13 @@ const Navbar = () => {
                     transition={{ duration: 0.2 }}
                     className="absolute top-full left-0 mt-2 w-48 bg-[#0a0a0a]/95 backdrop-blur-xl border border-red-500/30 rounded-xl overflow-hidden shadow-2xl"
                   >
-                    {games.map((game) => (
+                    {gameCategories.map((cat) => (
                       <a
-                        key={game.name}
-                        href={game.href}
+                        key={cat.name}
+                        href={cat.href}
                         className="block px-4 py-3 text-sm text-zinc-400 hover:text-white hover:bg-red-600/20 transition-colors"
                       >
-                        {game.name}
+                        {cat.name}
                       </a>
                     ))}
                   </motion.div>
@@ -136,15 +136,15 @@ const Navbar = () => {
                   </a>
                 ))}
                 <div className="py-2">
-                  <p className="text-red-500 text-xs uppercase tracking-wider mb-2">Games</p>
-                  {games.map((game) => (
+                  <p className="text-red-500 text-xs uppercase tracking-wider mb-2">Game Categories</p>
+                  {gameCategories.map((cat) => (
                     <a
-                      key={game.name}
-                      href={game.href}
+                      key={cat.name}
+                      href={cat.href}
                       className="block text-zinc-400 hover:text-white transition-colors duration-200 text-sm font-medium py-2 pl-4"
                       onClick={() => setIsOpen(false)}
                     >
-                      {game.name}
+                      {cat.name}
                     </a>
                   ))}
                 </div>
