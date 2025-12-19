@@ -8,7 +8,6 @@ import FeaturesSection from "@/components/FeaturesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import FAQSection from "@/components/FAQSection";
-import SupportSection from "@/components/SupportSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -63,7 +62,6 @@ const Index = () => {
           <TestimonialsSection />
           <ReviewsSection />
           <FAQSection />
-          <SupportSection />
           <Footer />
         </motion.main>
       )}
