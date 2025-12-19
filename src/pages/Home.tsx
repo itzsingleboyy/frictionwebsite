@@ -173,7 +173,7 @@ const Home = () => {
                 >
                   {[
                     { value: "99.9%", label: "Uptime" },
-                    { value: "1000+", label: "Servers" },
+                    { value: "100+", label: "Servers" },
                     { value: "24/7", label: "Support" },
                     { value: "₹45", label: "Starting Price" },
                   ].map((stat, index) => (
