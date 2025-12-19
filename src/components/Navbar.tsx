@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, LogOut, User, LayoutDashboard, Shield } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import CartButton from "@/components/CartButton";
 import logo from "@/assets/logo.webp";
 
 const Navbar = () => {
@@ -105,6 +106,7 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
+            <CartButton />
             {user ? (
               <>
                 <Link to="/dashboard">

@@ -1,23 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Copy, Check, CreditCard, Clock, Tag, Percent } from "lucide-react";
+import { X, Copy, Check, CreditCard, Clock, Tag, Percent, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
-interface Plan {
-  name: string;
-  price: number;
-  ram: string;
-  cpu: string;
-  storage: string;
-}
+import { useCart } from "@/contexts/CartContext";
 
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  plan: Plan | null;
 }
 
 interface Coupon {
@@ -35,7 +27,8 @@ const COUPONS: Coupon[] = [
 
 const UPI_ID = "shashankfan@axl";
 
-const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
+const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
+  const { items, totalPrice, clearCart } = useCart();
   const [transactionId, setTransactionId] = useState("");
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -80,18 +73,20 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
   };
 
   const getDiscountedPrice = () => {
-    if (!plan) return 0;
-    if (!appliedCoupon) return plan.price;
-    return Math.round(plan.price * (1 - appliedCoupon.discount / 100));
+    if (!appliedCoupon) return totalPrice;
+    return Math.round(totalPrice * (1 - appliedCoupon.discount / 100));
   };
 
   const getDiscount = () => {
-    if (!plan || !appliedCoupon) return 0;
-    return plan.price - getDiscountedPrice();
+    if (!appliedCoupon) return 0;
+    return totalPrice - getDiscountedPrice();
   };
 
   const handleSubmitOrder = async () => {
-    if (!plan) return;
+    if (items.length === 0) {
+      toast.error("Your cart is empty");
+      return;
+    }
     
     if (!transactionId.trim()) {
       toast.error("Please enter your UPI transaction ID");
@@ -108,23 +103,45 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
         return;
       }
 
-      const { error } = await supabase.from("orders").insert({
+      // Create orders for each cart item
+      const orders = items.map(item => ({
         user_id: user.id,
-        plan_name: plan.name,
-        plan_price: getDiscountedPrice(),
-        ram: plan.ram,
-        cpu: plan.cpu,
-        storage: plan.storage,
+        plan_name: item.name,
+        plan_price: appliedCoupon 
+          ? Math.round(item.price * item.quantity * (1 - appliedCoupon.discount / 100))
+          : item.price * item.quantity,
+        ram: item.ram,
+        cpu: item.cpu,
+        storage: item.storage,
         upi_transaction_id: transactionId.trim(),
-        status: "pending",
-      });
+        status: "pending" as const,
+      }));
 
-      if (error) throw error;
+      // Insert all orders
+      for (let i = 0; i < items.length; i++) {
+        for (let j = 0; j < items[i].quantity; j++) {
+          const { error } = await supabase.from("orders").insert({
+            user_id: user.id,
+            plan_name: items[i].name,
+            plan_price: appliedCoupon 
+              ? Math.round(items[i].price * (1 - appliedCoupon.discount / 100))
+              : items[i].price,
+            ram: items[i].ram,
+            cpu: items[i].cpu,
+            storage: items[i].storage,
+            upi_transaction_id: transactionId.trim(),
+            status: "pending" as const,
+          });
 
-      toast.success("Order placed successfully! Admin will verify your payment.");
+          if (error) throw error;
+        }
+      }
+
+      toast.success("Orders placed successfully! Admin will verify your payment.");
       setTransactionId("");
       setCouponCode("");
       setAppliedCoupon(null);
+      clearCart();
       onClose();
     } catch (error: any) {
       console.error("Order error:", error);
@@ -134,7 +151,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
     }
   };
 
-  if (!plan) return null;
+  if (items.length === 0) return null;
 
   return (
     <AnimatePresence>
@@ -151,7 +168,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className="glass-strong rounded-2xl p-6 w-full max-w-md"
+            className="glass-strong rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto"
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
@@ -167,30 +184,32 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
               </button>
             </div>
 
-            {/* Plan Summary */}
+            {/* Cart Items Summary */}
             <div className="bg-secondary/50 rounded-xl p-4 mb-6">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-muted-foreground">Plan</span>
-                <span className="text-foreground font-semibold">{plan.name}</span>
+              <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
+                <Package className="w-4 h-4" />
+                <span>Order Summary ({items.reduce((sum, i) => sum + i.quantity, 0)} items)</span>
               </div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-muted-foreground">RAM</span>
-                <span className="text-foreground">{plan.ram}</span>
+              
+              <div className="space-y-3 max-h-40 overflow-y-auto">
+                {items.map((item) => (
+                  <div key={item.id} className="flex justify-between items-center py-2 border-b border-border/50 last:border-0">
+                    <div>
+                      <span className="text-foreground font-medium">{item.name}</span>
+                      <span className="text-muted-foreground text-sm ml-2">x{item.quantity}</span>
+                      <p className="text-xs text-muted-foreground">{item.ram} • {item.storage}</p>
+                    </div>
+                    <span className="text-foreground font-semibold">₹{item.price * item.quantity}</span>
+                  </div>
+                ))}
               </div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-muted-foreground">CPU</span>
-                <span className="text-foreground">{plan.cpu}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground">Storage</span>
-                <span className="text-foreground">{plan.storage}</span>
-              </div>
+
               <div className="border-t border-border mt-4 pt-4">
                 {appliedCoupon && (
                   <>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span className="text-muted-foreground">₹{plan.price}/mo</span>
+                      <span className="text-muted-foreground">₹{totalPrice}/mo</span>
                     </div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-green-400 flex items-center gap-1">
@@ -206,7 +225,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
                   <div className="text-right">
                     {appliedCoupon && (
                       <span className="text-sm text-muted-foreground/60 line-through mr-2">
-                        ₹{plan.price}
+                        ₹{totalPrice}
                       </span>
                     )}
                     <span className="text-2xl font-bold gradient-text">
@@ -295,7 +314,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
               <div className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-accent/80">
-                  After payment, enter your transaction ID. Admin will verify and activate your server within 24 hours.
+                  After payment, enter your transaction ID. Admin will verify and activate your servers within 24 hours.
                 </p>
               </div>
             </div>
@@ -307,7 +326,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
               onClick={handleSubmitOrder}
               disabled={loading}
             >
-              {loading ? "Placing Order..." : "Confirm Order"}
+              {loading ? "Placing Orders..." : `Confirm Order (₹${getDiscountedPrice()})`}
             </Button>
           </motion.div>
         </motion.div>
