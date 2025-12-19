@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RamCalculator from "@/components/RamCalculator";
 import PaymentModal from "@/components/PaymentModal";
+import FloatingParticles from "@/components/FloatingParticles";
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles, ArrowRight, Globe, Zap } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -191,6 +192,7 @@ const Pricing = () => {
           <div className="fixed inset-0 pointer-events-none">
             <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-red-600/10 blur-[150px]" />
             <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[120px]" />
+            <FloatingParticles count={25} />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
