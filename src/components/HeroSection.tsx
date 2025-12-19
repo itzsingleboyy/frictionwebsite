@@ -163,21 +163,23 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-3 mt-12"
+            className="mt-12"
           >
-            {games.map((game) => (
-              <button
-                key={game.id}
-                onClick={() => setActiveGame(game)}
-                className={`px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
-                  activeGame.id === game.id
-                    ? "bg-gradient-to-r from-primary to-accent text-white glow-primary"
-                    : "glass text-muted-foreground hover:text-foreground hover:border-primary/40"
-                }`}
-              >
-                {game.name}
-              </button>
-            ))}
+            <div className="inline-flex items-center glass rounded-full p-1.5 gap-1">
+              {games.map((game) => (
+                <button
+                  key={game.id}
+                  onClick={() => setActiveGame(game)}
+                  className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    activeGame.id === game.id
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {game.name}
+                </button>
+              ))}
+            </div>
           </motion.div>
 
           {/* Promo Banner */}
