@@ -5,7 +5,6 @@ import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
-import RamCalculator from "@/components/RamCalculator";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import FAQSection from "@/components/FAQSection";
@@ -61,7 +60,6 @@ const Index = () => {
           <Navbar />
           <HeroSection />
           <FeaturesSection />
-          <RamCalculator />
           <TestimonialsSection />
           <ReviewsSection />
           <FAQSection />
