@@ -61,6 +61,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        glass: {
+          DEFAULT: "hsl(var(--glass-bg))",
+          border: "hsl(var(--glass-border))",
+        },
+      },
+      backdropBlur: {
+        xs: "2px",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -81,8 +88,12 @@ export default {
           "50%": { transform: "translateY(-20px)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(270, 80%, 60%, 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(270, 80%, 60%, 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(230, 85%, 60%, 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(230, 85%, 60%, 0.6)" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
         "gradient-shift": {
           "0%": { backgroundPosition: "0% 50%" },
@@ -106,6 +117,7 @@ export default {
         "gradient-shift": "gradient-shift 8s ease infinite",
         "slide-up": "slide-up 0.6s ease-out forwards",
         "fade-in": "fade-in 0.8s ease-out forwards",
+        "shimmer": "shimmer 2s linear infinite",
       },
     },
   },

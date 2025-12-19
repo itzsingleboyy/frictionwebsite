@@ -6,44 +6,48 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 98%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 0 85% 55%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 230 85% 60%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 222 47% 12%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 222 47% 15%;
+    --muted-foreground: 215 20% 60%;
 
-    --accent: 25 100% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 260 85% 65%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 85% 55%;
+    --border: 222 47% 18%;
+    --input: 222 47% 18%;
+    --ring: 230 85% 60%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 5%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 85% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 10%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 0 85% 55%;
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 230 85% 60%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 222 47% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 18%;
+    --sidebar-ring: 230 85% 60%;
+
+    /* Glassmorphism tokens */
+    --glass-bg: 222 47% 10%;
+    --glass-border: 222 47% 25%;
   }
 }
 
@@ -57,7 +61,7 @@
   }
 
   body {
-    @apply bg-[#0a0a0a] text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, sans-serif;
   }
 
@@ -66,7 +70,30 @@
   }
 
   ::selection {
-    background: hsl(0, 85%, 55%, 0.3);
+    background: hsl(230, 85%, 60%, 0.3);
+  }
+}
+
+/* Glassmorphism utilities */
+@layer utilities {
+  .glass {
+    @apply bg-card/40 backdrop-blur-xl border border-border/50;
+  }
+  
+  .glass-strong {
+    @apply bg-card/60 backdrop-blur-2xl border border-border/60;
+  }
+  
+  .glass-subtle {
+    @apply bg-card/20 backdrop-blur-md border border-border/30;
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 30px hsl(230, 85%, 60%, 0.3), 0 0 60px hsl(230, 85%, 60%, 0.1);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 30px hsl(260, 85%, 65%, 0.3), 0 0 60px hsl(260, 85%, 65%, 0.1);
   }
 }
 
@@ -76,16 +103,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: hsl(222, 47%, 4%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+  background: linear-gradient(180deg, hsl(230, 85%, 60%) 0%, hsl(260, 85%, 50%) 100%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+  background: linear-gradient(180deg, hsl(230, 85%, 70%) 0%, hsl(260, 85%, 60%) 100%);
 }
 
 /* Custom range slider */
@@ -97,7 +124,7 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-  background: linear-gradient(90deg, #dc2626 0%, #991b1b 100%);
+  background: linear-gradient(90deg, hsl(230, 85%, 60%) 0%, hsl(260, 85%, 50%) 100%);
   height: 8px;
   border-radius: 4px;
 }
@@ -110,11 +137,11 @@ input[type="range"]::-webkit-slider-thumb {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+  box-shadow: 0 0 10px hsl(230, 85%, 60%, 0.5);
 }
 
 input[type="range"]::-moz-range-track {
-  background: linear-gradient(90deg, #dc2626 0%, #991b1b 100%);
+  background: linear-gradient(90deg, hsl(230, 85%, 60%) 0%, hsl(260, 85%, 50%) 100%);
   height: 8px;
   border-radius: 4px;
 }
@@ -125,11 +152,11 @@ input[type="range"]::-moz-range-thumb {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+  box-shadow: 0 0 10px hsl(230, 85%, 60%, 0.5);
 }
 
 /* Selection styling */
 select option {
-  background: #1a1a1a;
+  background: hsl(222, 47%, 10%);
   color: white;
 }
