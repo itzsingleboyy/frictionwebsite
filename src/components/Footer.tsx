@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Twitter, Youtube, MessageCircle } from "lucide-react";
 import logo from "@/assets/logo.webp";
 
@@ -7,37 +8,73 @@ const Footer = () => {
 
   const footerLinks = {
     games: [
-      { name: "Minecraft", href: "#" },
-      { name: "Rust", href: "#" },
-      { name: "Palworld", href: "#" },
-      { name: "GTA V", href: "#" },
-      { name: "Terraria", href: "#" },
+      { name: "Minecraft", href: "/#games", isExternal: false },
+      { name: "Rust", href: "/#games", isExternal: false },
+      { name: "Palworld", href: "/#games", isExternal: false },
+      { name: "GTA V", href: "/#games", isExternal: false },
+      { name: "Terraria", href: "/#games", isExternal: false },
     ],
     company: [
-      { name: "About Us", href: "#" },
-      { name: "Our Team", href: "#team" },
-      { name: "Blog", href: "#" },
-      { name: "Status", href: "#" },
+      { name: "About Us", href: "/#features", isExternal: false },
+      { name: "Our Team", href: "/team", isExternal: false },
+      { name: "Pricing", href: "/pricing", isExternal: false },
+      { name: "Features", href: "/features", isExternal: false },
     ],
     support: [
-      { name: "Help Center", href: "#" },
-      { name: "Contact Us", href: "#" },
-      { name: "Live Chat", href: "#" },
-      { name: "Discord", href: "https://discord.gg/uAZst3rWMa" },
+      { name: "Help Center", href: "/support", isExternal: false },
+      { name: "Contact Us", href: "/support", isExternal: false },
+      { name: "Live Chat", href: "/support", isExternal: false },
+      { name: "Discord", href: "https://discord.gg/93mRrFkutF", isExternal: true },
     ],
     legal: [
-      { name: "Terms of Service", href: "#" },
-      { name: "Privacy Policy", href: "#" },
-      { name: "Refund Policy", href: "#" },
-      { name: "SLA", href: "#" },
+      { name: "Terms of Service", href: "/terms", isExternal: false },
+      { name: "Privacy Policy", href: "/privacy", isExternal: false },
+      { name: "Refund Policy", href: "/terms#section-5", isExternal: false },
+      { name: "SLA", href: "/terms#section-9", isExternal: false },
     ],
   };
 
   const socialLinks = [
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Youtube, href: "#", label: "YouTube" },
-    { icon: MessageCircle, href: "https://discord.gg/uAZst3rWMa", label: "Discord" },
+    { icon: MessageCircle, href: "https://discord.gg/93mRrFkutF", label: "Discord" },
   ];
+
+  const renderLink = (link: { name: string; href: string; isExternal: boolean }) => {
+    if (link.isExternal) {
+      return (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+        >
+          {link.name}
+        </a>
+      );
+    }
+    
+    // Handle hash links for same page navigation
+    if (link.href.startsWith("/#")) {
+      return (
+        <Link
+          to={link.href}
+          className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+        >
+          {link.name}
+        </Link>
+      );
+    }
+
+    return (
+      <Link
+        to={link.href}
+        className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+      >
+        {link.name}
+      </Link>
+    );
+  };
 
   return (
     <footer className="bg-background border-t border-primary/10">
@@ -51,7 +88,7 @@ const Footer = () => {
         >
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2 mb-4">
               <img src={logo} alt="FrictionHost Logo" className="w-10 h-10 rounded-xl" />
               <div className="flex flex-col items-start">
                 <span className="font-display font-bold text-xl gradient-text leading-tight">
@@ -61,7 +98,7 @@ const Footer = () => {
                   India's best hosting
                 </span>
               </div>
-            </div>
+            </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
               Premium game server hosting with powerful hardware, 24/7 support,
               and instant setup. Start your gaming journey today.
@@ -71,6 +108,8 @@ const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   aria-label={social.label}
                   className="w-10 h-10 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary hover:border-primary transition-all duration-200"
                 >
@@ -88,12 +127,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.games.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                  >
-                    {link.name}
-                  </a>
+                  {renderLink(link)}
                 </li>
               ))}
             </ul>
@@ -107,12 +141,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                  >
-                    {link.name}
-                  </a>
+                  {renderLink(link)}
                 </li>
               ))}
             </ul>
@@ -126,12 +155,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                  >
-                    {link.name}
-                  </a>
+                  {renderLink(link)}
                 </li>
               ))}
             </ul>
@@ -145,12 +169,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                  >
-                    {link.name}
-                  </a>
+                  {renderLink(link)}
                 </li>
               ))}
             </ul>
