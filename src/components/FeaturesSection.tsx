@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Shield, Headphones, RefreshCw, Cpu, Star, Clock, Zap, HardDrive } from "lucide-react";
 import TiltCard from "@/components/TiltCard";
+import { useRef, useState, useEffect } from "react";
 
 const features = [
   {
@@ -55,11 +56,52 @@ const features = [
 ];
 
 const stats = [
-  { icon: Zap, value: "99.9%", label: "Uptime" },
-  { icon: HardDrive, value: "50+", label: "Games" },
-  { icon: Headphones, value: "<5min", label: "Response" },
-  { icon: Star, value: "4.7★", label: "Rating" },
+  { icon: Zap, value: 99.9, suffix: "%", label: "Uptime" },
+  { icon: HardDrive, value: 50, suffix: "+", label: "Games" },
+  { icon: Headphones, value: 5, prefix: "<", suffix: "min", label: "Response" },
+  { icon: Star, value: 4.7, suffix: "★", label: "Rating", decimals: 1 },
 ];
+
+// Counting animation component
+const CountingNumber = ({ value, suffix = "", prefix = "", decimals = 0, isInView }: { 
+  value: number; 
+  suffix?: string; 
+  prefix?: string; 
+  decimals?: number;
+  isInView: boolean;
+}) => {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    if (!isInView) {
+      setCount(0);
+      return;
+    }
+    
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const increment = value / steps;
+    let current = 0;
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(current);
+      }
+    }, duration / steps);
+    
+    return () => clearInterval(timer);
+  }, [isInView, value]);
+  
+  return (
+    <span>
+      {prefix}{decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}{suffix}
+    </span>
+  );
+};
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -86,6 +128,9 @@ const itemVariants = {
 };
 
 const FeaturesSection = () => {
+  const statsRef = useRef(null);
+  const isInView = useInView(statsRef, { once: false, amount: 0.5 });
+
   return (
     <section id="features" className="py-24 relative overflow-hidden bg-background">
       {/* Background Effects */}
@@ -98,6 +143,7 @@ const FeaturesSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Stats Bar */}
         <motion.div
+          ref={statsRef}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -117,7 +163,13 @@ const FeaturesSection = () => {
               <div className="flex items-center justify-center gap-2 mb-1">
                 <stat.icon className="w-5 h-5 text-primary" />
                 <span className="text-3xl md:text-4xl font-display font-bold gradient-text">
-                  {stat.value}
+                  <CountingNumber 
+                    value={stat.value} 
+                    suffix={stat.suffix} 
+                    prefix={stat.prefix || ""} 
+                    decimals={stat.decimals || 0}
+                    isInView={isInView}
+                  />
                 </span>
               </div>
               <span className="text-muted-foreground text-sm">{stat.label}</span>
