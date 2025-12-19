@@ -23,7 +23,7 @@ const Footer = () => {
       { name: "Help Center", href: "#" },
       { name: "Contact Us", href: "#" },
       { name: "Live Chat", href: "#" },
-      { name: "Discord", href: "#" },
+      { name: "Discord", href: "https://discord.gg/uAZst3rWMa" },
     ],
     legal: [
       { name: "Terms of Service", href: "#" },
@@ -36,7 +36,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Youtube, href: "#", label: "YouTube" },
-    { icon: MessageCircle, href: "#", label: "Discord" },
+    { icon: MessageCircle, href: "https://discord.gg/uAZst3rWMa", label: "Discord" },
   ];
 
   return (
