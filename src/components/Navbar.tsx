@@ -75,9 +75,14 @@ const Navbar = () => {
               className="flex items-center gap-2 cursor-pointer"
             >
               <img src={logo} alt="FrictionHost Logo" className="w-9 h-9 rounded-lg" />
-              <span className="font-display font-bold text-xl gradient-text">
-                FrictionHost
-              </span>
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-xl gradient-text leading-tight">
+                  FrictionHost
+                </span>
+                <span className="text-[10px] text-muted-foreground leading-tight">
+                  India's best hosting
+                </span>
+              </div>
             </motion.div>
           </Link>
 
