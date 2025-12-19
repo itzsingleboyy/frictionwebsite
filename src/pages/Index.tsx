@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import GamesSection from "@/components/GamesSection";
 import FeaturesSection from "@/components/FeaturesSection";
-import TeamSection from "@/components/TeamSection";
 import RamCalculator from "@/components/RamCalculator";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -62,9 +60,7 @@ const Index = () => {
         >
           <Navbar />
           <HeroSection />
-          <GamesSection />
           <FeaturesSection />
-          <TeamSection />
           <RamCalculator />
           <TestimonialsSection />
           <ReviewsSection />
