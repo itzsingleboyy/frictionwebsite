@@ -194,32 +194,118 @@ const Pricing = () => {
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            {/* Header */}
+            {/* Proxy Plans Header */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center max-w-3xl mx-auto mb-16"
+              className="text-center max-w-3xl mx-auto mb-12"
             >
+              <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
+                <Globe className="w-4 h-4 text-red-400" />
+                <span className="text-sm text-red-300">Proxy Services</span>
+              </div>
               <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
+                <span className="text-white">Minecraft </span>
+                <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                  Proxy Plans
+                </span>
+              </h1>
+              <p className="text-zinc-400 text-lg">
+                Fast, reliable proxies for your Minecraft servers.
+              </p>
+            </motion.div>
+
+            {/* Proxy Plans */}
+            <div className="flex justify-center mb-24">
+              {proxyPlans.map((plan, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1 }}
+                  whileHover={{ y: -10 }}
+                  className="relative bg-zinc-900/50 backdrop-blur-lg rounded-2xl p-6 border border-zinc-800 hover:border-red-500/30 transition-all duration-300 max-w-sm w-full"
+                >
+                  <div className="text-center mb-6">
+                    <h3 className="font-display text-2xl font-bold text-white mb-2">
+                      {plan.name}
+                    </h3>
+                    <p className="text-zinc-500 text-sm mb-4">{plan.description}</p>
+                    <div className="flex items-baseline justify-center gap-1">
+                      <span className="text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                        ₹{plan.price}
+                      </span>
+                      <span className="text-zinc-500">/mo</span>
+                    </div>
+                  </div>
+
+                  {/* Specs */}
+                  <div className="bg-zinc-800/50 rounded-xl p-4 mb-6">
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                      <div>
+                        <div className="text-white font-semibold text-sm">{plan.ram}</div>
+                        <div className="text-zinc-500 text-xs">RAM</div>
+                      </div>
+                      <div>
+                        <div className="text-white font-semibold text-sm">{plan.cpu}</div>
+                        <div className="text-zinc-500 text-xs">CPU</div>
+                      </div>
+                      <div>
+                        <div className="text-white font-semibold text-sm">{plan.storage}</div>
+                        <div className="text-zinc-500 text-xs">Storage</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-3 mb-6">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-zinc-400">
+                        <Check className="w-4 h-4 text-red-500 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA */}
+                  <Button
+                    variant="outline"
+                    className="w-full gap-2"
+                    onClick={() => handleGetStarted(plan as any)}
+                  >
+                    Get Started <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Minecraft Hosting Plans Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-center max-w-3xl mx-auto mb-12"
+            >
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
                 <span className="text-white">Minecraft </span>
                 <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
                   Hosting Plans
                 </span>
-              </h1>
-              <p className="text-zinc-400 text-lg">
+              </h2>
+              <p className="text-zinc-400">
                 No hidden fees. No surprises. Choose the plan that fits your needs.
               </p>
             </motion.div>
 
-            {/* Pricing Grid */}
+            {/* Minecraft Hosting Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
               {plans.map((plan, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: 0.4 + index * 0.1 }}
                   whileHover={{ y: -10 }}
                   className={`relative bg-zinc-900/50 backdrop-blur-lg rounded-2xl p-6 border transition-all duration-300 ${
                     plan.popular
@@ -289,93 +375,6 @@ const Pricing = () => {
                 </motion.div>
               ))}
             </div>
-
-            {/* Proxy Plans Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-24"
-            >
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
-                  <Globe className="w-4 h-4 text-red-400" />
-                  <span className="text-sm text-red-300">Proxy Services</span>
-                </div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  <span className="text-white">Minecraft </span>
-                  <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
-                    Proxy Plans
-                  </span>
-                </h2>
-                <p className="text-zinc-400">
-                  Fast, reliable proxies for your Minecraft servers.
-                </p>
-              </div>
-
-              <div className="flex justify-center">
-                {proxyPlans.map((plan, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                    whileHover={{ y: -10 }}
-                    className="relative bg-zinc-900/50 backdrop-blur-lg rounded-2xl p-6 border border-zinc-800 hover:border-red-500/30 transition-all duration-300 max-w-sm w-full"
-                  >
-                    <div className="text-center mb-6">
-                      <h3 className="font-display text-2xl font-bold text-white mb-2">
-                        {plan.name}
-                      </h3>
-                      <p className="text-zinc-500 text-sm mb-4">{plan.description}</p>
-                      <div className="flex items-baseline justify-center gap-1">
-                        <span className="text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
-                          ₹{plan.price}
-                        </span>
-                        <span className="text-zinc-500">/mo</span>
-                      </div>
-                    </div>
-
-                    {/* Specs */}
-                    <div className="bg-zinc-800/50 rounded-xl p-4 mb-6">
-                      <div className="grid grid-cols-3 gap-2 text-center">
-                        <div>
-                          <div className="text-white font-semibold text-sm">{plan.ram}</div>
-                          <div className="text-zinc-500 text-xs">RAM</div>
-                        </div>
-                        <div>
-                          <div className="text-white font-semibold text-sm">{plan.cpu}</div>
-                          <div className="text-zinc-500 text-xs">CPU</div>
-                        </div>
-                        <div>
-                          <div className="text-white font-semibold text-sm">{plan.storage}</div>
-                          <div className="text-zinc-500 text-xs">Storage</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Features */}
-                    <ul className="space-y-3 mb-6">
-                      {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm text-zinc-400">
-                          <Check className="w-4 h-4 text-red-500 flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* CTA */}
-                    <Button
-                      variant="outline"
-                      className="w-full gap-2"
-                      onClick={() => handleGetStarted(plan as any)}
-                    >
-                      Get Started <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
 
             {/* Custom Plans */}
             <motion.div
