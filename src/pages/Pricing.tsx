@@ -6,11 +6,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RamCalculator from "@/components/RamCalculator";
 import PaymentModal from "@/components/PaymentModal";
+import CartDrawer from "@/components/CartDrawer";
 import FloatingParticles from "@/components/FloatingParticles";
 import { Button } from "@/components/ui/button";
-import { Check, Sparkles, ArrowRight, Globe } from "lucide-react";
+import { Check, Sparkles, ArrowRight, Globe, ShoppingCart, Zap } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
 
 const plans = [
   {
@@ -161,10 +163,21 @@ const proxyPlans = [
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const [selectedPlan, setSelectedPlan] = useState<typeof plans[0] | null>(null);
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const { addItem } = useCart();
 
-  const handleGetStarted = async (plan: typeof plans[0]) => {
+  const handleAddToCart = (plan: typeof plans[0]) => {
+    addItem({
+      name: plan.name,
+      price: plan.price,
+      ram: plan.ram,
+      cpu: plan.cpu,
+      storage: plan.storage,
+    });
+    toast.success(`${plan.name} added to cart!`);
+  };
+
+  const handleBuyNow = async (plan: typeof plans[0]) => {
     const { data: { user } } = await supabase.auth.getUser();
     
     if (!user) {
@@ -173,7 +186,25 @@ const Pricing = () => {
       return;
     }
     
-    setSelectedPlan(plan);
+    addItem({
+      name: plan.name,
+      price: plan.price,
+      ram: plan.ram,
+      cpu: plan.cpu,
+      storage: plan.storage,
+    });
+    setIsPaymentOpen(true);
+  };
+
+  const handleCheckout = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      toast.error("Please login to checkout");
+      navigate("/auth");
+      return;
+    }
+    
     setIsPaymentOpen(true);
   };
 
@@ -270,14 +301,25 @@ const Pricing = () => {
                     ))}
                   </ul>
 
-                  {/* CTA */}
-                  <Button
-                    variant="outline"
-                    className="w-full gap-2"
-                    onClick={() => handleGetStarted(plan as any)}
-                  >
-                    Get Started <ArrowRight className="w-4 h-4" />
-                  </Button>
+                  {/* CTA Buttons */}
+                  <div className="space-y-2">
+                    <Button
+                      variant="hero"
+                      className="w-full gap-2"
+                      onClick={() => handleBuyNow(plan as any)}
+                    >
+                      <Zap className="w-4 h-4" />
+                      Buy Now
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full gap-2"
+                      onClick={() => handleAddToCart(plan as any)}
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                      Add to Cart
+                    </Button>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -366,14 +408,25 @@ const Pricing = () => {
                     ))}
                   </ul>
 
-                  {/* CTA */}
-                  <Button
-                    variant={plan.popular ? "hero" : "outline"}
-                    className="w-full gap-2"
-                    onClick={() => handleGetStarted(plan)}
-                  >
-                    Get Started <ArrowRight className="w-4 h-4" />
-                  </Button>
+                  {/* CTA Buttons */}
+                  <div className="space-y-2">
+                    <Button
+                      variant={plan.popular ? "hero" : "outline"}
+                      className="w-full gap-2"
+                      onClick={() => handleBuyNow(plan)}
+                    >
+                      <Zap className="w-4 h-4" />
+                      Buy Now
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-full gap-2 text-muted-foreground hover:text-foreground"
+                      onClick={() => handleAddToCart(plan)}
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                      Add to Cart
+                    </Button>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -395,14 +448,14 @@ const Pricing = () => {
           </div>
 
           {/* RAM Calculator */}
-          <RamCalculator onSelectPlan={(plan) => handleGetStarted(plan as typeof plans[0])} />
+          <RamCalculator onSelectPlan={(plan) => handleAddToCart(plan as typeof plans[0])} />
         </main>
         <Footer />
         
+        <CartDrawer onCheckout={handleCheckout} />
         <PaymentModal
           isOpen={isPaymentOpen}
           onClose={() => setIsPaymentOpen(false)}
-          plan={selectedPlan}
         />
       </div>
     </>
