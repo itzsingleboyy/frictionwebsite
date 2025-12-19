@@ -97,10 +97,10 @@ const ReviewsSection = () => {
     : "0.0";
 
   return (
-    <section className="py-24 relative overflow-hidden bg-[#0a0a0a]">
+    <section className="py-24 relative overflow-hidden bg-background">
       {/* Background */}
-      <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full bg-red-600/10 blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[100px]" />
+      <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[100px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -111,17 +111,17 @@ const ReviewsSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
-            <MessageSquare className="w-4 h-4 text-red-500" />
-            <span className="text-sm text-red-300">Customer Reviews</span>
+          <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 px-4 py-2 rounded-full mb-6">
+            <MessageSquare className="w-4 h-4 text-primary" />
+            <span className="text-sm text-primary-foreground/80">Customer Reviews</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-white">What Our </span>
-            <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+            <span className="text-foreground">What Our </span>
+            <span className="gradient-text">
               Customers Say
             </span>
           </h2>
-          <p className="text-zinc-400 text-lg">
+          <p className="text-muted-foreground text-lg">
             Real reviews from real gamers using our servers
           </p>
         </motion.div>
@@ -134,9 +134,9 @@ const ReviewsSection = () => {
             viewport={{ once: true }}
             className="flex justify-center mb-12"
           >
-            <div className="bg-zinc-900/80 backdrop-blur-lg border border-red-500/20 px-6 py-4 rounded-2xl flex items-center gap-4">
+            <div className="glass-strong px-6 py-4 rounded-2xl flex items-center gap-4">
               <div className="text-center">
-                <div className="text-3xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                <div className="text-3xl font-bold gradient-text">
                   {averageRating}
                 </div>
                 <div className="flex gap-0.5 justify-center">
@@ -145,19 +145,19 @@ const ReviewsSection = () => {
                       key={i}
                       className={`w-4 h-4 ${
                         i <= Math.round(parseFloat(averageRating))
-                          ? "text-yellow-500 fill-yellow-500"
-                          : "text-zinc-600"
+                          ? "text-primary fill-primary"
+                          : "text-muted-foreground/30"
                       }`}
                     />
                   ))}
                 </div>
               </div>
-              <div className="h-12 w-px bg-red-500/30" />
+              <div className="h-12 w-px bg-primary/30" />
               <div className="text-center">
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-foreground">
                   {reviews.length}
                 </div>
-                <p className="text-xs text-zinc-400">Reviews</p>
+                <p className="text-xs text-muted-foreground">Reviews</p>
               </div>
             </div>
           </motion.div>
@@ -165,7 +165,7 @@ const ReviewsSection = () => {
 
         {/* Reviews Grid */}
         {isLoading ? (
-          <div className="text-center text-zinc-400">Loading reviews...</div>
+          <div className="text-center text-muted-foreground">Loading reviews...</div>
         ) : reviews.length > 0 ? (
           <motion.div
             variants={containerVariants}
@@ -177,7 +177,7 @@ const ReviewsSection = () => {
             {reviews.map((review) => (
               <motion.div key={review.id} variants={itemVariants}>
                 <TiltCard intensity={5}>
-                  <div className="group bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-6 rounded-2xl transition-all duration-500 hover:border-red-500/30 h-full">
+                  <div className="group glass backdrop-blur-lg p-6 rounded-2xl transition-all duration-500 hover:border-primary/30 h-full">
                     {/* Rating */}
                     <div className="flex gap-0.5 mb-3">
                       {[1, 2, 3, 4, 5].map((i) => (
@@ -185,28 +185,28 @@ const ReviewsSection = () => {
                           key={i}
                           className={`w-4 h-4 ${
                             i <= review.rating
-                              ? "text-yellow-500 fill-yellow-500"
-                              : "text-zinc-600"
+                              ? "text-primary fill-primary"
+                              : "text-muted-foreground/30"
                           }`}
                         />
                       ))}
                     </div>
 
                     {/* Content */}
-                    <p className="text-white/90 mb-4 leading-relaxed line-clamp-4">
+                    <p className="text-foreground/90 mb-4 leading-relaxed line-clamp-4">
                       "{review.content}"
                     </p>
 
                     {/* User Info */}
                     <div className="flex items-center gap-3 mt-auto">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">
                         {getInitial(review)}
                       </div>
                       <div>
-                        <p className="font-semibold text-white">
+                        <p className="font-semibold text-foreground">
                           {getDisplayName(review)}
                         </p>
-                        <p className="text-xs text-zinc-500">
+                        <p className="text-xs text-muted-foreground">
                           {formatDate(review.created_at)}
                         </p>
                       </div>
@@ -217,7 +217,7 @@ const ReviewsSection = () => {
             ))}
           </motion.div>
         ) : (
-          <div className="text-center text-zinc-400 mb-12">
+          <div className="text-center text-muted-foreground mb-12">
             No reviews yet. Be the first to review!
           </div>
         )}
@@ -254,10 +254,10 @@ const ReviewsSection = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center bg-zinc-900/50 backdrop-blur-lg border border-red-500/20 p-6 rounded-2xl"
+              className="text-center glass-strong p-6 rounded-2xl"
             >
-              <UserIcon className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
-              <p className="text-zinc-400 mb-4">
+              <UserIcon className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+              <p className="text-muted-foreground mb-4">
                 Sign in to write a review
               </p>
               <Link to="/auth">
