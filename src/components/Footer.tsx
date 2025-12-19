@@ -53,11 +53,11 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <img src={logo} alt="FrictionHost Logo" className="w-10 h-10 rounded-xl" />
-              <div className="flex flex-col">
+              <div className="flex flex-col items-start">
                 <span className="font-display font-bold text-xl gradient-text leading-tight">
                   FrictionHost
                 </span>
-                <span className="text-[10px] text-muted-foreground leading-tight">
+                <span className="text-[9px] text-foreground/60 tracking-wide leading-tight">
                   India's best hosting
                 </span>
               </div>
