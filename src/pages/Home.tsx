@@ -52,7 +52,7 @@ const Home = () => {
         
         <main className="pt-16">
           {/* Hero Section */}
-          <section className="min-h-[90vh] flex items-center justify-center relative overflow-hidden">
+          <section className="min-h-[90vh] flex items-center justify-center relative overflow-hidden pt-20">
             {/* Background Effects */}
             <div className="absolute inset-0">
               <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-red-600/20 blur-[150px]" />
