@@ -47,11 +47,11 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0a0a0a] overflow-hidden"
+        className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background overflow-hidden"
       >
         {/* Animated Background Grid */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--primary)/0.03)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary)/0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
         </div>
 
         {/* Floating Particles */}
@@ -59,7 +59,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           {Array.from({ length: 30 }).map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-red-500/50 rounded-full"
+              className="absolute w-1 h-1 bg-primary/50 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -86,9 +86,9 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             opacity: [0.3, 0.5, 0.3],
           }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-red-600/20 blur-[100px]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/20 blur-[100px]"
         />
-        <div className="absolute top-1/3 left-1/3 w-[300px] h-[300px] rounded-full bg-orange-500/10 blur-[80px]" />
+        <div className="absolute top-1/3 left-1/3 w-[300px] h-[300px] rounded-full bg-accent/10 blur-[80px]" />
 
         {/* Logo */}
         <motion.div
@@ -102,12 +102,12 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-[-20px] rounded-full border-2 border-dashed border-red-500/30"
+              className="absolute inset-[-20px] rounded-full border-2 border-dashed border-primary/30"
             />
             <motion.div
               animate={{ rotate: -360 }}
               transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-[-35px] rounded-full border border-dashed border-orange-500/20"
+              className="absolute inset-[-35px] rounded-full border border-dashed border-accent/20"
             />
 
             {/* Logo Icon */}
@@ -125,7 +125,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
               <img 
                 src={logo} 
                 alt="FrictionHost Logo" 
-                className="w-28 h-28 rounded-3xl shadow-[0_0_80px_rgba(220,38,38,0.5)]" 
+                className="w-28 h-28 rounded-3xl glow-primary" 
               />
             </motion.div>
           </div>
@@ -137,7 +137,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             transition={{ delay: 0.3 }}
             className="font-display text-5xl font-bold mb-2"
           >
-            <span className="bg-gradient-to-r from-red-500 via-orange-400 to-red-500 bg-clip-text text-transparent">
+            <span className="gradient-text">
               FrictionHost
             </span>
           </motion.h1>
@@ -145,20 +145,20 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-zinc-500 text-sm mb-10"
+            className="text-muted-foreground text-sm mb-10"
           >
             Premium Game Hosting
           </motion.p>
 
           {/* Progress Bar Container */}
           <div className="w-80 mb-4">
-            <div className="flex justify-between text-xs text-zinc-500 mb-2">
+            <div className="flex justify-between text-xs text-muted-foreground mb-2">
               <span>Loading</span>
               <span>{Math.min(Math.round(progress), 100)}%</span>
             </div>
-            <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-2 bg-secondary rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-red-600 via-orange-500 to-red-600 rounded-full"
+                className="h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full"
                 style={{ backgroundSize: "200% 100%" }}
                 initial={{ width: 0 }}
                 animate={{
@@ -182,7 +182,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="text-zinc-400 text-sm text-center"
+                className="text-muted-foreground text-sm text-center"
               >
                 {loadingTips[tipIndex]}
               </motion.p>
@@ -195,7 +195,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="absolute bottom-8 text-zinc-600 text-xs"
+          className="absolute bottom-8 text-muted text-xs"
         >
           Powered by High-Performance Ryzen CPUs
         </motion.div>

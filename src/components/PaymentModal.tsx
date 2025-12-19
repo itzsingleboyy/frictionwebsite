@@ -22,11 +22,10 @@ interface PaymentModalProps {
 
 interface Coupon {
   code: string;
-  discount: number; // percentage
+  discount: number;
   description: string;
 }
 
-// Available coupons - you can modify these
 const COUPONS: Coupon[] = [
   { code: "WELCOME10", discount: 10, description: "10% off for new users" },
   { code: "FRICTION20", discount: 20, description: "20% special discount" },
@@ -59,7 +58,6 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
 
     setCouponLoading(true);
     
-    // Simulate API call delay
     setTimeout(() => {
       const foundCoupon = COUPONS.find(
         (c) => c.code.toLowerCase() === couponCode.trim().toLowerCase()
@@ -153,46 +151,46 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-md"
+            className="glass-strong rounded-2xl p-6 w-full max-w-md"
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                <CreditCard className="w-6 h-6 text-red-500" />
+              <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                <CreditCard className="w-6 h-6 text-primary" />
                 Payment
               </h2>
               <button
                 onClick={onClose}
-                className="text-zinc-400 hover:text-white transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
 
             {/* Plan Summary */}
-            <div className="bg-zinc-800/50 rounded-xl p-4 mb-6">
+            <div className="bg-secondary/50 rounded-xl p-4 mb-6">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-zinc-400">Plan</span>
-                <span className="text-white font-semibold">{plan.name}</span>
+                <span className="text-muted-foreground">Plan</span>
+                <span className="text-foreground font-semibold">{plan.name}</span>
               </div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-zinc-400">RAM</span>
-                <span className="text-white">{plan.ram}</span>
+                <span className="text-muted-foreground">RAM</span>
+                <span className="text-foreground">{plan.ram}</span>
               </div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-zinc-400">CPU</span>
-                <span className="text-white">{plan.cpu}</span>
+                <span className="text-muted-foreground">CPU</span>
+                <span className="text-foreground">{plan.cpu}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-zinc-400">Storage</span>
-                <span className="text-white">{plan.storage}</span>
+                <span className="text-muted-foreground">Storage</span>
+                <span className="text-foreground">{plan.storage}</span>
               </div>
-              <div className="border-t border-zinc-700 mt-4 pt-4">
+              <div className="border-t border-border mt-4 pt-4">
                 {appliedCoupon && (
                   <>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-zinc-400">Subtotal</span>
-                      <span className="text-zinc-400">₹{plan.price}/mo</span>
+                      <span className="text-muted-foreground">Subtotal</span>
+                      <span className="text-muted-foreground">₹{plan.price}/mo</span>
                     </div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-green-400 flex items-center gap-1">
@@ -204,14 +202,14 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
                   </>
                 )}
                 <div className="flex justify-between items-center">
-                  <span className="text-white font-semibold">Total</span>
+                  <span className="text-foreground font-semibold">Total</span>
                   <div className="text-right">
                     {appliedCoupon && (
-                      <span className="text-sm text-zinc-500 line-through mr-2">
+                      <span className="text-sm text-muted line-through mr-2">
                         ₹{plan.price}
                       </span>
                     )}
-                    <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                    <span className="text-2xl font-bold gradient-text">
                       ₹{getDiscountedPrice()}/mo
                     </span>
                   </div>
@@ -221,7 +219,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
 
             {/* Coupon Code */}
             <div className="mb-6">
-              <label className="block text-sm text-zinc-400 mb-2 flex items-center gap-2">
+              <label className="block text-sm text-muted-foreground mb-2 flex items-center gap-2">
                 <Tag className="w-4 h-4" />
                 Coupon Code
               </label>
@@ -235,7 +233,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
                     variant="ghost"
                     size="sm"
                     onClick={removeCoupon}
-                    className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                    className="text-destructive hover:text-destructive hover:bg-destructive/10"
                   >
                     <X className="w-4 h-4" />
                   </Button>
@@ -246,14 +244,14 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
                     value={couponCode}
                     onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                     placeholder="Enter coupon code"
-                    className="bg-zinc-800 border-zinc-700 text-white uppercase"
+                    className="bg-secondary border-border text-foreground uppercase"
                     onKeyDown={(e) => e.key === "Enter" && applyCoupon()}
                   />
                   <Button
                     variant="outline"
                     onClick={applyCoupon}
                     disabled={couponLoading}
-                    className="border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-800"
+                    className="border-border text-muted-foreground hover:text-foreground hover:bg-secondary"
                   >
                     {couponLoading ? "..." : "Apply"}
                   </Button>
@@ -263,16 +261,16 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
 
             {/* UPI Payment */}
             <div className="mb-6">
-              <label className="block text-sm text-zinc-400 mb-2">
+              <label className="block text-sm text-muted-foreground mb-2">
                 Pay via UPI
               </label>
-              <div className="flex items-center gap-2 bg-zinc-800 rounded-lg p-3">
-                <span className="text-white font-mono flex-1">{UPI_ID}</span>
+              <div className="flex items-center gap-2 bg-secondary rounded-lg p-3">
+                <span className="text-foreground font-mono flex-1">{UPI_ID}</span>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={copyUPI}
-                  className="text-red-500 hover:text-red-400"
+                  className="text-primary hover:text-accent"
                 >
                   {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </Button>
@@ -281,22 +279,22 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
 
             {/* Transaction ID */}
             <div className="mb-6">
-              <label className="block text-sm text-zinc-400 mb-2">
+              <label className="block text-sm text-muted-foreground mb-2">
                 UPI Transaction ID (after payment)
               </label>
               <Input
                 value={transactionId}
                 onChange={(e) => setTransactionId(e.target.value)}
                 placeholder="Enter your UPI transaction ID"
-                className="bg-zinc-800 border-zinc-700 text-white"
+                className="bg-secondary border-border text-foreground"
               />
             </div>
 
             {/* Info */}
-            <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 mb-6">
+            <div className="bg-accent/10 border border-accent/30 rounded-lg p-4 mb-6">
               <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-orange-400 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-orange-200">
+                <Clock className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-accent/80">
                   After payment, enter your transaction ID. Admin will verify and activate your server within 24 hours.
                 </p>
               </div>
