@@ -21,12 +21,13 @@ const tiers = [
 ];
 
 const plans = [
-  { name: "SPARK", ram: 4, price: 170, pricePerPlayer: 14.17 },
-  { name: "BLAZE", ram: 6, price: 250, pricePerPlayer: 20.83 },
-  { name: "INFERNO", ram: 8, price: 330, pricePerPlayer: 27.50 },
-  { name: "PHOENIX", ram: 10, price: 400, pricePerPlayer: 33.33 },
-  { name: "DRAGON", ram: 12, price: 480, pricePerPlayer: 40.00 },
-  { name: "TITAN", ram: 16, price: 600, pricePerPlayer: 50.00 },
+  { name: "Meteor", ram: 4, price: 160, pricePerPlayer: 13.33 },
+  { name: "Nova", ram: 6, price: 240, pricePerPlayer: 20.00 },
+  { name: "Eclipse", ram: 8, price: 320, pricePerPlayer: 26.67 },
+  { name: "Comet", ram: 12, price: 480, pricePerPlayer: 40.00 },
+  { name: "Nebula", ram: 16, price: 640, pricePerPlayer: 53.33 },
+  { name: "Plasma", ram: 24, price: 960, pricePerPlayer: 80.00 },
+  { name: "SuperNova", ram: 32, price: 1280, pricePerPlayer: 106.67 },
 ];
 
 const RamCalculator = () => {
