@@ -13,6 +13,9 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import CursorGlow from "./components/CursorGlow";
+import ScrollProgress from "./components/ScrollProgress";
+import NoiseOverlay from "./components/NoiseOverlay";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +23,9 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <CursorGlow />
+        <ScrollProgress />
+        <NoiseOverlay />
         <Toaster />
         <Sonner />
         <BrowserRouter>
