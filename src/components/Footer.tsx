@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Flame, Zap, Twitter, Youtube, MessageCircle } from "lucide-react";
+import { Twitter, Youtube, MessageCircle } from "lucide-react";
+import logo from "@/assets/logo.webp";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -51,12 +52,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
-                  <Flame className="w-5 h-5 text-white" />
-                </div>
-                <Zap className="w-4 h-4 text-orange-400 absolute -top-1 -right-1" />
-              </div>
+              <img src={logo} alt="FrictionHost Logo" className="w-10 h-10 rounded-xl" />
               <span className="font-display font-bold text-xl bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
                 FrictionHost
               </span>

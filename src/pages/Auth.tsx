@@ -6,9 +6,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Flame, Zap, Mail, Lock, User, ArrowLeft, Loader2 } from "lucide-react";
+import { Mail, Lock, User, ArrowLeft, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
+import logo from "@/assets/logo.webp";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -148,10 +149,11 @@ const Auth = () => {
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                   className="absolute inset-[-15px] rounded-full border border-dashed border-red-500/30"
                 />
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-[0_0_40px_rgba(220,38,38,0.5)]">
-                  <Flame className="w-8 h-8 text-white" />
-                </div>
-                <Zap className="w-6 h-6 text-orange-400 absolute -top-1 -right-1 drop-shadow-[0_0_10px_rgba(251,146,60,0.8)]" />
+                <img 
+                  src={logo} 
+                  alt="FrictionHost Logo" 
+                  className="w-16 h-16 rounded-2xl shadow-[0_0_40px_rgba(220,38,38,0.5)]" 
+                />
               </div>
               <h1 className="font-display text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
                 FrictionHost
