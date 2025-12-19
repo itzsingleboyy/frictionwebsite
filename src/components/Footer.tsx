@@ -1,4 +1,5 @@
-import { Server, Zap, Github, Twitter, Youtube, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Server, Zap, Twitter, Youtube, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -35,25 +36,32 @@ const Footer = () => {
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Youtube, href: "#", label: "YouTube" },
     { icon: MessageCircle, href: "#", label: "Discord" },
-    { icon: Github, href: "#", label: "GitHub" },
   ];
 
   return (
-    <footer className="bg-card border-t border-border/50">
+    <footer className="bg-[#0a0120] border-t border-purple-500/20">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="grid md:grid-cols-2 lg:grid-cols-6 gap-8"
+        >
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="relative">
-                <Server className="w-8 h-8 text-primary" />
-                <Zap className="w-4 h-4 text-accent absolute -top-1 -right-1" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center">
+                  <Server className="w-5 h-5 text-white" />
+                </div>
+                <Zap className="w-4 h-4 text-cyan-400 absolute -top-1 -right-1" />
               </div>
-              <span className="font-display font-bold text-xl text-gradient">
+              <span className="font-display font-bold text-xl bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 LordCloud
               </span>
             </div>
-            <p className="text-muted-foreground text-sm mb-6 max-w-xs">
+            <p className="text-purple-300/60 text-sm mb-6 max-w-xs">
               Premium game server hosting with powerful hardware, 24/7 support,
               and instant setup. Start your gaming journey today.
             </p>
@@ -63,7 +71,7 @@ const Footer = () => {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-200"
+                  className="w-10 h-10 rounded-xl bg-purple-900/50 border border-purple-500/20 flex items-center justify-center text-purple-300 hover:text-white hover:bg-purple-600 hover:border-purple-500 transition-all duration-200"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
@@ -73,7 +81,7 @@ const Footer = () => {
 
           {/* Games */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">
+            <h4 className="font-display font-semibold text-white mb-4">
               Games
             </h4>
             <ul className="space-y-2">
@@ -81,7 +89,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                    className="text-purple-300/60 hover:text-purple-300 text-sm transition-colors"
                   >
                     {link.name}
                   </a>
@@ -92,7 +100,7 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">
+            <h4 className="font-display font-semibold text-white mb-4">
               Company
             </h4>
             <ul className="space-y-2">
@@ -100,7 +108,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                    className="text-purple-300/60 hover:text-purple-300 text-sm transition-colors"
                   >
                     {link.name}
                   </a>
@@ -111,7 +119,7 @@ const Footer = () => {
 
           {/* Support */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">
+            <h4 className="font-display font-semibold text-white mb-4">
               Support
             </h4>
             <ul className="space-y-2">
@@ -119,7 +127,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                    className="text-purple-300/60 hover:text-purple-300 text-sm transition-colors"
                   >
                     {link.name}
                   </a>
@@ -130,7 +138,7 @@ const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">
+            <h4 className="font-display font-semibold text-white mb-4">
               Legal
             </h4>
             <ul className="space-y-2">
@@ -138,7 +146,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                    className="text-purple-300/60 hover:text-purple-300 text-sm transition-colors"
                   >
                     {link.name}
                   </a>
@@ -146,16 +154,16 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-sm">
+        <div className="mt-12 pt-8 border-t border-purple-500/20 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-purple-300/50 text-sm">
             © {currentYear} LordCloud. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-muted-foreground text-sm">
+          <div className="flex items-center gap-2 text-purple-300/50 text-sm">
             <span>Made with</span>
-            <span className="text-destructive">❤</span>
+            <span className="text-red-500">❤</span>
             <span>in India</span>
           </div>
         </div>
