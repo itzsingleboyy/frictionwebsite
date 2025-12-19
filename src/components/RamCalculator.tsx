@@ -2,32 +2,65 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Calculator, ChevronRight, ChevronDown, ChevronUp, Cpu, HardDrive, Users, Settings, RotateCcw, Puzzle, Zap } from "lucide-react";
+import { 
+  Calculator, ChevronRight, ChevronDown, ChevronUp, Cpu, HardDrive, Users, 
+  Settings, RotateCcw, Puzzle, Zap, Globe, Database, Shield, Clock, 
+  Server, Layers, Activity, Info, Gauge, MemoryStick
+} from "lucide-react";
 
 const presets = [
-  { id: "survival", name: "Survival", players: 10, plugins: { light: 5, medium: 2, heavy: 0 } },
-  { id: "skyblock", name: "Skyblock", players: 15, plugins: { light: 8, medium: 4, heavy: 1 } },
-  { id: "light-modpack", name: "Light Modpack", players: 8, plugins: { light: 3, medium: 2, heavy: 2 } },
-  { id: "heavy-modpack", name: "Heavy Modpack", players: 6, plugins: { light: 2, medium: 3, heavy: 5 } },
+  { id: "survival", name: "Survival", players: 10, plugins: { light: 5, medium: 2, heavy: 0 }, mods: 0, worldSize: "small" },
+  { id: "skyblock", name: "Skyblock", players: 15, plugins: { light: 8, medium: 4, heavy: 1 }, mods: 0, worldSize: "medium" },
+  { id: "light-modpack", name: "Light Modpack", players: 8, plugins: { light: 3, medium: 2, heavy: 2 }, mods: 50, worldSize: "medium" },
+  { id: "heavy-modpack", name: "Heavy Modpack", players: 6, plugins: { light: 2, medium: 3, heavy: 5 }, mods: 150, worldSize: "large" },
+  { id: "network", name: "Network Hub", players: 50, plugins: { light: 10, medium: 5, heavy: 2 }, mods: 0, worldSize: "small" },
+  { id: "creative", name: "Creative", players: 20, plugins: { light: 15, medium: 8, heavy: 3 }, mods: 0, worldSize: "large" },
 ];
 
-const serverTypes = ["Spigot/Paper", "Forge", "Fabric", "Vanilla"];
-const versions = ["1.21.x", "1.20.x", "1.19.x", "1.18.x", "1.17.x"];
+const serverTypes = [
+  { id: "paper", name: "Paper/Spigot", multiplier: 1 },
+  { id: "purpur", name: "Purpur", multiplier: 1.05 },
+  { id: "forge", name: "Forge", multiplier: 1.4 },
+  { id: "fabric", name: "Fabric", multiplier: 1.3 },
+  { id: "vanilla", name: "Vanilla", multiplier: 0.9 },
+];
+
+const versions = [
+  { id: "1.21", name: "1.21.x", multiplier: 1.15 },
+  { id: "1.20", name: "1.20.x", multiplier: 1.1 },
+  { id: "1.19", name: "1.19.x", multiplier: 1.05 },
+  { id: "1.18", name: "1.18.x", multiplier: 1 },
+  { id: "1.16", name: "1.16.x", multiplier: 0.95 },
+  { id: "1.12", name: "1.12.x", multiplier: 0.85 },
+];
+
+const worldSizes = [
+  { id: "small", name: "Small (1-5k)", chunks: 2500, multiplier: 1 },
+  { id: "medium", name: "Medium (5-15k)", chunks: 10000, multiplier: 1.2 },
+  { id: "large", name: "Large (15-30k)", chunks: 22500, multiplier: 1.4 },
+  { id: "massive", name: "Massive (30k+)", chunks: 50000, multiplier: 1.7 },
+];
+
+const networkTypes = [
+  { id: "standalone", name: "Standalone", multiplier: 1, description: "Single server" },
+  { id: "bungeecord", name: "BungeeCord", multiplier: 1.15, description: "Proxy network" },
+  { id: "velocity", name: "Velocity", multiplier: 1.1, description: "Modern proxy" },
+];
 
 const tiers = [
-  { id: "auto", name: "Auto", multiplier: 1 },
-  { id: "budget", name: "Budget", multiplier: 0.85 },
-  { id: "performance", name: "Performance", multiplier: 1.25 },
+  { id: "budget", name: "Budget", multiplier: 0.85, icon: "💰" },
+  { id: "auto", name: "Balanced", multiplier: 1, icon: "⚖️" },
+  { id: "performance", name: "Performance", multiplier: 1.3, icon: "🚀" },
 ];
 
 const plans = [
-  { name: "Meteor", ram: 4, price: 160, pricePerPlayer: 13.33 },
-  { name: "Nova", ram: 6, price: 240, pricePerPlayer: 20.00 },
-  { name: "Eclipse", ram: 8, price: 320, pricePerPlayer: 26.67 },
-  { name: "Comet", ram: 12, price: 480, pricePerPlayer: 40.00 },
-  { name: "Nebula", ram: 16, price: 640, pricePerPlayer: 53.33 },
-  { name: "Plasma", ram: 24, price: 960, pricePerPlayer: 80.00 },
-  { name: "SuperNova", ram: 32, price: 1280, pricePerPlayer: 106.67 },
+  { name: "Meteor", ram: 4, price: 160, cpu: "1 vCore", storage: "10 GB" },
+  { name: "Nova", ram: 6, price: 240, cpu: "1.5 vCores", storage: "15 GB" },
+  { name: "Eclipse", ram: 8, price: 320, cpu: "2 vCores", storage: "20 GB" },
+  { name: "Comet", ram: 12, price: 480, cpu: "2.5 vCores", storage: "30 GB" },
+  { name: "Nebula", ram: 16, price: 640, cpu: "3 vCores", storage: "40 GB" },
+  { name: "Plasma", ram: 24, price: 960, cpu: "3.5 vCores", storage: "40 GB" },
+  { name: "SuperNova", ram: 32, price: 1280, cpu: "4 vCores", storage: "60 GB" },
 ];
 
 const RamCalculator = () => {
@@ -37,53 +70,117 @@ const RamCalculator = () => {
   const [mediumPlugins, setMediumPlugins] = useState(5);
   const [heavyPlugins, setHeavyPlugins] = useState(0);
   const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
-  const [serverType, setServerType] = useState(serverTypes[0]);
-  const [version, setVersion] = useState(versions[0]);
+  const [serverType, setServerType] = useState("paper");
+  const [version, setVersion] = useState("1.20");
   const [selectedTier, setSelectedTier] = useState("auto");
-  const [showAdvanced, setShowAdvanced] = useState(true);
+  const [worldSize, setWorldSize] = useState("medium");
+  const [networkType, setNetworkType] = useState("standalone");
+  const [useDatabase, setUseDatabase] = useState(false);
+  const [useOptimizedFlags, setUseOptimizedFlags] = useState(true);
+  const [viewDistance, setViewDistance] = useState(10);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showBreakdown, setShowBreakdown] = useState(false);
 
   const calculateRam = () => {
-    let baseRam = 2;
-    baseRam += Math.ceil(players / 5) * 0.5;
-    baseRam += mods * 0.1;
-    baseRam += lightPlugins * 0.05;
-    baseRam += mediumPlugins * 0.15;
-    baseRam += heavyPlugins * 0.3;
+    // Base RAM requirement
+    let baseRam = 1.5;
     
-    if (serverType === "Forge" || serverType === "Fabric") {
-      baseRam *= 1.3;
-    }
+    // Player impact (exponential scaling for large servers)
+    const playerRam = players <= 20 
+      ? players * 0.08 
+      : 20 * 0.08 + (players - 20) * 0.12;
     
-    const tier = tiers.find(t => t.id === selectedTier);
-    if (tier) {
-      baseRam *= tier.multiplier;
-    }
+    // Mod impact (heavy for modded servers)
+    const modRam = mods * 0.02;
     
-    return Math.max(4, Math.ceil(baseRam));
+    // Plugin impact
+    const pluginRam = lightPlugins * 0.03 + mediumPlugins * 0.1 + heavyPlugins * 0.25;
+    
+    // World size impact
+    const worldMultiplier = worldSizes.find(w => w.id === worldSize)?.multiplier || 1;
+    
+    // Server type multiplier
+    const serverMultiplier = serverTypes.find(s => s.id === serverType)?.multiplier || 1;
+    
+    // Version multiplier
+    const versionMultiplier = versions.find(v => v.id === version)?.multiplier || 1;
+    
+    // Network type multiplier
+    const networkMultiplier = networkTypes.find(n => n.id === networkType)?.multiplier || 1;
+    
+    // View distance impact
+    const viewDistanceRam = (viewDistance - 6) * 0.15;
+    
+    // Database overhead
+    const databaseRam = useDatabase ? 0.5 : 0;
+    
+    // Optimized flags reduction
+    const flagsMultiplier = useOptimizedFlags ? 0.92 : 1;
+    
+    // Tier multiplier
+    const tierMultiplier = tiers.find(t => t.id === selectedTier)?.multiplier || 1;
+    
+    // Calculate total
+    let totalRam = (baseRam + playerRam + modRam + pluginRam + viewDistanceRam + databaseRam) 
+      * worldMultiplier 
+      * serverMultiplier 
+      * versionMultiplier 
+      * networkMultiplier 
+      * flagsMultiplier 
+      * tierMultiplier;
+    
+    return {
+      total: Math.max(4, Math.ceil(totalRam)),
+      breakdown: {
+        base: 1.5,
+        players: playerRam,
+        mods: modRam,
+        plugins: pluginRam,
+        viewDistance: viewDistanceRam,
+        database: databaseRam,
+        worldMultiplier,
+        serverMultiplier,
+        versionMultiplier,
+        networkMultiplier,
+        flagsMultiplier,
+        tierMultiplier,
+      }
+    };
   };
 
-  const recommendedRam = calculateRam();
+  const { total: recommendedRam, breakdown } = calculateRam();
   
   const getRecommendedPlans = () => {
     const planIndex = plans.findIndex(p => p.ram >= recommendedRam);
-    const startIndex = Math.max(0, planIndex - 1);
+    const startIndex = Math.max(0, planIndex === -1 ? plans.length - 3 : planIndex - 1);
     return plans.slice(startIndex, startIndex + 3);
   };
 
   const recommendedPlans = getRecommendedPlans();
   const mainPlan = recommendedPlans[1] || recommendedPlans[0];
 
-  const getRamUsage = () => {
-    if (recommendedRam <= 6) return { text: "Optimal", color: "text-green-400", barColor: "bg-green-500" };
-    if (recommendedRam <= 10) return { text: "Moderate", color: "text-yellow-400", barColor: "bg-yellow-500" };
-    return { text: "High", color: "text-orange-400", barColor: "bg-orange-500" };
+  const getPerformanceScore = () => {
+    const pluginLoad = lightPlugins + mediumPlugins * 2 + heavyPlugins * 4;
+    const playerLoad = players / 10;
+    const modLoad = mods / 20;
+    const score = 100 - (pluginLoad * 0.8 + playerLoad * 3 + modLoad * 2);
+    return Math.max(20, Math.min(100, Math.round(score)));
   };
 
-  const getTpsRisk = () => {
-    const pluginLoad = lightPlugins + mediumPlugins * 2 + heavyPlugins * 4;
-    if (pluginLoad < 20 && players < 15) return { text: "Low", color: "text-green-400", barColor: "bg-green-500", width: "30%" };
-    if (pluginLoad < 40 && players < 25) return { text: "Medium", color: "text-yellow-400", barColor: "bg-yellow-500", width: "60%" };
-    return { text: "High", color: "text-orange-400", barColor: "bg-orange-500", width: "90%" };
+  const getTpsEstimate = () => {
+    const score = getPerformanceScore();
+    if (score >= 80) return { tps: "19-20", color: "text-green-400", status: "Excellent" };
+    if (score >= 60) return { tps: "17-19", color: "text-yellow-400", status: "Good" };
+    if (score >= 40) return { tps: "14-17", color: "text-orange-400", status: "Moderate" };
+    return { tps: "10-14", color: "text-red-400", status: "Heavy Load" };
+  };
+
+  const getStorageEstimate = () => {
+    const baseStorage = 2;
+    const worldStorage = worldSizes.find(w => w.id === worldSize)?.chunks || 5000;
+    const modStorage = mods * 0.05;
+    const pluginStorage = (lightPlugins + mediumPlugins + heavyPlugins) * 0.02;
+    return Math.ceil(baseStorage + (worldStorage / 1000) + modStorage + pluginStorage);
   };
 
   const handlePreset = (presetId: string) => {
@@ -94,23 +191,31 @@ const RamCalculator = () => {
       setLightPlugins(preset.plugins.light);
       setMediumPlugins(preset.plugins.medium);
       setHeavyPlugins(preset.plugins.heavy);
+      setMods(preset.mods);
+      setWorldSize(preset.worldSize);
     }
   };
 
   const handleReset = () => {
     setSelectedPreset(null);
-    setServerType(serverTypes[0]);
-    setVersion(versions[0]);
+    setServerType("paper");
+    setVersion("1.20");
     setPlayers(12);
     setMods(0);
     setLightPlugins(10);
     setMediumPlugins(5);
     setHeavyPlugins(0);
     setSelectedTier("auto");
+    setWorldSize("medium");
+    setNetworkType("standalone");
+    setUseDatabase(false);
+    setUseOptimizedFlags(true);
+    setViewDistance(10);
   };
 
-  const ramUsage = getRamUsage();
-  const tpsRisk = getTpsRisk();
+  const performanceScore = getPerformanceScore();
+  const tpsEstimate = getTpsEstimate();
+  const storageEstimate = getStorageEstimate();
 
   return (
     <section id="calculator" className="py-24 relative overflow-hidden bg-[#0a0a0a]">
@@ -129,29 +234,28 @@ const RamCalculator = () => {
         >
           <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
             <Calculator className="w-4 h-4 text-red-500" />
-            <span className="text-sm text-red-300">Smart Calculator</span>
+            <span className="text-sm text-red-300">Advanced Calculator</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-white">Not Sure Which </span>
+            <span className="text-white">Server Resource </span>
             <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
-              Plan
+              Calculator
             </span>
-            <span className="text-white"> to Pick?</span>
           </h2>
           <p className="text-zinc-400 text-lg">
-            Our smart calculator will find the perfect plan for your server.
+            Get precise recommendations based on your server configuration.
           </p>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-6">
-            {/* Calculator Form */}
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-5 gap-6">
+            {/* Calculator Form - Left Side */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-6 rounded-2xl space-y-6"
+              className="lg:col-span-3 bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-6 rounded-2xl space-y-6"
             >
               {/* Quick Presets */}
               <div>
@@ -159,12 +263,12 @@ const RamCalculator = () => {
                   <Zap className="w-4 h-4 text-red-500" />
                   <span className="font-semibold text-white">Quick Presets</span>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
                   {presets.map((preset) => (
                     <button
                       key={preset.id}
                       onClick={() => handlePreset(preset.id)}
-                      className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                      className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-200 ${
                         selectedPreset === preset.id
                           ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-500/20"
                           : "bg-zinc-800/80 text-zinc-400 border border-red-500/20 hover:border-red-500/50 hover:text-white"
@@ -176,109 +280,219 @@ const RamCalculator = () => {
                 </div>
               </div>
 
-              {/* Server Type & Version */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* Server Configuration Row */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Settings className="w-4 h-4 text-red-500" />
-                    <span className="font-medium text-sm text-white">Server Type</span>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Server className="w-3 h-3 text-red-500" />
+                    <span className="font-medium text-xs text-white">Server Type</span>
                   </div>
                   <select
                     value={serverType}
                     onChange={(e) => setServerType(e.target.value)}
-                    className="w-full bg-zinc-800/80 text-white px-4 py-2.5 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-sm"
+                    className="w-full bg-zinc-800/80 text-white px-3 py-2 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-xs"
                   >
                     {serverTypes.map((type) => (
-                      <option key={type} value={type} className="bg-zinc-900">
-                        {type}
+                      <option key={type.id} value={type.id} className="bg-zinc-900">
+                        {type.name}
                       </option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <HardDrive className="w-4 h-4 text-red-500" />
-                    <span className="font-medium text-sm text-white">Game Version</span>
+                  <div className="flex items-center gap-2 mb-2">
+                    <HardDrive className="w-3 h-3 text-red-500" />
+                    <span className="font-medium text-xs text-white">Version</span>
                   </div>
                   <select
                     value={version}
                     onChange={(e) => setVersion(e.target.value)}
-                    className="w-full bg-zinc-800/80 text-white px-4 py-2.5 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-sm"
+                    className="w-full bg-zinc-800/80 text-white px-3 py-2 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-xs"
                   >
                     {versions.map((v) => (
-                      <option key={v} value={v} className="bg-zinc-900">
-                        {v}
+                      <option key={v.id} value={v.id} className="bg-zinc-900">
+                        {v.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Globe className="w-3 h-3 text-red-500" />
+                    <span className="font-medium text-xs text-white">World Size</span>
+                  </div>
+                  <select
+                    value={worldSize}
+                    onChange={(e) => setWorldSize(e.target.value)}
+                    className="w-full bg-zinc-800/80 text-white px-3 py-2 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-xs"
+                  >
+                    {worldSizes.map((size) => (
+                      <option key={size.id} value={size.id} className="bg-zinc-900">
+                        {size.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Layers className="w-3 h-3 text-red-500" />
+                    <span className="font-medium text-xs text-white">Network</span>
+                  </div>
+                  <select
+                    value={networkType}
+                    onChange={(e) => setNetworkType(e.target.value)}
+                    className="w-full bg-zinc-800/80 text-white px-3 py-2 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-xs"
+                  >
+                    {networkTypes.map((net) => (
+                      <option key={net.id} value={net.id} className="bg-zinc-900">
+                        {net.name}
                       </option>
                     ))}
                   </select>
                 </div>
               </div>
 
-              {/* Concurrent Players */}
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-red-500" />
-                    <span className="font-medium text-sm text-white">Concurrent Players</span>
+              {/* Main Sliders */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Players */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-red-500" />
+                      <span className="font-medium text-sm text-white">Concurrent Players</span>
+                    </div>
+                    <span className="text-red-500 font-bold text-lg">{players}</span>
                   </div>
-                  <span className="text-red-500 font-bold text-lg">{players}</span>
+                  <Slider
+                    value={[players]}
+                    onValueChange={(value) => setPlayers(value[0])}
+                    min={1}
+                    max={200}
+                    step={1}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                    <span>1</span>
+                    <span>200</span>
+                  </div>
                 </div>
-                <Slider
-                  value={[players]}
-                  onValueChange={(value) => setPlayers(value[0])}
-                  min={1}
-                  max={100}
-                  step={1}
-                  className="w-full"
-                />
+
+                {/* View Distance */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Activity className="w-4 h-4 text-red-500" />
+                      <span className="font-medium text-sm text-white">View Distance</span>
+                    </div>
+                    <span className="text-red-500 font-bold text-lg">{viewDistance} chunks</span>
+                  </div>
+                  <Slider
+                    value={[viewDistance]}
+                    onValueChange={(value) => setViewDistance(value[0])}
+                    min={4}
+                    max={32}
+                    step={1}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                    <span>4</span>
+                    <span>32</span>
+                  </div>
+                </div>
+
+                {/* Mods */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Puzzle className="w-4 h-4 text-red-500" />
+                      <span className="font-medium text-sm text-white">Mods Installed</span>
+                    </div>
+                    <span className="text-red-500 font-bold text-lg">{mods}</span>
+                  </div>
+                  <Slider
+                    value={[mods]}
+                    onValueChange={(value) => setMods(value[0])}
+                    min={0}
+                    max={300}
+                    step={5}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                    <span>0</span>
+                    <span>300</span>
+                  </div>
+                </div>
+
+                {/* Plugins Summary */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Cpu className="w-4 h-4 text-red-500" />
+                      <span className="font-medium text-sm text-white">Total Plugins</span>
+                    </div>
+                    <span className="text-red-500 font-bold text-lg">{lightPlugins + mediumPlugins + heavyPlugins}</span>
+                  </div>
+                  <div className="flex gap-2 text-xs">
+                    <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded">{lightPlugins} Light</span>
+                    <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">{mediumPlugins} Medium</span>
+                    <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded">{heavyPlugins} Heavy</span>
+                  </div>
+                </div>
               </div>
 
-              {/* How many mods */}
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <Puzzle className="w-4 h-4 text-red-500" />
-                    <span className="font-medium text-sm text-white">How many mods?</span>
-                  </div>
-                  <span className="text-red-500 font-bold text-lg">{mods}</span>
-                </div>
-                <Slider
-                  value={[mods]}
-                  onValueChange={(value) => setMods(value[0])}
-                  min={0}
-                  max={200}
-                  step={1}
-                  className="w-full"
-                />
+              {/* Toggle Options */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <button
+                  onClick={() => setUseOptimizedFlags(!useOptimizedFlags)}
+                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
+                    useOptimizedFlags
+                      ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                      : "bg-zinc-800/80 text-zinc-400 border border-zinc-700"
+                  }`}
+                >
+                  <Gauge className="w-3 h-3" />
+                  Optimized JVM
+                </button>
+                <button
+                  onClick={() => setUseDatabase(!useDatabase)}
+                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
+                    useDatabase
+                      ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                      : "bg-zinc-800/80 text-zinc-400 border border-zinc-700"
+                  }`}
+                >
+                  <Database className="w-3 h-3" />
+                  MySQL/MariaDB
+                </button>
+                <button
+                  onClick={() => setShowAdvanced(!showAdvanced)}
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium bg-zinc-800/80 text-zinc-400 border border-zinc-700 hover:border-red-500/50 transition-all"
+                >
+                  <Settings className="w-3 h-3" />
+                  {showAdvanced ? "Hide Plugins" : "Edit Plugins"}
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium bg-zinc-800/80 text-zinc-400 border border-zinc-700 hover:border-red-500/50 transition-all"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  Reset All
+                </button>
               </div>
 
-              {/* Plugin Load */}
-              <div className="border border-red-500/20 rounded-xl p-4 bg-zinc-800/30">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <Cpu className="w-4 h-4 text-red-500" />
-                    <span className="font-semibold text-white">Plugin Load</span>
-                  </div>
-                  <button
-                    onClick={() => setShowAdvanced(!showAdvanced)}
-                    className="flex items-center gap-1 text-xs text-zinc-400 hover:text-red-400 transition-colors"
+              {/* Advanced Plugin Editor */}
+              <AnimatePresence>
+                {showAdvanced && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="border border-red-500/20 rounded-xl p-4 bg-zinc-800/30 overflow-hidden"
                   >
-                    {showAdvanced ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                  </button>
-                </div>
-                
-                <AnimatePresence>
-                  {showAdvanced && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="space-y-5 overflow-hidden"
-                    >
-                      {/* Light Plugins */}
+                    <div className="space-y-4">
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-zinc-400">Light Plugins</span>
+                          <span className="text-sm text-zinc-400">Light Plugins <span className="text-zinc-600">(EssentialsX, Vault, etc.)</span></span>
                           <span className="text-red-400 font-medium">{lightPlugins}</span>
                         </div>
                         <Slider
@@ -290,11 +504,9 @@ const RamCalculator = () => {
                           className="w-full"
                         />
                       </div>
-
-                      {/* Medium Plugins */}
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-zinc-400">Medium Plugins</span>
+                          <span className="text-sm text-zinc-400">Medium Plugins <span className="text-zinc-600">(WorldEdit, FAWE, etc.)</span></span>
                           <span className="text-red-400 font-medium">{mediumPlugins}</span>
                         </div>
                         <Slider
@@ -306,11 +518,9 @@ const RamCalculator = () => {
                           className="w-full"
                         />
                       </div>
-
-                      {/* Heavy Plugins */}
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-zinc-400">Heavy Plugins</span>
+                          <span className="text-sm text-zinc-400">Heavy Plugins <span className="text-zinc-600">(Dynmap, Citizens, etc.)</span></span>
                           <span className="text-red-400 font-medium">{heavyPlugins}</span>
                         </div>
                         <Slider
@@ -322,156 +532,213 @@ const RamCalculator = () => {
                           className="w-full"
                         />
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Actions */}
-              <div className="flex items-center justify-between pt-2">
-                <button
-                  onClick={() => setShowAdvanced(!showAdvanced)}
-                  className="flex items-center gap-2 text-sm text-zinc-400 hover:text-red-400 transition-colors"
-                >
-                  <Settings className="w-4 h-4" />
-                  {showAdvanced ? "Hide Advanced" : "Show Advanced"}
-                </button>
-                <button
-                  onClick={handleReset}
-                  className="flex items-center gap-2 text-sm text-zinc-400 hover:text-red-400 transition-colors"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  Reset
-                </button>
-              </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
 
-            {/* Recommendation Card */}
+            {/* Recommendation Panel - Right Side */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-zinc-900/50 backdrop-blur-lg border border-red-500/20 p-6 rounded-2xl space-y-6"
+              className="lg:col-span-2 space-y-4"
             >
-              <h3 className="font-display text-2xl font-bold text-white">
-                Our Recommendation
-              </h3>
-
-              {/* RAM Display */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-zinc-400">Calculated RAM:</span>
-                  <span className="text-3xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+              {/* RAM Result Card */}
+              <div className="bg-gradient-to-br from-red-500/20 to-orange-500/10 backdrop-blur-lg border border-red-500/30 p-6 rounded-2xl">
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <MemoryStick className="w-5 h-5 text-red-400" />
+                    <span className="text-zinc-400 text-sm">Recommended RAM</span>
+                  </div>
+                  <div className="text-6xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
                     {recommendedRam} GB
-                  </span>
+                  </div>
+                  <p className="text-zinc-500 text-sm mt-2">
+                    Based on your server configuration
+                  </p>
+                </div>
+              </div>
+
+              {/* Performance Metrics */}
+              <div className="bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-4 rounded-2xl space-y-4">
+                <div className="flex items-center gap-2">
+                  <Activity className="w-4 h-4 text-red-500" />
+                  <span className="font-semibold text-white text-sm">Performance Metrics</span>
                 </div>
                 
-                {/* Status Bars */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  {/* Performance Score */}
                   <div>
-                    <div className="flex items-center justify-between text-xs mb-1.5">
-                      <span className="text-zinc-500">RAM Usage:</span>
-                      <span className={`font-medium ${ramUsage.color}`}>{ramUsage.text}</span>
+                    <div className="flex items-center justify-between text-xs mb-1">
+                      <span className="text-zinc-500">Performance Score</span>
+                      <span className={`font-medium ${performanceScore >= 70 ? 'text-green-400' : performanceScore >= 40 ? 'text-yellow-400' : 'text-red-400'}`}>
+                        {performanceScore}/100
+                      </span>
                     </div>
                     <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: `${Math.min(100, (recommendedRam / 16) * 100)}%` }}
-                        className={`h-full ${ramUsage.barColor} rounded-full`}
+                        animate={{ width: `${performanceScore}%` }}
+                        className={`h-full rounded-full ${performanceScore >= 70 ? 'bg-green-500' : performanceScore >= 40 ? 'bg-yellow-500' : 'bg-red-500'}`}
                       />
                     </div>
                   </div>
-                  <div>
-                    <div className="flex items-center justify-between text-xs mb-1.5">
-                      <span className="text-zinc-500">TPS Risk:</span>
-                      <span className={`font-medium ${tpsRisk.color}`}>{tpsRisk.text}</span>
-                    </div>
-                    <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: tpsRisk.width }}
-                        className={`h-full ${tpsRisk.barColor} rounded-full`}
-                      />
-                    </div>
+
+                  {/* TPS Estimate */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-zinc-500 text-xs">Est. TPS</span>
+                    <span className={`font-medium text-sm ${tpsEstimate.color}`}>
+                      {tpsEstimate.tps} ({tpsEstimate.status})
+                    </span>
+                  </div>
+
+                  {/* Storage Estimate */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-zinc-500 text-xs">Est. Storage</span>
+                    <span className="font-medium text-sm text-white">{storageEstimate} GB</span>
                   </div>
                 </div>
               </div>
 
-              {/* Preferred Tier */}
-              <div>
-                <span className="text-sm text-zinc-400 mb-3 block">Preferred Tier</span>
+              {/* Tier Selection */}
+              <div className="bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-4 rounded-2xl">
+                <span className="text-sm text-zinc-400 mb-3 block">Optimization Tier</span>
                 <div className="grid grid-cols-3 gap-2">
                   {tiers.map((tier) => (
                     <button
                       key={tier.id}
                       onClick={() => setSelectedTier(tier.id)}
-                      className={`py-2.5 px-4 rounded-xl text-sm font-medium transition-all ${
+                      className={`py-2 px-2 rounded-xl text-xs font-medium transition-all ${
                         selectedTier === tier.id
                           ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-500/20"
                           : "bg-zinc-800/80 text-zinc-400 hover:text-white border border-red-500/20 hover:border-red-500/40"
                       }`}
                     >
+                      <span className="block text-base mb-1">{tier.icon}</span>
                       {tier.name}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Plan Cost Header */}
-              <div className="text-center py-4 border-t border-b border-red-500/10">
-                <p className="text-lg font-semibold text-white">{recommendedRam} GB Plan Cost</p>
-                <p className="text-sm text-zinc-500">
-                  Budget: ₹{mainPlan?.price - 50 || 120} / Performance: ₹{mainPlan?.price + 60 || 310}
-                </p>
-              </div>
+              {/* Recommended Plan */}
+              {mainPlan && (
+                <div className="bg-gradient-to-b from-red-500/20 to-red-900/10 backdrop-blur-lg border border-red-500 p-5 rounded-2xl shadow-lg shadow-red-500/20">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Shield className="w-4 h-4 text-red-400" />
+                    <span className="text-xs text-red-300 font-medium">BEST MATCH</span>
+                  </div>
+                  <h4 className="font-bold text-xl text-white mb-2">{mainPlan.name} Plan</h4>
+                  <div className="grid grid-cols-3 gap-2 mb-4 text-center">
+                    <div className="bg-zinc-800/50 rounded-lg p-2">
+                      <div className="text-white font-semibold text-sm">{mainPlan.ram} GB</div>
+                      <div className="text-zinc-500 text-[10px]">RAM</div>
+                    </div>
+                    <div className="bg-zinc-800/50 rounded-lg p-2">
+                      <div className="text-white font-semibold text-sm">{mainPlan.cpu}</div>
+                      <div className="text-zinc-500 text-[10px]">CPU</div>
+                    </div>
+                    <div className="bg-zinc-800/50 rounded-lg p-2">
+                      <div className="text-white font-semibold text-sm">{mainPlan.storage}</div>
+                      <div className="text-zinc-500 text-[10px]">Storage</div>
+                    </div>
+                  </div>
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <span className="text-3xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                        ₹{mainPlan.price}
+                      </span>
+                      <span className="text-zinc-500 text-sm">/mo</span>
+                    </div>
+                    <Button className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white">
+                      Select Plan <ChevronRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </div>
+                </div>
+              )}
 
-              {/* Plan Cards */}
-              <div className="grid grid-cols-3 gap-3">
-                {recommendedPlans.map((plan, index) => (
+              {/* Breakdown Toggle */}
+              <button
+                onClick={() => setShowBreakdown(!showBreakdown)}
+                className="w-full text-center text-sm text-red-400 hover:text-red-300 transition-colors flex items-center justify-center gap-1 py-2"
+              >
+                <Info className="w-4 h-4" />
+                {showBreakdown ? "Hide" : "Show"} Calculation Breakdown
+                {showBreakdown ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              </button>
+
+              {/* Breakdown Panel */}
+              <AnimatePresence>
+                {showBreakdown && (
                   <motion.div
-                    key={plan.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className={`relative p-4 rounded-xl border transition-all ${
-                      index === 1
-                        ? "bg-gradient-to-b from-red-500/20 to-red-900/10 border-red-500 scale-105 shadow-lg shadow-red-500/20"
-                        : "bg-zinc-800/50 border-red-500/20 hover:border-red-500/40"
-                    }`}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-4 rounded-2xl overflow-hidden"
                   >
-                    {index === 1 && (
-                      <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-red-600 to-orange-500 text-white text-[10px] font-bold px-3 py-0.5 rounded-full whitespace-nowrap">
-                        Budget Tier
+                    <h4 className="font-semibold text-white text-sm mb-3">RAM Calculation Breakdown</h4>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500">Base RAM</span>
+                        <span className="text-white">{breakdown.base.toFixed(2)} GB</span>
                       </div>
-                    )}
-                    <div className="text-center space-y-2 pt-2">
-                      <h4 className="font-bold text-sm text-white">{plan.name}</h4>
-                      <div className="text-2xl font-bold">
-                        <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">₹{plan.price}</span>
-                        <span className="text-xs text-zinc-500">/mo</span>
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500">Players ({players})</span>
+                        <span className="text-white">+{breakdown.players.toFixed(2)} GB</span>
                       </div>
-                      <p className="text-xs text-zinc-500">{plan.ram} GB RAM</p>
-                      <p className="text-xs text-zinc-500">~₹{plan.pricePerPlayer.toFixed(2)}/player</p>
-                      <Button
-                        size="sm"
-                        className={`w-full mt-2 ${
-                          index === 1 
-                            ? "bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white" 
-                            : "bg-zinc-700 hover:bg-zinc-600 text-white"
-                        }`}
-                      >
-                        Select Plan
-                      </Button>
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500">Mods ({mods})</span>
+                        <span className="text-white">+{breakdown.mods.toFixed(2)} GB</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500">Plugins ({lightPlugins + mediumPlugins + heavyPlugins})</span>
+                        <span className="text-white">+{breakdown.plugins.toFixed(2)} GB</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500">View Distance ({viewDistance})</span>
+                        <span className="text-white">+{breakdown.viewDistance.toFixed(2)} GB</span>
+                      </div>
+                      {useDatabase && (
+                        <div className="flex justify-between">
+                          <span className="text-zinc-500">Database</span>
+                          <span className="text-white">+{breakdown.database.toFixed(2)} GB</span>
+                        </div>
+                      )}
+                      <div className="border-t border-zinc-800 pt-2 mt-2">
+                        <div className="flex justify-between">
+                          <span className="text-zinc-500">World Size</span>
+                          <span className="text-white">×{breakdown.worldMultiplier.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-zinc-500">Server Type</span>
+                          <span className="text-white">×{breakdown.serverMultiplier.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-zinc-500">Version</span>
+                          <span className="text-white">×{breakdown.versionMultiplier.toFixed(2)}</span>
+                        </div>
+                        {useOptimizedFlags && (
+                          <div className="flex justify-between">
+                            <span className="text-zinc-500">JVM Optimization</span>
+                            <span className="text-green-400">×{breakdown.flagsMultiplier.toFixed(2)}</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between">
+                          <span className="text-zinc-500">Tier ({selectedTier})</span>
+                          <span className="text-white">×{breakdown.tierMultiplier.toFixed(2)}</span>
+                        </div>
+                      </div>
+                      <div className="border-t border-zinc-800 pt-2 mt-2 flex justify-between font-semibold">
+                        <span className="text-white">Final Result</span>
+                        <span className="text-red-400">{recommendedRam} GB</span>
+                      </div>
                     </div>
                   </motion.div>
-                ))}
-              </div>
-
-              {/* Show Calculation Breakdown */}
-              <button className="w-full text-center text-sm text-red-400 hover:text-red-300 transition-colors flex items-center justify-center gap-1">
-                Show Calculation Breakdown <ChevronDown className="w-4 h-4" />
-              </button>
+                )}
+              </AnimatePresence>
             </motion.div>
           </div>
         </div>
