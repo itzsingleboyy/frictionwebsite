@@ -157,15 +157,10 @@ const Footer = () => {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-red-500/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-red-500/10 flex justify-center items-center">
           <p className="text-zinc-600 text-sm">
             © {currentYear} FrictionHost. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-zinc-600 text-sm">
-            <span>Made with</span>
-            <span className="text-red-500">❤</span>
-            <span>in India</span>
-          </div>
         </div>
       </div>
     </footer>
