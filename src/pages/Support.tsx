@@ -26,14 +26,6 @@ const supportChannels = [
     highlight: false,
   },
   {
-    icon: Headphones,
-    title: "Live Chat",
-    description: "Chat with our support team in real-time through our panel.",
-    link: "#",
-    linkText: "Open Live Chat",
-    highlight: false,
-  },
-  {
     icon: FileText,
     title: "Knowledge Base",
     description: "Browse our documentation and tutorials for self-help.",
@@ -45,7 +37,7 @@ const supportChannels = [
 
 const stats = [
   { icon: Clock, value: "< 5 min", label: "Avg Response Time" },
-  { icon: Users, value: "50K+", label: "Happy Customers" },
+  { icon: Users, value: "100+", label: "Happy Customers" },
   { icon: Headphones, value: "24/7", label: "Support Available" },
 ];
 
