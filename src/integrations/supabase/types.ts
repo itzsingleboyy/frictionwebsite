@@ -19,7 +19,9 @@ export type Database = {
           cpu: string
           created_at: string
           id: string
+          panel_id: string | null
           panel_link: string | null
+          panel_password: string | null
           plan_name: string
           plan_price: number
           ram: string
@@ -34,7 +36,9 @@ export type Database = {
           cpu: string
           created_at?: string
           id?: string
+          panel_id?: string | null
           panel_link?: string | null
+          panel_password?: string | null
           plan_name: string
           plan_price: number
           ram: string
@@ -49,7 +53,9 @@ export type Database = {
           cpu?: string
           created_at?: string
           id?: string
+          panel_id?: string | null
           panel_link?: string | null
+          panel_password?: string | null
           plan_name?: string
           plan_price?: number
           ram?: string
