@@ -15,28 +15,12 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
 
-  useEffect(() => {
-    // Preload images
-    const images = [
-      "/src/assets/minecraft-hero.jpg",
-      "/src/assets/rust-hero.jpg",
-      "/src/assets/palworld-hero.jpg",
-      "/src/assets/gtav-hero.jpg",
-      "/src/assets/terraria-hero.jpg",
-    ];
-
-    Promise.all(
-      images.map((src) => {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = resolve;
-          img.onerror = resolve;
-        });
-      })
-    );
-  }, []);
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+    setTimeout(() => setShowContent(true), 100);
+  };
 
   return (
     <>
@@ -59,30 +43,30 @@ const Index = () => {
         <link rel="canonical" href="https://frictionhost.com" />
       </Helmet>
 
-      <AnimatePresence mode="wait">
-        {isLoading ? (
-          <LoadingScreen key="loading" onLoadingComplete={() => setIsLoading(false)} />
-        ) : (
-          <motion.main
-            key="main"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="min-h-screen bg-[#0a0a0a]"
-          >
-            <Navbar />
-            <HeroSection />
-            <GamesCategory />
-            <FeaturesSection />
-            <TeamSection />
-            <RamCalculator />
-            <TestimonialsSection />
-            <FAQSection />
-            <SupportSection />
-            <Footer />
-          </motion.main>
-        )}
-      </AnimatePresence>
+      {isLoading && (
+        <LoadingScreen key="loading" onLoadingComplete={handleLoadingComplete} />
+      )}
+      
+      {!isLoading && (
+        <motion.main
+          key="main"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="min-h-screen bg-[#0a0a0a]"
+        >
+          <Navbar />
+          <HeroSection />
+          <GamesCategory />
+          <FeaturesSection />
+          <TeamSection />
+          <RamCalculator />
+          <TestimonialsSection />
+          <FAQSection />
+          <SupportSection />
+          <Footer />
+        </motion.main>
+      )}
     </>
   );
 };
