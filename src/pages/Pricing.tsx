@@ -144,51 +144,15 @@ const proxyPlans = [
   {
     name: "Starter Proxy",
     price: 45,
-    description: "Basic proxy for light usage",
-    bandwidth: "50 GB",
-    connections: "5 Concurrent",
-    locations: "3 Locations",
+    description: "Perfect for Minecraft servers",
+    ram: "2 GB",
+    cpu: "100% CPU",
+    storage: "5 GB NVMe",
     features: [
-      "HTTP/HTTPS Support",
-      "SOCKS5 Support",
+      "DDoS Protection",
+      "Low Latency",
       "99.9% Uptime",
-      "Basic Dashboard",
-    ],
-    popular: false,
-  },
-  {
-    name: "Pro Proxy",
-    price: 99,
-    description: "For power users",
-    bandwidth: "150 GB",
-    connections: "15 Concurrent",
-    locations: "10 Locations",
-    features: [
-      "HTTP/HTTPS Support",
-      "SOCKS5 Support",
-      "99.9% Uptime",
-      "Advanced Dashboard",
-      "API Access",
-      "Priority Support",
-    ],
-    popular: true,
-  },
-  {
-    name: "Business Proxy",
-    price: 199,
-    description: "Enterprise-grade proxy",
-    bandwidth: "Unlimited",
-    connections: "50 Concurrent",
-    locations: "25+ Locations",
-    features: [
-      "HTTP/HTTPS Support",
-      "SOCKS5 Support",
-      "99.99% Uptime SLA",
-      "Full Dashboard",
-      "API Access",
-      "Dedicated Support",
-      "Custom Locations",
-      "Whitelabel Option",
+      "24/7 Support",
     ],
     popular: false,
   },
@@ -334,22 +298,22 @@ const Pricing = () => {
               className="mt-24"
             >
               <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 px-4 py-2 rounded-full mb-6">
-                  <Globe className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm text-blue-300">Proxy Services</span>
+                <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
+                  <Globe className="w-4 h-4 text-red-400" />
+                  <span className="text-sm text-red-300">Proxy Services</span>
                 </div>
                 <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  <span className="text-white">Premium </span>
-                  <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                  <span className="text-white">Minecraft </span>
+                  <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
                     Proxy Plans
                   </span>
                 </h2>
                 <p className="text-zinc-400">
-                  Fast, reliable proxies for all your needs.
+                  Fast, reliable proxies for your Minecraft servers.
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div className="flex justify-center">
                 {proxyPlans.map((plan, index) => (
                   <motion.div
                     key={index}
@@ -357,29 +321,15 @@ const Pricing = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                     whileHover={{ y: -10 }}
-                    className={`relative bg-zinc-900/50 backdrop-blur-lg rounded-2xl p-6 border transition-all duration-300 ${
-                      plan.popular
-                        ? "border-blue-500/50 shadow-[0_0_40px_rgba(59,130,246,0.2)]"
-                        : "border-zinc-800 hover:border-blue-500/30"
-                    }`}
+                    className="relative bg-zinc-900/50 backdrop-blur-lg rounded-2xl p-6 border border-zinc-800 hover:border-red-500/30 transition-all duration-300 max-w-sm w-full"
                   >
-                    {/* Popular Badge */}
-                    {plan.popular && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                        <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
-                          <Zap className="w-3 h-3" />
-                          Best Value
-                        </div>
-                      </div>
-                    )}
-
                     <div className="text-center mb-6">
                       <h3 className="font-display text-2xl font-bold text-white mb-2">
                         {plan.name}
                       </h3>
                       <p className="text-zinc-500 text-sm mb-4">{plan.description}</p>
                       <div className="flex items-baseline justify-center gap-1">
-                        <span className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                        <span className="text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
                           ₹{plan.price}
                         </span>
                         <span className="text-zinc-500">/mo</span>
@@ -390,16 +340,16 @@ const Pricing = () => {
                     <div className="bg-zinc-800/50 rounded-xl p-4 mb-6">
                       <div className="grid grid-cols-3 gap-2 text-center">
                         <div>
-                          <div className="text-white font-semibold text-sm">{plan.bandwidth}</div>
-                          <div className="text-zinc-500 text-xs">Bandwidth</div>
+                          <div className="text-white font-semibold text-sm">{plan.ram}</div>
+                          <div className="text-zinc-500 text-xs">RAM</div>
                         </div>
                         <div>
-                          <div className="text-white font-semibold text-sm">{plan.connections}</div>
-                          <div className="text-zinc-500 text-xs">Connections</div>
+                          <div className="text-white font-semibold text-sm">{plan.cpu}</div>
+                          <div className="text-zinc-500 text-xs">CPU</div>
                         </div>
                         <div>
-                          <div className="text-white font-semibold text-sm">{plan.locations}</div>
-                          <div className="text-zinc-500 text-xs">Locations</div>
+                          <div className="text-white font-semibold text-sm">{plan.storage}</div>
+                          <div className="text-zinc-500 text-xs">Storage</div>
                         </div>
                       </div>
                     </div>
@@ -408,7 +358,7 @@ const Pricing = () => {
                     <ul className="space-y-3 mb-6">
                       {plan.features.map((feature, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm text-zinc-400">
-                          <Check className="w-4 h-4 text-blue-500 flex-shrink-0" />
+                          <Check className="w-4 h-4 text-red-500 flex-shrink-0" />
                           {feature}
                         </li>
                       ))}
@@ -416,8 +366,8 @@ const Pricing = () => {
 
                     {/* CTA */}
                     <Button
-                      variant={plan.popular ? "default" : "outline"}
-                      className={`w-full gap-2 ${plan.popular ? "bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600" : ""}`}
+                      variant="outline"
+                      className="w-full gap-2"
                       onClick={() => handleGetStarted(plan as any)}
                     >
                       Get Started <ArrowRight className="w-4 h-4" />
