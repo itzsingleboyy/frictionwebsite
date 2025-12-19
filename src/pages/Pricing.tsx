@@ -238,9 +238,9 @@ const Pricing = () => {
               className="text-center max-w-3xl mx-auto mb-16"
             >
               <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
-                <span className="text-white">Simple </span>
+                <span className="text-white">Minecraft </span>
                 <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
-                  Pricing
+                  Hosting Plans
                 </span>
               </h1>
               <p className="text-zinc-400 text-lg">
