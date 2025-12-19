@@ -395,7 +395,7 @@ const Pricing = () => {
           </div>
 
           {/* RAM Calculator */}
-          <RamCalculator />
+          <RamCalculator onSelectPlan={(plan) => handleGetStarted(plan as typeof plans[0])} />
         </main>
         <Footer />
         

@@ -63,7 +63,11 @@ const plans = [
   { name: "SuperNova", ram: 32, price: 1280, cpu: "4 vCores", storage: "60 GB" },
 ];
 
-const RamCalculator = () => {
+interface RamCalculatorProps {
+  onSelectPlan?: (plan: { name: string; price: number; ram: string; cpu: string; storage: string }) => void;
+}
+
+const RamCalculator = ({ onSelectPlan }: RamCalculatorProps) => {
   const [players, setPlayers] = useState(12);
   const [mods, setMods] = useState(0);
   const [lightPlugins, setLightPlugins] = useState(10);
@@ -629,7 +633,16 @@ const RamCalculator = () => {
                       </span>
                       <span className="text-muted-foreground text-sm">/mo</span>
                     </div>
-                    <Button variant="hero">
+                    <Button 
+                      variant="hero"
+                      onClick={() => onSelectPlan?.({
+                        name: mainPlan.name,
+                        price: mainPlan.price,
+                        ram: `${mainPlan.ram} GB`,
+                        cpu: mainPlan.cpu,
+                        storage: mainPlan.storage,
+                      })}
+                    >
                       Select Plan <ChevronRight className="w-4 h-4 ml-1" />
                     </Button>
                   </div>
