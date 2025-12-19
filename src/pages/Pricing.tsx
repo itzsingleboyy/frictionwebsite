@@ -13,11 +13,11 @@ import { toast } from "sonner";
 
 const plans = [
   {
-    name: "Starter",
-    price: 45,
+    name: "Meteor",
+    price: 160,
     description: "Perfect for small communities",
-    ram: "2 GB",
-    cpu: "1 vCore",
+    ram: "4 GB",
+    cpu: "1 vCore @ 3.0GHz",
     storage: "10 GB NVMe",
     features: [
       "Unlimited Slots",
@@ -29,12 +29,29 @@ const plans = [
     popular: false,
   },
   {
-    name: "Standard",
-    price: 89,
+    name: "Nova",
+    price: 240,
     description: "Great for growing servers",
-    ram: "4 GB",
-    cpu: "2 vCores",
-    storage: "25 GB NVMe",
+    ram: "6 GB",
+    cpu: "1.5 vCores @ 3.0GHz",
+    storage: "15 GB NVMe",
+    features: [
+      "Unlimited Slots",
+      "DDoS Protection",
+      "24/7 Support",
+      "Daily Backups",
+      "Full FTP Access",
+      "Mod Support",
+    ],
+    popular: false,
+  },
+  {
+    name: "Eclipse",
+    price: 320,
+    description: "For serious gaming communities",
+    ram: "8 GB",
+    cpu: "2 vCores @ 3.0GHz",
+    storage: "20 GB NVMe",
     features: [
       "Unlimited Slots",
       "DDoS Protection",
@@ -47,31 +64,67 @@ const plans = [
     popular: true,
   },
   {
-    name: "Premium",
-    price: 149,
-    description: "For serious gaming communities",
-    ram: "8 GB",
-    cpu: "4 vCores",
-    storage: "50 GB NVMe",
+    name: "Comet",
+    price: 480,
+    description: "High performance hosting",
+    ram: "12 GB",
+    cpu: "2.5 vCores @ 3.0GHz",
+    storage: "30 GB NVMe",
     features: [
       "Unlimited Slots",
       "Advanced DDoS Protection",
       "24/7 Priority Support",
-      "Real-time Backups",
+      "Hourly Backups",
       "Full FTP Access",
       "Mod Support",
+      "Custom Subdomain",
+    ],
+    popular: false,
+  },
+  {
+    name: "Nebula",
+    price: 640,
+    description: "Maximum performance",
+    ram: "16 GB",
+    cpu: "3 vCores @ 3.0GHz",
+    storage: "40 GB NVMe",
+    features: [
+      "Unlimited Slots",
+      "Enterprise DDoS Protection",
+      "24/7 Priority Support",
+      "Real-time Backups",
+      "Full Root Access",
+      "Unlimited Mods",
+      "Custom Domain",
+    ],
+    popular: false,
+  },
+  {
+    name: "Plasma",
+    price: 960,
+    description: "Enterprise grade hosting",
+    ram: "24 GB",
+    cpu: "3.5 vCores @ 3.0GHz",
+    storage: "40 GB NVMe",
+    features: [
+      "Unlimited Slots",
+      "Enterprise DDoS Protection",
+      "Dedicated Support Manager",
+      "Real-time Backups",
+      "Full Root Access",
+      "Unlimited Mods",
       "Custom Domain",
       "Dedicated IP",
     ],
     popular: false,
   },
   {
-    name: "Enterprise",
-    price: 299,
-    description: "Maximum performance",
-    ram: "16 GB",
-    cpu: "8 vCores",
-    storage: "100 GB NVMe",
+    name: "SuperNova",
+    price: 1280,
+    description: "Ultimate server power",
+    ram: "32 GB",
+    cpu: "4 vCores @ 3.0GHz",
+    storage: "60 GB NVMe",
     features: [
       "Unlimited Slots",
       "Enterprise DDoS Protection",
@@ -142,7 +195,7 @@ const Pricing = () => {
             </motion.div>
 
             {/* Pricing Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
               {plans.map((plan, index) => (
                 <motion.div
                   key={index}
