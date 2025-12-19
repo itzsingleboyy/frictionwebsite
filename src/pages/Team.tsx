@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Twitter, Linkedin, Github, Crown, Briefcase, Star } from "lucide-react";
 import luffyAvatar from "@/assets/luffy-avatar.png";
 import paxboltAvatar from "@/assets/paxbolt-avatar.png";
+import singleAvatar from "@/assets/single-avatar.png";
 
 const teamMembers = [
   {
@@ -37,7 +38,7 @@ const teamMembers = [
     role: "Director",
     icon: Star,
     description: "Operations mastermind ensuring 99.9% uptime and seamless service delivery.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    image: singleAvatar,
     gradient: "from-orange-500 to-red-500",
     social: {
       twitter: "#",
