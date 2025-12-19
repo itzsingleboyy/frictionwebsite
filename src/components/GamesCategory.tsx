@@ -11,6 +11,14 @@ import gtavThumb from "@/assets/gtav-thumb.jpg";
 import terrariaThumb from "@/assets/terraria-thumb.jpg";
 import arkThumb from "@/assets/ark-thumb.jpg";
 
+const categories = [
+  { id: "all", label: "All Games", icon: Gamepad2 },
+  { id: "popular", label: "Popular", icon: Sparkles },
+  { id: "survival", label: "Survival", icon: Shield },
+  { id: "sandbox", label: "Sandbox", icon: HardDrive },
+  { id: "roleplay", label: "Roleplay", icon: Users },
+];
+
 const games = [
   {
     id: "minecraft",
@@ -20,6 +28,7 @@ const games = [
     thumbnail: minecraftThumb,
     players: "Unlimited",
     popular: true,
+    category: "sandbox",
     features: ["Unlimited Slots", "Mod Support", "Auto Backups", "Spigot/Paper"],
   },
   {
@@ -30,6 +39,7 @@ const games = [
     thumbnail: rustThumb,
     players: "300+",
     popular: true,
+    category: "survival",
     features: ["Oxide Support", "Custom Maps", "DDoS Protected", "Daily Wipes"],
   },
   {
@@ -40,6 +50,7 @@ const games = [
     thumbnail: palworldThumb,
     players: "32",
     popular: true,
+    category: "survival",
     features: ["Cross-play", "Auto Updates", "Fast Setup", "Dedicated CPU"],
   },
   {
@@ -50,6 +61,7 @@ const games = [
     thumbnail: gtavThumb,
     players: "128",
     popular: false,
+    category: "roleplay",
     features: ["FiveM Ready", "Script Support", "High RAM", "Custom Framework"],
   },
   {
@@ -60,6 +72,7 @@ const games = [
     thumbnail: terrariaThumb,
     players: "16",
     popular: false,
+    category: "sandbox",
     features: ["TShock Support", "Easy Mods", "Quick Setup", "24/7 Online"],
   },
   {
@@ -70,6 +83,7 @@ const games = [
     thumbnail: arkThumb,
     players: "70",
     popular: false,
+    category: "survival",
     features: ["Cluster Ready", "Mod Support", "High Memory", "Fast CPU"],
   },
 ];
@@ -100,9 +114,13 @@ const cardVariants = {
 
 const GamesCategory = () => {
   const [hoveredGame, setHoveredGame] = useState<string | null>(null);
-  const [filter, setFilter] = useState<"all" | "popular">("all");
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const filteredGames = filter === "all" ? games : games.filter((g) => g.popular);
+  const filteredGames = activeCategory === "all" 
+    ? games 
+    : activeCategory === "popular"
+    ? games.filter((g) => g.popular)
+    : games.filter((g) => g.category === activeCategory);
 
   return (
     <section id="games" className="py-24 relative overflow-hidden bg-[#0a0a0a]">
@@ -141,35 +159,31 @@ const GamesCategory = () => {
           </p>
         </motion.div>
 
-        {/* Filter Tabs */}
+        {/* Category Tabs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          <button
-            onClick={() => setFilter("all")}
-            className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-              filter === "all"
-                ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-[0_0_30px_rgba(220,38,38,0.4)]"
-                : "bg-zinc-900 text-zinc-400 border border-zinc-800 hover:border-red-500/50"
-            }`}
-          >
-            All Games
-          </button>
-          <button
-            onClick={() => setFilter("popular")}
-            className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
-              filter === "popular"
-                ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-[0_0_30px_rgba(220,38,38,0.4)]"
-                : "bg-zinc-900 text-zinc-400 border border-zinc-800 hover:border-red-500/50"
-            }`}
-          >
-            <Sparkles className="w-4 h-4" />
-            Popular
-          </button>
+          {categories.map((category) => {
+            const Icon = category.icon;
+            return (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-5 py-2.5 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${
+                  activeCategory === category.id
+                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-[0_0_30px_rgba(220,38,38,0.4)]"
+                    : "bg-zinc-900/80 text-zinc-400 border border-zinc-800 hover:border-red-500/50 hover:text-white"
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {category.label}
+              </button>
+            );
+          })}
         </motion.div>
 
         {/* Games Grid */}
