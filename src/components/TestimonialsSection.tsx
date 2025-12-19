@@ -60,10 +60,10 @@ const itemVariants = {
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-24 relative overflow-hidden bg-[#0a0a0a]">
+    <section className="py-24 relative overflow-hidden bg-background">
       {/* Background */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-red-600/10 blur-[120px]" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[100px]" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[100px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -74,17 +74,17 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6">
             <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-            <span className="text-sm text-red-300">Testimonials</span>
+            <span className="text-sm text-primary">Testimonials</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-white">Why We Are Rated </span>
-            <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+            <span className="text-foreground">Why We Are Rated </span>
+            <span className="gradient-text">
               Excellent
             </span>
           </h2>
-          <p className="text-zinc-400 text-lg">
+          <p className="text-muted-foreground text-lg">
             See what our customers have to say about their experience with FrictionHost.
           </p>
         </motion.div>
@@ -97,7 +97,7 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-center mb-12"
         >
-          <div className="bg-zinc-900/80 backdrop-blur-lg border border-red-500/20 px-6 py-4 rounded-2xl flex items-center gap-4">
+          <div className="glass-strong px-6 py-4 rounded-2xl flex items-center gap-4">
             <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map((i) => (
                 <Star
@@ -106,10 +106,10 @@ const TestimonialsSection = () => {
                 />
               ))}
             </div>
-            <div className="h-8 w-px bg-red-500/30" />
+            <div className="h-8 w-px bg-primary/30" />
             <div>
-              <span className="font-bold text-white">Trustpilot</span>
-              <p className="text-xs text-zinc-400">
+              <span className="font-bold text-foreground">Trustpilot</span>
+              <p className="text-xs text-muted-foreground">
                 TrustScore 4.7 | 100+ reviews
               </p>
             </div>
@@ -130,21 +130,21 @@ const TestimonialsSection = () => {
               variants={itemVariants}
             >
               <TiltCard intensity={6}>
-                <div className="group bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-6 rounded-2xl transition-all duration-500 hover:border-red-500/30 hover:shadow-[0_0_40px_rgba(220,38,38,0.15)] h-full">
-                  <Quote className="w-8 h-8 text-red-500/30 mb-4 group-hover:text-red-500/50 transition-colors" />
-                  <p className="text-white/90 mb-6 leading-relaxed">
+                <div className="group glass p-6 rounded-2xl transition-all duration-500 hover:border-primary/30 hover:shadow-[0_0_40px_hsl(var(--primary)/0.15)] h-full">
+                  <Quote className="w-8 h-8 text-primary/30 mb-4 group-hover:text-primary/50 transition-colors" />
+                  <p className="text-foreground/90 mb-6 leading-relaxed">
                     "{testimonial.content}"
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold">
                         {testimonial.avatar}
                       </div>
                       <div>
-                        <p className="font-semibold text-white">
+                        <p className="font-semibold text-foreground">
                           {testimonial.name}
                         </p>
-                        <p className="text-xs text-zinc-500">
+                        <p className="text-xs text-muted-foreground">
                           {testimonial.role}
                         </p>
                       </div>
