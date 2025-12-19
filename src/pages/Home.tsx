@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MinecraftBlock from "@/components/MinecraftBlock";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Copy, Check, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -60,115 +61,126 @@ const Home = () => {
               <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
             </div>
 
-            {/* Minecraft Floating Objects */}
-            {/* Grass Block */}
-            <motion.div
-              animate={{ y: [-20, 20, -20], rotate: [0, 5, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[15%] left-[10%] w-14 h-14 shadow-lg"
-              style={{
-                background: 'linear-gradient(to bottom, #5d8c3e 0%, #5d8c3e 30%, #8b5a2b 30%, #8b5a2b 100%)',
-                boxShadow: '0 0 20px rgba(93, 140, 62, 0.4)',
-                imageRendering: 'pixelated'
-              }}
-            />
-            
-            {/* Diamond Block */}
-            <motion.div
-              animate={{ y: [20, -20, 20], rotate: [0, -5, 0] }}
-              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[20%] right-[15%] w-12 h-12"
-              style={{
-                background: 'linear-gradient(135deg, #4aedd9 0%, #2dd4bf 50%, #1a9988 100%)',
-                boxShadow: '0 0 25px rgba(74, 237, 217, 0.5)',
-              }}
-            />
-            
-            {/* TNT Block */}
-            <motion.div
-              animate={{ y: [-15, 25, -15], scale: [1, 1.05, 1] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[25%] left-[8%] w-16 h-16 flex items-center justify-center"
-              style={{
-                background: 'linear-gradient(to bottom, #dc2626 0%, #dc2626 100%)',
-                boxShadow: '0 0 20px rgba(220, 38, 38, 0.5)',
-              }}
-            >
-              <span className="text-white font-bold text-xs" style={{ fontFamily: 'monospace' }}>TNT</span>
-            </motion.div>
-            
-            {/* Creeper Face */}
-            <motion.div
-              animate={{ y: [15, -25, 15], rotate: [0, 3, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[30%] right-[10%] w-14 h-14 relative"
-              style={{
-                background: '#4ade80',
-                boxShadow: '0 0 20px rgba(74, 222, 128, 0.4)',
-              }}
-            >
-              {/* Creeper Eyes */}
-              <div className="absolute top-2 left-2 w-3 h-3 bg-black" />
-              <div className="absolute top-2 right-2 w-3 h-3 bg-black" />
-              {/* Creeper Mouth */}
-              <div className="absolute top-6 left-1/2 -translate-x-1/2 w-2 h-4 bg-black" />
-              <div className="absolute top-8 left-1/2 -translate-x-1/2 w-6 h-2 bg-black" />
-            </motion.div>
-            
-            {/* Gold Block */}
-            <motion.div
-              animate={{ y: [-10, 30, -10], rotate: [0, -3, 0] }}
-              transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[40%] left-[5%] w-10 h-10"
-              style={{
-                background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
-                boxShadow: '0 0 20px rgba(251, 191, 36, 0.5)',
-              }}
-            />
-            
-            {/* Dirt Block */}
-            <motion.div
-              animate={{ y: [25, -15, 25], x: [5, -5, 5] }}
-              transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[60%] right-[8%] w-11 h-11"
-              style={{
-                background: '#8b5a2b',
-                boxShadow: '0 0 15px rgba(139, 90, 43, 0.4)',
-              }}
-            />
-            
-            {/* Redstone Block */}
-            <motion.div
-              animate={{ y: [-20, 15, -20], scale: [1, 1.1, 1] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[70%] left-[15%] w-9 h-9"
-              style={{
-                background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
-                boxShadow: '0 0 25px rgba(239, 68, 68, 0.6)',
-              }}
-            />
-            
-            {/* Emerald Block */}
-            <motion.div
-              animate={{ y: [10, -20, 10], rotate: [0, 5, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[25%] left-[25%] w-8 h-8"
-              style={{
-                background: 'linear-gradient(135deg, #22c55e 0%, #15803d 100%)',
-                boxShadow: '0 0 20px rgba(34, 197, 94, 0.5)',
-              }}
-            />
-            
-            {/* Lapis Block */}
-            <motion.div
-              animate={{ y: [-25, 10, -25], x: [-8, 8, -8] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[40%] right-[20%] w-10 h-10"
-              style={{
-                background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
-                boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)',
-              }}
-            />
+            {/* 3D Minecraft Floating Blocks */}
+            <div className="absolute inset-0" style={{ perspective: "1000px" }}>
+              {/* Grass Block */}
+              <MinecraftBlock
+                topColor="#5d8c3e"
+                sideColor="#8b5a2b"
+                frontColor="linear-gradient(to bottom, #5d8c3e 0%, #5d8c3e 30%, #8b5a2b 30%)"
+                size={56}
+                className="top-[15%] left-[10%]"
+                animate={{ y: [-20, 20, -20], rotateY: [0, 360], rotateX: [-15, 15, -15] }}
+                duration={12}
+                glowColor="rgba(93, 140, 62, 0.5)"
+              />
+              
+              {/* Diamond Block */}
+              <MinecraftBlock
+                topColor="#4aedd9"
+                sideColor="#1a9988"
+                frontColor="#2dd4bf"
+                size={48}
+                className="top-[20%] right-[15%]"
+                animate={{ y: [20, -20, 20], rotateY: [360, 0], rotateX: [10, -10, 10] }}
+                duration={10}
+                glowColor="rgba(74, 237, 217, 0.6)"
+              />
+              
+              {/* TNT Block */}
+              <MinecraftBlock
+                topColor="#7f1d1d"
+                sideColor="#991b1b"
+                frontColor="#dc2626"
+                size={60}
+                className="bottom-[25%] left-[8%]"
+                animate={{ y: [-15, 25, -15], rotateY: [0, -360], scale: [1, 1.05, 1] }}
+                duration={8}
+                glowColor="rgba(220, 38, 38, 0.6)"
+              >
+                <span className="text-white font-bold text-xs" style={{ fontFamily: 'monospace' }}>TNT</span>
+              </MinecraftBlock>
+              
+              {/* Creeper Block */}
+              <MinecraftBlock
+                topColor="#22c55e"
+                sideColor="#15803d"
+                frontColor="#4ade80"
+                size={52}
+                className="bottom-[30%] right-[10%]"
+                animate={{ y: [15, -25, 15], rotateY: [0, 360], rotateX: [5, -5, 5] }}
+                duration={14}
+                glowColor="rgba(74, 222, 128, 0.5)"
+              >
+                {/* Creeper Face */}
+                <div className="relative w-full h-full">
+                  <div className="absolute top-2 left-2 w-3 h-3 bg-black" />
+                  <div className="absolute top-2 right-2 w-3 h-3 bg-black" />
+                  <div className="absolute top-6 left-1/2 -translate-x-1/2 w-2 h-4 bg-black" />
+                  <div className="absolute top-8 left-1/2 -translate-x-1/2 w-6 h-2 bg-black" />
+                </div>
+              </MinecraftBlock>
+              
+              {/* Gold Block */}
+              <MinecraftBlock
+                topColor="#fbbf24"
+                sideColor="#d97706"
+                frontColor="#f59e0b"
+                size={44}
+                className="top-[40%] left-[5%]"
+                animate={{ y: [-10, 30, -10], rotateY: [360, 0], rotateX: [-10, 10, -10] }}
+                duration={9}
+                glowColor="rgba(251, 191, 36, 0.6)"
+              />
+              
+              {/* Dirt Block */}
+              <MinecraftBlock
+                topColor="#92400e"
+                sideColor="#78350f"
+                frontColor="#8b5a2b"
+                size={46}
+                className="top-[60%] right-[8%]"
+                animate={{ y: [25, -15, 25], x: [5, -5, 5], rotateY: [0, 360] }}
+                duration={11}
+                glowColor="rgba(139, 90, 43, 0.5)"
+              />
+              
+              {/* Redstone Block */}
+              <MinecraftBlock
+                topColor="#ef4444"
+                sideColor="#991b1b"
+                frontColor="#dc2626"
+                size={40}
+                className="top-[70%] left-[15%]"
+                animate={{ y: [-20, 15, -20], rotateY: [0, -360], scale: [1, 1.1, 1] }}
+                duration={7}
+                glowColor="rgba(239, 68, 68, 0.7)"
+              />
+              
+              {/* Emerald Block */}
+              <MinecraftBlock
+                topColor="#22c55e"
+                sideColor="#166534"
+                frontColor="#16a34a"
+                size={36}
+                className="top-[25%] left-[25%]"
+                animate={{ y: [10, -20, 10], rotateY: [360, 0], rotateX: [15, -15, 15] }}
+                duration={10}
+                glowColor="rgba(34, 197, 94, 0.6)"
+              />
+              
+              {/* Lapis Block */}
+              <MinecraftBlock
+                topColor="#3b82f6"
+                sideColor="#1e40af"
+                frontColor="#2563eb"
+                size={42}
+                className="bottom-[40%] right-[20%]"
+                animate={{ y: [-25, 10, -25], x: [-8, 8, -8], rotateY: [0, 360] }}
+                duration={13}
+                glowColor="rgba(59, 130, 246, 0.6)"
+              />
+            </div>
 
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-4xl mx-auto text-center">
