@@ -140,7 +140,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg text-foreground/90 max-w-2xl mx-auto mb-8 font-medium"
+            className="text-xl text-foreground max-w-2xl mx-auto mb-8 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
           >
             {activeGame.description}
           </motion.p>
