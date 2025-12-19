@@ -64,32 +64,32 @@ const Home = () => {
             <motion.div
               animate={{ y: [-20, 20, -20], rotate: [0, 10, -10, 0] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[15%] left-[10%] w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-orange-500 shadow-lg shadow-red-500/30"
+              className="absolute top-[15%] left-[10%] w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500/30 to-orange-500/30 backdrop-blur-sm border border-red-500/20"
             />
             <motion.div
               animate={{ y: [20, -20, 20], rotate: [0, -15, 15, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[20%] right-[15%] w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-yellow-500 shadow-lg shadow-orange-500/30"
+              className="absolute top-[20%] right-[15%] w-12 h-12 rounded-full bg-gradient-to-br from-orange-400/30 to-yellow-500/30 backdrop-blur-sm border border-orange-500/20"
             />
             <motion.div
               animate={{ y: [-15, 25, -15], scale: [1, 1.1, 1] }}
               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[25%] left-[8%] w-20 h-20 rounded-3xl bg-gradient-to-br from-red-600 to-red-400 shadow-lg shadow-red-500/40"
+              className="absolute bottom-[25%] left-[8%] w-20 h-20 rounded-3xl bg-gradient-to-br from-red-600/30 to-red-400/30 backdrop-blur-sm border border-red-500/20"
             />
             <motion.div
               animate={{ y: [15, -25, 15], rotate: [0, 360] }}
               transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[30%] right-[10%] w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg shadow-orange-500/30"
+              className="absolute bottom-[30%] right-[10%] w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500/30 to-red-500/30 backdrop-blur-sm border border-orange-500/20"
             />
             <motion.div
               animate={{ y: [-10, 30, -10], x: [-10, 10, -10] }}
               transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[40%] left-[5%] w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 shadow-lg shadow-yellow-500/30"
+              className="absolute top-[40%] left-[5%] w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400/30 to-orange-400/30 backdrop-blur-sm border border-yellow-500/20"
             />
             <motion.div
               animate={{ y: [25, -15, 25], rotate: [0, -180, -360] }}
               transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[60%] right-[8%] w-8 h-8 rounded-lg bg-gradient-to-br from-red-400 to-orange-300 shadow-lg shadow-red-500/20"
+              className="absolute top-[60%] right-[8%] w-8 h-8 rounded-lg bg-gradient-to-br from-red-400/30 to-orange-300/30 backdrop-blur-sm border border-red-500/20"
             />
 
             <div className="container mx-auto px-4 relative z-10">
