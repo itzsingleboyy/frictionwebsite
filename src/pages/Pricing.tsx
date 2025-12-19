@@ -2,9 +2,9 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RamCalculator from "@/components/RamCalculator";
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles, ArrowRight } from "lucide-react";
-
 const plans = [
   {
     name: "Starter",
@@ -210,8 +210,10 @@ const Pricing = () => {
               </Button>
             </motion.div>
           </div>
-        </main>
 
+          {/* RAM Calculator */}
+          <RamCalculator />
+        </main>
         <Footer />
       </div>
     </>
