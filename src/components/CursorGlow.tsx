@@ -30,9 +30,9 @@ const CursorGlow = () => {
       }}
     >
       <div
-        className="w-[350px] h-[350px] rounded-full opacity-50"
+        className="w-[300px] h-[300px] rounded-full opacity-35"
         style={{
-          background: "radial-gradient(circle, rgba(139,92,246,0.5) 0%, rgba(168,85,247,0.2) 40%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(139,92,246,0.4) 0%, rgba(168,85,247,0.15) 40%, transparent 70%)",
         }}
       />
     </motion.div>
