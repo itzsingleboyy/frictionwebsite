@@ -2,27 +2,46 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Flame, Zap, LogOut, User } from "lucide-react";
+import { Menu, X, Flame, Zap, LogOut, User, LayoutDashboard, Shield } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
+      if (session?.user) {
+        checkAdmin(session.user.id);
+      } else {
+        setIsAdmin(false);
+      }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+      if (session?.user) {
+        checkAdmin(session.user.id);
+      }
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  const checkAdmin = async (userId: string) => {
+    const { data } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .eq("role", "admin")
+      .maybeSingle();
+    setIsAdmin(!!data);
+  };
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -87,6 +106,20 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             {user ? (
               <>
+                <Link to="/dashboard">
+                  <Button variant="ghost" size="sm" className="text-zinc-300 hover:text-white hover:bg-red-600/20 gap-2">
+                    <LayoutDashboard className="w-4 h-4" />
+                    Dashboard
+                  </Button>
+                </Link>
+                {isAdmin && (
+                  <Link to="/admin">
+                    <Button variant="ghost" size="sm" className="text-orange-400 hover:text-orange-300 hover:bg-orange-600/20 gap-2">
+                      <Shield className="w-4 h-4" />
+                      Admin
+                    </Button>
+                  </Link>
+                )}
                 <div className="flex items-center gap-2 text-zinc-300 text-sm">
                   <User className="w-4 h-4" />
                   <span className="max-w-[120px] truncate">{user.email}</span>
@@ -154,6 +187,20 @@ const Navbar = () => {
                 <div className="flex flex-col gap-2 pt-4 border-t border-red-500/20">
                   {user ? (
                     <>
+                      <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+                        <Button variant="ghost" size="sm" className="justify-start text-zinc-300 gap-2 w-full">
+                          <LayoutDashboard className="w-4 h-4" />
+                          Dashboard
+                        </Button>
+                      </Link>
+                      {isAdmin && (
+                        <Link to="/admin" onClick={() => setIsOpen(false)}>
+                          <Button variant="ghost" size="sm" className="justify-start text-orange-400 gap-2 w-full">
+                            <Shield className="w-4 h-4" />
+                            Admin
+                          </Button>
+                        </Link>
+                      )}
                       <div className="flex items-center gap-2 text-zinc-300 text-sm py-2">
                         <User className="w-4 h-4" />
                         <span className="truncate">{user.email}</span>

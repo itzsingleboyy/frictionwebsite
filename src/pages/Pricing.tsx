@@ -1,10 +1,16 @@
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RamCalculator from "@/components/RamCalculator";
+import PaymentModal from "@/components/PaymentModal";
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles, ArrowRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
 const plans = [
   {
     name: "Starter",
@@ -82,6 +88,23 @@ const plans = [
 ];
 
 const Pricing = () => {
+  const navigate = useNavigate();
+  const [selectedPlan, setSelectedPlan] = useState<typeof plans[0] | null>(null);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+
+  const handleGetStarted = async (plan: typeof plans[0]) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      toast.error("Please login to purchase a plan");
+      navigate("/auth");
+      return;
+    }
+    
+    setSelectedPlan(plan);
+    setIsPaymentOpen(true);
+  };
+
   return (
     <>
       <Helmet>
@@ -188,6 +211,7 @@ const Pricing = () => {
                   <Button
                     variant={plan.popular ? "hero" : "outline"}
                     className="w-full gap-2"
+                    onClick={() => handleGetStarted(plan)}
                   >
                     Get Started <ArrowRight className="w-4 h-4" />
                   </Button>
@@ -215,6 +239,12 @@ const Pricing = () => {
           <RamCalculator />
         </main>
         <Footer />
+        
+        <PaymentModal
+          isOpen={isPaymentOpen}
+          onClose={() => setIsPaymentOpen(false)}
+          plan={selectedPlan}
+        />
       </div>
     </>
   );
