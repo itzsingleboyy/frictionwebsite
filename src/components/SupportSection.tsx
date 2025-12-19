@@ -7,9 +7,9 @@ const SupportSection = () => {
   const [message, setMessage] = useState("");
 
   return (
-    <section id="support" className="py-24 relative overflow-hidden bg-[#0c0229]">
+    <section id="support" className="py-24 relative overflow-hidden bg-[#0a0a0a]">
       {/* Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-purple-600/10 blur-[150px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-red-600/10 blur-[150px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto">
@@ -21,17 +21,17 @@ const SupportSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="inline-flex items-center gap-2 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 px-4 py-2 rounded-full mb-6">
-                <Headphones className="w-4 h-4 text-purple-400" />
-                <span className="text-sm text-purple-300">Support</span>
+              <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
+                <Headphones className="w-4 h-4 text-red-500" />
+                <span className="text-sm text-red-300">Support</span>
               </div>
               <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
                 <span className="text-white">24/7 - 365 </span>
-                <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
                   Support
                 </span>
               </h2>
-              <p className="text-purple-200/70 text-lg mb-8">
+              <p className="text-zinc-400 text-lg mb-8">
                 Our friendly support team is available day and night to assist you
                 with any question or concern. Expect a quick response and expert
                 knowledge.
@@ -41,16 +41,16 @@ const SupportSection = () => {
               <div className="space-y-4">
                 <motion.div
                   whileHover={{ scale: 1.02, x: 5 }}
-                  className="flex items-center gap-4 bg-purple-900/30 backdrop-blur-lg border border-purple-500/20 p-4 rounded-xl hover:border-purple-500/40 transition-all duration-300"
+                  className="flex items-center gap-4 bg-zinc-900/80 backdrop-blur-lg border border-red-500/10 p-4 rounded-xl hover:border-red-500/30 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
                     <Clock className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <p className="font-semibold text-white">
                       Average Response Time
                     </p>
-                    <p className="text-sm text-purple-300">
+                    <p className="text-sm text-zinc-500">
                       Under 5 minutes
                     </p>
                   </div>
@@ -58,29 +58,29 @@ const SupportSection = () => {
 
                 <motion.div
                   whileHover={{ scale: 1.02, x: 5 }}
-                  className="flex items-center gap-4 bg-purple-900/30 backdrop-blur-lg border border-purple-500/20 p-4 rounded-xl hover:border-purple-500/40 transition-all duration-300"
+                  className="flex items-center gap-4 bg-zinc-900/80 backdrop-blur-lg border border-red-500/10 p-4 rounded-xl hover:border-red-500/30 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <p className="font-semibold text-white">Email Support</p>
-                    <p className="text-sm text-purple-300">
-                      support@lordcloud.in
+                    <p className="text-sm text-zinc-500">
+                      support@frictionhost.com
                     </p>
                   </div>
                 </motion.div>
 
                 <motion.div
                   whileHover={{ scale: 1.02, x: 5 }}
-                  className="flex items-center gap-4 bg-purple-900/30 backdrop-blur-lg border border-purple-500/20 p-4 rounded-xl hover:border-purple-500/40 transition-all duration-300"
+                  className="flex items-center gap-4 bg-zinc-900/80 backdrop-blur-lg border border-red-500/10 p-4 rounded-xl hover:border-red-500/30 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
                     <MessageCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <p className="font-semibold text-white">Discord</p>
-                    <p className="text-sm text-purple-300">
+                    <p className="text-sm text-zinc-500">
                       Join our community server
                     </p>
                   </div>
@@ -94,10 +94,10 @@ const SupportSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-purple-900/30 backdrop-blur-lg border border-purple-500/20 p-6 rounded-3xl"
+              className="bg-zinc-900/80 backdrop-blur-lg border border-red-500/10 p-6 rounded-3xl"
             >
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-purple-500/20">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-red-500/10">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
                   <MessageCircle className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -122,7 +122,7 @@ const SupportSection = () => {
                   transition={{ delay: 0.3 }}
                   className="flex justify-end"
                 >
-                  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-3 rounded-2xl rounded-tr-md max-w-[80%]">
+                  <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-3 rounded-2xl rounded-tr-md max-w-[80%]">
                     <p className="text-sm">
                       Hey, I need help setting up my server, please help!
                     </p>
@@ -135,7 +135,7 @@ const SupportSection = () => {
                   transition={{ delay: 0.6 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-purple-900/50 border border-purple-500/30 text-white px-4 py-3 rounded-2xl rounded-tl-md max-w-[80%]">
+                  <div className="bg-zinc-800 border border-red-500/20 text-white px-4 py-3 rounded-2xl rounded-tl-md max-w-[80%]">
                     <p className="text-sm">
                       Hi there! 👋 I'd be happy to help you set up your server.
                       What game are you looking to host?
@@ -151,7 +151,7 @@ const SupportSection = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-1 bg-purple-900/50 text-white placeholder:text-purple-400/50 px-4 py-3 rounded-xl border border-purple-500/30 focus:border-purple-500 focus:outline-none transition-colors"
+                  className="flex-1 bg-zinc-800 text-white placeholder:text-zinc-500 px-4 py-3 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors"
                 />
                 <Button variant="hero" size="icon" className="w-12 h-12 rounded-xl">
                   <Send className="w-5 h-5" />

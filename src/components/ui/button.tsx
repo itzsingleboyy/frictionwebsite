@@ -11,13 +11,13 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-border bg-transparent text-foreground hover:bg-secondary hover:border-primary/50",
+        outline: "border border-border bg-transparent text-foreground hover:bg-secondary hover:border-red-500/50",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "text-foreground hover:bg-secondary hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-gradient-to-r from-[hsl(270,80%,60%)] to-[hsl(200,100%,50%)] text-white font-bold shadow-[0_4px_20px_hsl(270,80%,60%,0.4)] hover:shadow-[0_0_40px_hsl(270,80%,60%,0.3)] hover:scale-105 transition-all duration-300",
-        gaming: "bg-card border border-primary/30 text-foreground hover:border-primary hover:shadow-[0_0_40px_hsl(270,80%,60%,0.3)] transition-all duration-300",
-        glow: "bg-primary/20 border border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-[0_0_40px_hsl(270,80%,60%,0.3)] transition-all duration-300",
+        hero: "bg-gradient-to-r from-red-600 to-red-700 text-white font-bold shadow-[0_4px_20px_rgba(220,38,38,0.4)] hover:shadow-[0_0_40px_rgba(220,38,38,0.5)] hover:scale-105 transition-all duration-300",
+        gaming: "bg-zinc-900 border border-red-500/30 text-foreground hover:border-red-500 hover:shadow-[0_0_40px_rgba(220,38,38,0.3)] transition-all duration-300",
+        glow: "bg-red-500/20 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white shadow-[0_0_40px_rgba(220,38,38,0.3)] transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",
