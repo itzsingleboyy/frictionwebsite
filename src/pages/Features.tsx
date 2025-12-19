@@ -95,14 +95,14 @@ const Features = () => {
         <meta name="description" content="Discover our premium features: AMD Ryzen CPUs, NVMe storage, DDoS protection, and more." />
       </Helmet>
 
-      <div className="min-h-screen bg-[#0a0a0a]">
+      <div className="min-h-screen bg-background">
         <Navbar />
         
         <main className="pt-24 pb-16">
           {/* Background Effects */}
           <div className="fixed inset-0 pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-red-600/10 blur-[150px]" />
-            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[120px]" />
+            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[150px]" />
+            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[120px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -114,12 +114,12 @@ const Features = () => {
               className="text-center max-w-3xl mx-auto mb-16"
             >
               <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
-                <span className="text-white">Powerful </span>
-                <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                <span className="text-foreground">Powerful </span>
+                <span className="gradient-text">
                   Features
                 </span>
               </h1>
-              <p className="text-zinc-400 text-lg">
+              <p className="text-muted-foreground text-lg">
                 Everything you need for the ultimate gaming experience. Enterprise-grade infrastructure at affordable prices.
               </p>
             </motion.div>
@@ -138,15 +138,15 @@ const Features = () => {
                     key={index}
                     variants={itemVariants}
                     whileHover={{ y: -5, scale: 1.02 }}
-                    className="group bg-zinc-900/50 backdrop-blur-lg border border-zinc-800 hover:border-red-500/50 rounded-2xl p-6 transition-all duration-300"
+                    className="group glass hover:border-primary/50 rounded-2xl p-6 transition-all duration-300"
                   >
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-red-600/20 to-orange-500/20 flex items-center justify-center mb-4 group-hover:from-red-600/30 group-hover:to-orange-500/30 transition-all">
-                      <Icon className="w-7 h-7 text-red-500" />
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-4 group-hover:from-primary/30 group-hover:to-accent/30 transition-all">
+                      <Icon className="w-7 h-7 text-primary" />
                     </div>
-                    <h3 className="font-display text-xl font-semibold text-white mb-2 group-hover:text-red-400 transition-colors">
+                    <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {feature.title}
                     </h3>
-                    <p className="text-zinc-500 text-sm leading-relaxed">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       {feature.description}
                     </p>
                   </motion.div>

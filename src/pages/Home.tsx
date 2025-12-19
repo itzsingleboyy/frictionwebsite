@@ -50,7 +50,7 @@ const Home = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-[#0a0a0a]"
+        className="min-h-screen bg-background"
       >
         <Navbar />
         
@@ -59,9 +59,9 @@ const Home = () => {
           <section className="min-h-[90vh] flex items-center justify-center relative overflow-hidden pt-20">
             {/* Background Effects */}
             <div className="absolute inset-0">
-              <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-red-600/20 blur-[150px]" />
-              <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/10 blur-[120px]" />
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+              <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/20 blur-[150px]" />
+              <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[120px]" />
+              <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--primary)/0.03)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary)/0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
               <FloatingParticles count={30} />
             </div>
 
@@ -79,12 +79,12 @@ const Home = () => {
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                      className="absolute inset-[-30px] rounded-full border-2 border-dashed border-red-500/30"
+                      className="absolute inset-[-30px] rounded-full border-2 border-dashed border-primary/30"
                     />
                     <img 
                       src={logo} 
                       alt="FrictionHost Logo" 
-                      className="w-32 h-32 rounded-3xl shadow-[0_0_100px_rgba(220,38,38,0.5)]" 
+                      className="w-32 h-32 rounded-3xl glow-primary" 
                     />
                   </div>
                 </motion.div>
@@ -96,7 +96,7 @@ const Home = () => {
                   transition={{ delay: 0.4 }}
                   className="font-display text-6xl md:text-8xl font-bold mb-6"
                 >
-                  <TextReveal className="bg-gradient-to-r from-red-500 via-orange-400 to-red-500 bg-clip-text text-transparent" delay={0.5}>
+                  <TextReveal className="gradient-text" delay={0.5}>
                     FrictionHost
                   </TextReveal>
                 </motion.h1>
@@ -106,7 +106,7 @@ const Home = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="text-xl md:text-2xl text-zinc-400 mb-8"
+                  className="text-xl md:text-2xl text-muted-foreground mb-8"
                 >
                   Premium Game Server Hosting for Gamers
                 </motion.p>
@@ -115,7 +115,7 @@ const Home = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.7 }}
-                  className="text-zinc-500 mb-12 max-w-2xl mx-auto"
+                  className="text-muted mb-12 max-w-2xl mx-auto"
                 >
                   Experience lag-free gaming with our high-performance servers. 
                   Powered by Ryzen CPUs, NVMe storage, and enterprise-grade DDoS protection.
@@ -128,26 +128,26 @@ const Home = () => {
                   transition={{ delay: 0.8 }}
                   className="mb-12"
                 >
-                  <div className="inline-flex flex-col items-center gap-3 bg-gradient-to-r from-red-600/20 to-orange-500/20 backdrop-blur-lg border border-red-500/30 rounded-2xl p-6">
+                  <div className="inline-flex flex-col items-center gap-3 glass-strong rounded-2xl p-6">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-orange-400" />
-                      <span className="text-sm text-zinc-300">Welcome Offer - 20% OFF</span>
-                      <Sparkles className="w-5 h-5 text-orange-400" />
+                      <Sparkles className="w-5 h-5 text-accent" />
+                      <span className="text-sm text-muted-foreground">Welcome Offer - 20% OFF</span>
+                      <Sparkles className="w-5 h-5 text-accent" />
                     </div>
                     <div className="flex items-center gap-3">
-                      <code className="text-2xl md:text-3xl font-mono font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      <code className="text-2xl md:text-3xl font-mono font-bold gradient-text">
                         {offerCode}
                       </code>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={handleCopy}
-                        className="text-zinc-400 hover:text-white hover:bg-red-600/20"
+                        className="text-muted-foreground hover:text-foreground hover:bg-primary/20"
                       >
                         {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}
                       </Button>
                     </div>
-                    <span className="text-xs text-zinc-500">Use at checkout for discount</span>
+                    <span className="text-xs text-muted">Use at checkout for discount</span>
                   </div>
                 </motion.div>
 
@@ -164,7 +164,7 @@ const Home = () => {
                     </Button>
                   </Link>
                   <Link to="/pricing">
-                    <Button variant="outline" size="lg" className="gap-2 text-lg px-8 border-zinc-700 hover:border-red-500/50">
+                    <Button variant="outline" size="lg" className="gap-2 text-lg px-8 border-border hover:border-primary/50">
                       View Plans
                     </Button>
                   </Link>
@@ -178,28 +178,28 @@ const Home = () => {
                   className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
                 >
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                    <div className="text-3xl md:text-4xl font-bold gradient-text">
                       <AnimatedCounter value={99.9} suffix="%" />
                     </div>
-                    <div className="text-zinc-500 text-sm mt-1">Uptime</div>
+                    <div className="text-muted-foreground text-sm mt-1">Uptime</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                    <div className="text-3xl md:text-4xl font-bold gradient-text">
                       <AnimatedCounter value={100} suffix="+" />
                     </div>
-                    <div className="text-zinc-500 text-sm mt-1">Servers</div>
+                    <div className="text-muted-foreground text-sm mt-1">Servers</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                    <div className="text-3xl md:text-4xl font-bold gradient-text">
                       24/7
                     </div>
-                    <div className="text-zinc-500 text-sm mt-1">Support</div>
+                    <div className="text-muted-foreground text-sm mt-1">Support</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                    <div className="text-3xl md:text-4xl font-bold gradient-text">
                       ₹<AnimatedCounter value={45} />
                     </div>
-                    <div className="text-zinc-500 text-sm mt-1">Starting Price</div>
+                    <div className="text-muted-foreground text-sm mt-1">Starting Price</div>
                   </div>
                 </motion.div>
               </div>

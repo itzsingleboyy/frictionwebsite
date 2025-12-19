@@ -144,12 +144,12 @@ const Auth = () => {
         <meta name="description" content="Access your FrictionHost client area to manage your game servers." />
       </Helmet>
 
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center relative overflow-hidden">
+      <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-red-600/20 blur-[150px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/10 blur-[120px]" />
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/20 blur-[150px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[120px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--primary)/0.03)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary)/0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
         </div>
 
         {/* Back Button */}
@@ -157,7 +157,7 @@ const Auth = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate("/")}
-          className="absolute top-6 left-6 flex items-center gap-2 text-zinc-400 hover:text-white transition-colors z-10"
+          className="absolute top-6 left-6 flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors z-10"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>Back to Home</span>
@@ -170,38 +170,38 @@ const Auth = () => {
           transition={{ duration: 0.5 }}
           className="relative z-10 w-full max-w-md mx-4"
         >
-          <div className="bg-zinc-900/80 backdrop-blur-xl border border-red-500/20 rounded-2xl p-8">
+          <div className="glass-strong rounded-2xl p-8">
             {/* Logo */}
             <div className="flex flex-col items-center mb-8">
               <div className="relative mb-4">
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-[-15px] rounded-full border border-dashed border-red-500/30"
+                  className="absolute inset-[-15px] rounded-full border border-dashed border-primary/30"
                 />
                 <img 
                   src={logo} 
                   alt="FrictionHost Logo" 
-                  className="w-16 h-16 rounded-2xl shadow-[0_0_40px_rgba(220,38,38,0.5)]" 
+                  className="w-16 h-16 rounded-2xl glow-primary" 
                 />
               </div>
-              <h1 className="font-display text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+              <h1 className="font-display text-2xl font-bold gradient-text">
                 FrictionHost
               </h1>
-              <p className="text-zinc-500 text-sm mt-1">
+              <p className="text-muted-foreground text-sm mt-1">
                 {mode === "forgot" ? "Password Recovery" : "Client Area"}
               </p>
             </div>
 
             {/* Toggle - only show for login/signup */}
             {mode !== "forgot" && (
-              <div className="flex bg-zinc-800/50 rounded-xl p-1 mb-6">
+              <div className="flex bg-secondary/50 rounded-xl p-1 mb-6">
                 <button
                   onClick={() => setMode("login")}
                   className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
                     mode === "login"
-                      ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg"
-                      : "text-zinc-400 hover:text-white"
+                      ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   Login
@@ -210,8 +210,8 @@ const Auth = () => {
                   onClick={() => setMode("signup")}
                   className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
                     mode === "signup"
-                      ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg"
-                      : "text-zinc-400 hover:text-white"
+                      ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   Create Account
@@ -222,8 +222,8 @@ const Auth = () => {
             {/* Forgot Password Header */}
             {mode === "forgot" && (
               <div className="text-center mb-6">
-                <h2 className="text-lg font-semibold text-white mb-2">Forgot your password?</h2>
-                <p className="text-zinc-400 text-sm">Enter your email and we'll send you a reset link.</p>
+                <h2 className="text-lg font-semibold text-foreground mb-2">Forgot your password?</h2>
+                <p className="text-muted-foreground text-sm">Enter your email and we'll send you a reset link.</p>
               </div>
             )}
 
@@ -231,25 +231,25 @@ const Auth = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               {mode === "signup" && (
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-zinc-300">Full Name</Label>
+                  <Label htmlFor="name" className="text-muted-foreground">Full Name</Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                     <Input
                       id="name"
                       type="text"
                       placeholder="Enter your name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="pl-10 bg-zinc-800/50 border-zinc-700 focus:border-red-500 text-white placeholder:text-zinc-500"
+                      className="pl-10 bg-secondary/50 border-border focus:border-primary text-foreground placeholder:text-muted-foreground"
                     />
                   </div>
                 </div>
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-zinc-300">Email Address</Label>
+                <Label htmlFor="email" className="text-muted-foreground">Email Address</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
@@ -259,21 +259,21 @@ const Auth = () => {
                       setEmail(e.target.value);
                       setErrors((prev) => ({ ...prev, email: undefined }));
                     }}
-                    className={`pl-10 bg-zinc-800/50 border-zinc-700 focus:border-red-500 text-white placeholder:text-zinc-500 ${
-                      errors.email ? "border-red-500" : ""
+                    className={`pl-10 bg-secondary/50 border-border focus:border-primary text-foreground placeholder:text-muted-foreground ${
+                      errors.email ? "border-destructive" : ""
                     }`}
                   />
                 </div>
                 {errors.email && (
-                  <p className="text-red-500 text-xs">{errors.email}</p>
+                  <p className="text-destructive text-xs">{errors.email}</p>
                 )}
               </div>
 
               {mode !== "forgot" && (
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-zinc-300">Password</Label>
+                  <Label htmlFor="password" className="text-muted-foreground">Password</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                     <Input
                       id="password"
                       type="password"
@@ -283,13 +283,13 @@ const Auth = () => {
                         setPassword(e.target.value);
                         setErrors((prev) => ({ ...prev, password: undefined }));
                       }}
-                      className={`pl-10 bg-zinc-800/50 border-zinc-700 focus:border-red-500 text-white placeholder:text-zinc-500 ${
-                        errors.password ? "border-red-500" : ""
+                      className={`pl-10 bg-secondary/50 border-border focus:border-primary text-foreground placeholder:text-muted-foreground ${
+                        errors.password ? "border-destructive" : ""
                       }`}
                     />
                   </div>
                   {errors.password && (
-                    <p className="text-red-500 text-xs">{errors.password}</p>
+                    <p className="text-destructive text-xs">{errors.password}</p>
                   )}
                 </div>
               )}
@@ -300,7 +300,7 @@ const Auth = () => {
                   <button
                     type="button"
                     onClick={() => setMode("forgot")}
-                    className="text-sm text-red-400 hover:text-red-300 transition-colors"
+                    className="text-sm text-primary hover:text-accent transition-colors"
                   >
                     Forgot password?
                   </button>
@@ -310,7 +310,8 @@ const Auth = () => {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 rounded-xl shadow-[0_0_30px_rgba(220,38,38,0.3)] transition-all"
+                variant="hero"
+                className="w-full py-3"
               >
                 {loading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -324,7 +325,7 @@ const Auth = () => {
                 <button
                   type="button"
                   onClick={() => setMode("login")}
-                  className="w-full text-sm text-zinc-400 hover:text-white transition-colors mt-2"
+                  className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors mt-2"
                 >
                   Back to Login
                 </button>
@@ -332,13 +333,13 @@ const Auth = () => {
             </form>
 
             {/* Footer */}
-            <p className="text-center text-zinc-500 text-xs mt-6">
+            <p className="text-center text-muted-foreground text-xs mt-6">
               By continuing, you agree to our{" "}
-              <Link to="/terms" className="text-red-400 hover:text-red-300 transition-colors">
+              <Link to="/terms" className="text-primary hover:text-accent transition-colors">
                 Terms of Service
               </Link>{" "}
               and{" "}
-              <Link to="/privacy" className="text-red-400 hover:text-red-300 transition-colors">
+              <Link to="/privacy" className="text-primary hover:text-accent transition-colors">
                 Privacy Policy
               </Link>
               .

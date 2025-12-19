@@ -57,14 +57,14 @@ const Support = () => {
         <meta name="description" content="Get help from FrictionHost. Join our Discord, email us, or use live chat for instant support." />
       </Helmet>
 
-      <div className="min-h-screen bg-[#0a0a0a]">
+      <div className="min-h-screen bg-background">
         <Navbar />
         
         <main className="pt-24 pb-16">
           {/* Background Effects */}
           <div className="fixed inset-0 pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-red-600/10 blur-[150px]" />
-            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[120px]" />
+            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[150px]" />
+            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[120px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -76,12 +76,12 @@ const Support = () => {
               className="text-center max-w-3xl mx-auto mb-16"
             >
               <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
-                <span className="text-white">Get </span>
-                <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                <span className="text-foreground">Get </span>
+                <span className="gradient-text">
                   Support
                 </span>
               </h1>
-              <p className="text-zinc-400 text-lg">
+              <p className="text-muted-foreground text-lg">
                 We're here to help 24/7. Choose your preferred way to reach us.
               </p>
             </motion.div>
@@ -96,11 +96,11 @@ const Support = () => {
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
-                  <div key={index} className="flex items-center gap-3 bg-zinc-900/50 border border-zinc-800 rounded-xl px-6 py-4">
-                    <Icon className="w-8 h-8 text-red-500" />
+                  <div key={index} className="flex items-center gap-3 glass rounded-xl px-6 py-4">
+                    <Icon className="w-8 h-8 text-primary" />
                     <div>
-                      <div className="text-2xl font-bold text-white">{stat.value}</div>
-                      <div className="text-zinc-500 text-sm">{stat.label}</div>
+                      <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                      <div className="text-muted-foreground text-sm">{stat.label}</div>
                     </div>
                   </div>
                 );
@@ -118,25 +118,25 @@ const Support = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ y: -5 }}
-                    className={`bg-zinc-900/50 backdrop-blur-lg rounded-2xl p-6 border transition-all duration-300 ${
+                    className={`glass rounded-2xl p-6 transition-all duration-300 ${
                       channel.highlight
-                        ? "border-red-500/50 shadow-[0_0_40px_rgba(220,38,38,0.15)]"
-                        : "border-zinc-800 hover:border-red-500/30"
+                        ? "border-primary/50 glow-primary"
+                        : "hover:border-primary/30"
                     }`}
                   >
                     <div className="flex items-start gap-4">
                       <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
                         channel.highlight 
-                          ? "bg-gradient-to-br from-red-600 to-orange-500" 
-                          : "bg-zinc-800"
+                          ? "bg-gradient-to-br from-primary to-accent" 
+                          : "bg-secondary"
                       }`}>
-                        <Icon className={`w-7 h-7 ${channel.highlight ? "text-white" : "text-red-500"}`} />
+                        <Icon className={`w-7 h-7 ${channel.highlight ? "text-white" : "text-primary"}`} />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-display text-xl font-bold text-white mb-2">
+                        <h3 className="font-display text-xl font-bold text-foreground mb-2">
                           {channel.title}
                         </h3>
-                        <p className="text-zinc-500 text-sm mb-4">
+                        <p className="text-muted-foreground text-sm mb-4">
                           {channel.description}
                         </p>
                         <a
@@ -167,7 +167,7 @@ const Support = () => {
               transition={{ delay: 0.5 }}
               className="mt-16 text-center"
             >
-              <p className="text-zinc-500 mb-4">
+              <p className="text-muted-foreground mb-4">
                 Have common questions? Check out our FAQ section.
               </p>
               <Button variant="outline" size="lg" className="gap-2">
