@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -9,8 +10,12 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
+import CartDrawer from "@/components/CartDrawer";
+import { useCart } from "@/contexts/CartContext";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const { items } = useCart();
   const mountTime = useRef(Date.now());
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,6 +26,10 @@ const Index = () => {
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
+  };
+
+  const handleCheckout = () => {
+    navigate("/pricing");
   };
 
   return (
@@ -63,6 +72,7 @@ const Index = () => {
           <ReviewsSection />
           <FAQSection />
           <Footer />
+          <CartDrawer onCheckout={handleCheckout} />
         </motion.main>
       )}
     </>
