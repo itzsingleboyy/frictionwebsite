@@ -12,6 +12,8 @@ import Support from "./pages/Support";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import CursorGlow from "./components/CursorGlow";
 import ScrollProgress from "./components/ScrollProgress";
@@ -38,6 +40,8 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

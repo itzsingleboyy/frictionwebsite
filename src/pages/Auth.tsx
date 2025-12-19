@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -267,7 +267,15 @@ const Auth = () => {
 
             {/* Footer */}
             <p className="text-center text-zinc-500 text-xs mt-6">
-              By continuing, you agree to our Terms of Service and Privacy Policy.
+              By continuing, you agree to our{" "}
+              <Link to="/terms" className="text-red-400 hover:text-red-300 transition-colors">
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link to="/privacy" className="text-red-400 hover:text-red-300 transition-colors">
+                Privacy Policy
+              </Link>
+              .
             </p>
           </div>
         </motion.div>
