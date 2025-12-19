@@ -4,12 +4,12 @@ import TiltCard from "@/components/TiltCard";
 
 const testimonials = [
   {
-    name: "Pratheek",
+    name: "Vivek",
     role: "Minecraft Server Owner",
     content:
       "FrictionHost has been amazing! My server runs smooth 24/7 with no lag. The support team is incredibly responsive.",
     rating: 5,
-    avatar: "P",
+    avatar: "V",
   },
   {
     name: "Arjun K",
