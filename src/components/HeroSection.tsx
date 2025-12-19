@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Zap, Copy, Check } from "lucide-react";
@@ -53,9 +53,32 @@ const games = [
   },
 ];
 
+const AUTO_ROTATE_INTERVAL = 4000; // 4 seconds
+
 const HeroSection = () => {
-  const [activeGame, setActiveGame] = useState(games[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const activeGame = games[activeIndex];
+
+  // Auto-rotate games
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % games.length);
+    }, AUTO_ROTATE_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleGameClick = useCallback((index: number) => {
+    setActiveIndex(index);
+    setIsPaused(true);
+    // Resume auto-rotation after 10 seconds of inactivity
+    setTimeout(() => setIsPaused(false), 10000);
+  }, []);
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText("FRICTION20");
@@ -168,12 +191,12 @@ const HeroSection = () => {
             className="mt-12"
           >
             <div className="inline-flex items-center glass rounded-full p-1.5 gap-1">
-              {games.map((game) => (
+              {games.map((game, index) => (
                 <button
                   key={game.id}
-                  onClick={() => setActiveGame(game)}
+                  onClick={() => handleGameClick(index)}
                   className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                    activeGame.id === game.id
+                    activeIndex === index
                       ? "bg-muted text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
