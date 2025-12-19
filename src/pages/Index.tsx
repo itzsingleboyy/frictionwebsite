@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { AnimatePresence } from "framer-motion";
+import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import GamesSection from "@/components/GamesSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import RamCalculator from "@/components/RamCalculator";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -10,6 +12,30 @@ import SupportSection from "@/components/SupportSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Preload images
+    const images = [
+      "/src/assets/minecraft-hero.jpg",
+      "/src/assets/rust-hero.jpg",
+      "/src/assets/palworld-hero.jpg",
+      "/src/assets/gtav-hero.jpg",
+      "/src/assets/terraria-hero.jpg",
+    ];
+
+    Promise.all(
+      images.map((src) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })
+    );
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -31,17 +57,24 @@ const Index = () => {
         <link rel="canonical" href="https://lordcloud.in" />
       </Helmet>
 
-      <main className="min-h-screen bg-background">
-        <Navbar />
-        <HeroSection />
-        <GamesSection />
-        <FeaturesSection />
-        <RamCalculator />
-        <TestimonialsSection />
-        <FAQSection />
-        <SupportSection />
-        <Footer />
-      </main>
+      <AnimatePresence>
+        {isLoading && (
+          <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      {!isLoading && (
+        <main className="min-h-screen bg-[#0c0229]">
+          <Navbar />
+          <HeroSection />
+          <FeaturesSection />
+          <RamCalculator />
+          <TestimonialsSection />
+          <FAQSection />
+          <SupportSection />
+          <Footer />
+        </main>
+      )}
     </>
   );
 };

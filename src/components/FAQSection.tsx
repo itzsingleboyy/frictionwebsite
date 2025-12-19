@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -47,51 +48,75 @@ const faqs = [
     answer:
       "Your server is automatically activated within 2-5 minutes of payment confirmation. You'll receive login details via email instantly.",
   },
+  {
+    question: "Can I contact support anytime?",
+    answer:
+      "Absolutely! Our support team is available 24/7/365. You can reach us via live chat, ticket system, or Discord for immediate assistance.",
+  },
+  {
+    question: "Do you offer reseller or partnership programs?",
+    answer:
+      "Yes, we have reseller programs available for businesses looking to offer game hosting services. Contact our sales team for more information.",
+  },
 ];
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="py-24 relative overflow-hidden">
+    <section id="faq" className="py-24 relative overflow-hidden bg-[#0c0229]">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] rounded-full bg-purple-600/10 blur-[120px]" />
+      <div className="absolute top-0 right-1/4 w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[100px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-6">
-            <HelpCircle className="w-4 h-4 text-primary" />
-            <span className="text-sm text-muted-foreground">FAQ</span>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-2xl mx-auto mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 px-4 py-2 rounded-full mb-6">
+            <HelpCircle className="w-4 h-4 text-purple-400" />
+            <span className="text-sm text-purple-300">FAQ</span>
           </div>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            <span className="text-foreground">Frequently Asked</span>{" "}
-            <span className="text-gradient">Questions</span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-white">Frequently Asked </span>
+            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              Questions
+            </span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-purple-200/70 text-lg">
             Have questions? We've got answers. If you can't find what you're looking
             for, feel free to contact our support.
           </p>
-        </div>
+        </motion.div>
 
         {/* FAQ Accordion */}
-        <div className="max-w-3xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="max-w-3xl mx-auto"
+        >
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="glass-card rounded-2xl border-none px-6 data-[state=open]:shadow-glow transition-all duration-300"
+                className="bg-purple-900/20 backdrop-blur-lg rounded-2xl border border-purple-500/20 px-6 data-[state=open]:border-purple-500/40 data-[state=open]:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all duration-300"
               >
-                <AccordionTrigger className="text-foreground font-semibold hover:text-primary hover:no-underline py-6">
+                <AccordionTrigger className="text-white font-semibold hover:text-purple-300 hover:no-underline py-6 text-left">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-6">
+                <AccordionContent className="text-purple-200/70 pb-6">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
