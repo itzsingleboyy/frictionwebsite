@@ -115,7 +115,7 @@ const Home = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.7 }}
-                  className="text-muted mb-12 max-w-2xl mx-auto"
+                  className="text-muted-foreground mb-12 max-w-2xl mx-auto"
                 >
                   Experience lag-free gaming with our high-performance servers. 
                   Powered by Ryzen CPUs, NVMe storage, and enterprise-grade DDoS protection.
@@ -147,7 +147,7 @@ const Home = () => {
                         {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}
                       </Button>
                     </div>
-                    <span className="text-xs text-muted">Use at checkout for discount</span>
+                    <span className="text-xs text-muted-foreground">Use at checkout for discount</span>
                   </div>
                 </motion.div>
 

@@ -205,7 +205,7 @@ const PaymentModal = ({ isOpen, onClose, plan }: PaymentModalProps) => {
                   <span className="text-foreground font-semibold">Total</span>
                   <div className="text-right">
                     {appliedCoupon && (
-                      <span className="text-sm text-muted line-through mr-2">
+                      <span className="text-sm text-muted-foreground/60 line-through mr-2">
                         ₹{plan.price}
                       </span>
                     )}

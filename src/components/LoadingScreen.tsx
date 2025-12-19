@@ -195,7 +195,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="absolute bottom-8 text-muted text-xs"
+          className="absolute bottom-8 text-muted-foreground text-xs"
         >
           Powered by High-Performance Ryzen CPUs
         </motion.div>

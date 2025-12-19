@@ -468,7 +468,7 @@ const RamCalculator = () => {
                     <div className="space-y-4">
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-muted-foreground">Light Plugins <span className="text-muted">(EssentialsX, Vault, etc.)</span></span>
+                          <span className="text-sm text-muted-foreground">Light Plugins <span className="text-muted-foreground/70">(EssentialsX, Vault, etc.)</span></span>
                           <span className="text-primary font-medium">{lightPlugins}</span>
                         </div>
                         <Slider
@@ -482,7 +482,7 @@ const RamCalculator = () => {
                       </div>
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-muted-foreground">Medium Plugins <span className="text-muted">(WorldEdit, FAWE, etc.)</span></span>
+                          <span className="text-sm text-muted-foreground">Medium Plugins <span className="text-muted-foreground/70">(WorldEdit, FAWE, etc.)</span></span>
                           <span className="text-primary font-medium">{mediumPlugins}</span>
                         </div>
                         <Slider
@@ -496,7 +496,7 @@ const RamCalculator = () => {
                       </div>
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-muted-foreground">Heavy Plugins <span className="text-muted">(Dynmap, Citizens, etc.)</span></span>
+                          <span className="text-sm text-muted-foreground">Heavy Plugins <span className="text-muted-foreground/70">(Dynmap, Citizens, etc.)</span></span>
                           <span className="text-primary font-medium">{heavyPlugins}</span>
                         </div>
                         <Slider
