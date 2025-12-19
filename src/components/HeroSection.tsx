@@ -136,14 +136,16 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Description */}
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-xl text-foreground max-w-2xl mx-auto mb-8 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+            className="max-w-3xl mx-auto mb-8"
           >
-            {activeGame.description}
-          </motion.p>
+            <p className="glass-strong px-6 py-4 md:px-8 md:py-5 rounded-2xl text-xl md:text-2xl text-foreground font-semibold leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+              {activeGame.description}
+            </p>
+          </motion.div>
 
           {/* CTA Button */}
           <motion.div
