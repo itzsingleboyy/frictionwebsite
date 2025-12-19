@@ -5,8 +5,9 @@ import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Flame, Zap, Copy, Check, Sparkles } from "lucide-react";
+import { ArrowRight, Copy, Check, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.webp";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -74,16 +75,11 @@ const Home = () => {
                       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                       className="absolute inset-[-30px] rounded-full border-2 border-dashed border-red-500/30"
                     />
-                    <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-[0_0_100px_rgba(220,38,38,0.5)]">
-                      <Flame className="w-16 h-16 text-white" />
-                    </div>
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="absolute -top-3 -right-3"
-                    >
-                      <Zap className="w-10 h-10 text-orange-400 drop-shadow-[0_0_15px_rgba(251,146,60,0.8)]" />
-                    </motion.div>
+                    <img 
+                      src={logo} 
+                      alt="FrictionHost Logo" 
+                      className="w-32 h-32 rounded-3xl shadow-[0_0_100px_rgba(220,38,38,0.5)]" 
+                    />
                   </div>
                 </motion.div>
 
