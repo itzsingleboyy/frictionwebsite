@@ -5,6 +5,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
+import TeamSection from "@/components/TeamSection";
 import RamCalculator from "@/components/RamCalculator";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
@@ -39,22 +40,22 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>LordCloud - Premium Game Server Hosting | Minecraft, Rust, Palworld & More</title>
+        <title>FrictionHost - Premium Game Server Hosting | Minecraft, Rust, Palworld & More</title>
         <meta
           name="description"
           content="Premium game server hosting starting at ₹45/month. Host Minecraft, Rust, Palworld, GTA V servers with powerful hardware, DDoS protection, and 24/7 support."
         />
         <meta
           name="keywords"
-          content="game server hosting, minecraft server, rust server, palworld hosting, gta v server, fivem hosting, india game hosting"
+          content="game server hosting, minecraft server, rust server, palworld hosting, gta v server, fivem hosting, india game hosting, frictionhost"
         />
-        <meta property="og:title" content="LordCloud - Premium Game Server Hosting" />
+        <meta property="og:title" content="FrictionHost - Premium Game Server Hosting" />
         <meta
           property="og:description"
           content="Host your favorite games on high-performance servers with unlimited slots, NVMe storage, and 24/7 support."
         />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://lordcloud.in" />
+        <link rel="canonical" href="https://frictionhost.com" />
       </Helmet>
 
       <AnimatePresence>
@@ -64,10 +65,11 @@ const Index = () => {
       </AnimatePresence>
 
       {!isLoading && (
-        <main className="min-h-screen bg-[#0c0229]">
+        <main className="min-h-screen bg-[#0a0a0a]">
           <Navbar />
           <HeroSection />
           <FeaturesSection />
+          <TeamSection />
           <RamCalculator />
           <TestimonialsSection />
           <FAQSection />

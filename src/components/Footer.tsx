@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Server, Zap, Twitter, Youtube, MessageCircle } from "lucide-react";
+import { Flame, Zap, Twitter, Youtube, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,7 +14,7 @@ const Footer = () => {
     ],
     company: [
       { name: "About Us", href: "#" },
-      { name: "Careers", href: "#" },
+      { name: "Our Team", href: "#team" },
       { name: "Blog", href: "#" },
       { name: "Status", href: "#" },
     ],
@@ -39,7 +39,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#0a0120] border-t border-purple-500/20">
+    <footer className="bg-[#080808] border-t border-red-500/10">
       <div className="container mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -52,16 +52,16 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center">
-                  <Server className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                  <Flame className="w-5 h-5 text-white" />
                 </div>
-                <Zap className="w-4 h-4 text-cyan-400 absolute -top-1 -right-1" />
+                <Zap className="w-4 h-4 text-orange-400 absolute -top-1 -right-1" />
               </div>
-              <span className="font-display font-bold text-xl bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                LordCloud
+              <span className="font-display font-bold text-xl bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                FrictionHost
               </span>
             </div>
-            <p className="text-purple-300/60 text-sm mb-6 max-w-xs">
+            <p className="text-zinc-500 text-sm mb-6 max-w-xs">
               Premium game server hosting with powerful hardware, 24/7 support,
               and instant setup. Start your gaming journey today.
             </p>
@@ -71,7 +71,7 @@ const Footer = () => {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-purple-900/50 border border-purple-500/20 flex items-center justify-center text-purple-300 hover:text-white hover:bg-purple-600 hover:border-purple-500 transition-all duration-200"
+                  className="w-10 h-10 rounded-xl bg-zinc-900 border border-red-500/10 flex items-center justify-center text-zinc-500 hover:text-white hover:bg-red-600 hover:border-red-500 transition-all duration-200"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
@@ -89,7 +89,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-purple-300/60 hover:text-purple-300 text-sm transition-colors"
+                    className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors"
                   >
                     {link.name}
                   </a>
@@ -108,7 +108,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-purple-300/60 hover:text-purple-300 text-sm transition-colors"
+                    className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors"
                   >
                     {link.name}
                   </a>
@@ -127,7 +127,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-purple-300/60 hover:text-purple-300 text-sm transition-colors"
+                    className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors"
                   >
                     {link.name}
                   </a>
@@ -146,7 +146,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-purple-300/60 hover:text-purple-300 text-sm transition-colors"
+                    className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors"
                   >
                     {link.name}
                   </a>
@@ -157,11 +157,11 @@ const Footer = () => {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-purple-500/20 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-purple-300/50 text-sm">
-            © {currentYear} LordCloud. All rights reserved.
+        <div className="mt-12 pt-8 border-t border-red-500/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-zinc-600 text-sm">
+            © {currentYear} FrictionHost. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-purple-300/50 text-sm">
+          <div className="flex items-center gap-2 text-zinc-600 text-sm">
             <span>Made with</span>
             <span className="text-red-500">❤</span>
             <span>in India</span>

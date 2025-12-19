@@ -9,9 +9,9 @@ import { HelpCircle } from "lucide-react";
 
 const faqs = [
   {
-    question: "What is LordCloud?",
+    question: "What is FrictionHost?",
     answer:
-      "LordCloud is a premium game server hosting provider specializing in Minecraft, Rust, Palworld, GTA V, and more. We offer high-performance servers with 24/7 support, DDoS protection, and instant setup.",
+      "FrictionHost is a premium game server hosting provider specializing in Minecraft, Rust, Palworld, GTA V, and more. We offer high-performance servers with 24/7 support, DDoS protection, and instant setup.",
   },
   {
     question: "What services do you offer?",
@@ -62,10 +62,10 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="py-24 relative overflow-hidden bg-[#0c0229]">
+    <section id="faq" className="py-24 relative overflow-hidden bg-[#0a0a0a]">
       {/* Background */}
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] rounded-full bg-purple-600/10 blur-[120px]" />
-      <div className="absolute top-0 right-1/4 w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[100px]" />
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] rounded-full bg-red-600/10 blur-[120px]" />
+      <div className="absolute top-0 right-1/4 w-[300px] h-[300px] rounded-full bg-orange-500/5 blur-[100px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -76,17 +76,17 @@ const FAQSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 px-4 py-2 rounded-full mb-6">
-            <HelpCircle className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-purple-300">FAQ</span>
+          <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
+            <HelpCircle className="w-4 h-4 text-red-500" />
+            <span className="text-sm text-red-300">FAQ</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
             <span className="text-white">Frequently Asked </span>
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
               Questions
             </span>
           </h2>
-          <p className="text-purple-200/70 text-lg">
+          <p className="text-zinc-400 text-lg">
             Have questions? We've got answers. If you can't find what you're looking
             for, feel free to contact our support.
           </p>
@@ -105,12 +105,12 @@ const FAQSection = () => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-purple-900/20 backdrop-blur-lg rounded-2xl border border-purple-500/20 px-6 data-[state=open]:border-purple-500/40 data-[state=open]:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all duration-300"
+                className="bg-zinc-900/50 backdrop-blur-lg rounded-2xl border border-red-500/10 px-6 data-[state=open]:border-red-500/30 data-[state=open]:shadow-[0_0_30px_rgba(220,38,38,0.1)] transition-all duration-300"
               >
-                <AccordionTrigger className="text-white font-semibold hover:text-purple-300 hover:no-underline py-6 text-left">
+                <AccordionTrigger className="text-white font-semibold hover:text-red-400 hover:no-underline py-6 text-left">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-purple-200/70 pb-6">
+                <AccordionContent className="text-zinc-400 pb-6">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
