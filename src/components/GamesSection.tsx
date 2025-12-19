@@ -1,61 +1,68 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Gamepad2, Users, HardDrive, Cpu, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+// Import hero images
+import minecraftHero from "@/assets/minecraft-hero.jpg";
+import rustHero from "@/assets/rust-hero.jpg";
+import palworldHero from "@/assets/palworld-hero.jpg";
+import gtavHero from "@/assets/gtav-hero.jpg";
+import terrariaHero from "@/assets/terraria-hero.jpg";
+
+// Import thumbnails
+import minecraftThumb from "@/assets/minecraft-thumb.jpg";
+import rustThumb from "@/assets/rust-thumb.jpg";
+import palworldThumb from "@/assets/palworld-thumb.jpg";
+import gtavThumb from "@/assets/gtav-thumb.jpg";
+import terrariaThumb from "@/assets/terraria-thumb.jpg";
+import arkThumb from "@/assets/ark-thumb.jpg";
 
 const games = [
   {
     id: "minecraft",
     name: "Minecraft",
-    description: "The world's most popular sandbox game. Build, explore, and survive.",
-    price: 45,
-    icon: "🎮",
-    color: "from-green-500 to-emerald-600",
-    features: ["Unlimited Slots", "NVMe Storage", "Auto Backups", "Mod Support"],
+    title: "Minecraft Server Hosting",
+    description: "Build, explore, and survive in your own Minecraft world with friends. Create limitless adventures.",
+    price: 160,
+    heroImage: minecraftHero,
+    thumbnail: minecraftThumb,
   },
   {
     id: "rust",
     name: "Rust",
-    description: "Survive and thrive in the harsh world of Rust with friends.",
-    price: 89,
-    icon: "⚔️",
-    color: "from-orange-500 to-red-600",
-    features: ["High Performance", "DDoS Protection", "Oxide Support", "Custom Maps"],
+    title: "Rust Server Hosting",
+    description: "Survive and thrive in the harsh world of Rust. Build bases, form alliances, and dominate.",
+    price: 320,
+    heroImage: rustHero,
+    thumbnail: rustThumb,
   },
   {
     id: "palworld",
     name: "Palworld",
-    description: "Catch Pals, build bases, and survive in this open-world adventure.",
-    price: 79,
-    icon: "🐾",
-    color: "from-blue-500 to-cyan-600",
-    features: ["Dedicated CPU", "Fast Setup", "Auto Updates", "Cross-play"],
+    title: "Palworld Server Hosting",
+    description: "Catch Pals, build bases, and survive in this open-world creature collection adventure.",
+    price: 240,
+    heroImage: palworldHero,
+    thumbnail: palworldThumb,
   },
   {
     id: "gtav",
     name: "GTA V",
-    description: "Run your own FiveM or alt:V roleplay server.",
-    price: 149,
-    icon: "🚗",
-    color: "from-purple-500 to-pink-600",
-    features: ["FiveM Ready", "High RAM", "Fast SSD", "Script Support"],
+    title: "GTA V Server Hosting",
+    description: "Run your own FiveM or alt:V roleplay server. Create custom experiences in Los Santos.",
+    price: 480,
+    heroImage: gtavHero,
+    thumbnail: gtavThumb,
   },
   {
     id: "terraria",
     name: "Terraria",
-    description: "2D sandbox adventure with endless possibilities.",
-    price: 35,
-    icon: "⛏️",
-    color: "from-yellow-500 to-orange-600",
-    features: ["TShock Support", "Easy Mods", "Quick Setup", "24/7 Online"],
-  },
-  {
-    id: "ark",
-    name: "ARK Survival",
-    description: "Tame dinosaurs and survive prehistoric lands.",
-    price: 99,
-    icon: "🦖",
-    color: "from-teal-500 to-green-600",
-    features: ["Cluster Ready", "Mod Support", "High Memory", "Fast CPU"],
+    title: "Terraria Server Hosting",
+    description: "2D sandbox adventure with endless possibilities. Dig, fight, explore, and build.",
+    price: 160,
+    heroImage: terrariaHero,
+    thumbnail: terrariaThumb,
   },
 ];
 
@@ -63,110 +70,154 @@ const GamesSection = () => {
   const [activeGame, setActiveGame] = useState(games[0]);
 
   return (
-    <section id="games" className="py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
+    <section id="games" className="relative h-[90vh] min-h-[600px] overflow-hidden">
+      {/* Background Hero Images */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeGame.id}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="absolute inset-0"
+        >
+          <img
+            src={activeGame.heroImage}
+            alt={activeGame.name}
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]/40" />
+        </motion.div>
+      </AnimatePresence>
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-6">
-            <Gamepad2 className="w-4 h-4 text-primary" />
-            <span className="text-sm text-muted-foreground">Game Hosting</span>
-          </div>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            <span className="text-foreground">Host Your Favorite</span>{" "}
-            <span className="text-gradient">Games</span>
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Choose from our wide selection of game servers, all running on premium hardware.
-          </p>
-        </div>
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col justify-center container mx-auto px-4">
+        <div className="max-w-2xl">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mb-4"
+          >
+            <span className="inline-block text-sm font-medium text-red-400 tracking-wider uppercase">
+              Unlimited Slots, Storage, and Bandwidth
+            </span>
+          </motion.div>
 
-        {/* Game Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {games.map((game) => (
-            <button
-              key={game.id}
-              onClick={() => setActiveGame(game)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                activeGame.id === game.id
-                  ? "bg-primary text-primary-foreground shadow-button"
-                  : "bg-card text-muted-foreground hover:text-foreground hover:bg-secondary"
-              }`}
+          {/* Title */}
+          <AnimatePresence mode="wait">
+            <motion.h2
+              key={activeGame.id + "-title"}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="font-display text-4xl md:text-6xl font-bold text-white mb-4"
             >
-              <span className="mr-2">{game.icon}</span>
-              {game.name}
-            </button>
-          ))}
+              {activeGame.title}
+            </motion.h2>
+          </AnimatePresence>
+
+          {/* Price */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeGame.id + "-price"}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="flex items-baseline gap-2 mb-6"
+            >
+              <span className="text-zinc-400 text-sm">Starts at</span>
+              <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                ₹{activeGame.price}
+              </span>
+              <span className="text-zinc-400">/month</span>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Description */}
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={activeGame.id + "-desc"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="text-zinc-300 text-lg mb-8 max-w-lg"
+            >
+              {activeGame.description}
+            </motion.p>
+          </AnimatePresence>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <Button variant="hero" size="lg" className="gap-2">
+              Get Started <ArrowRight className="w-4 h-4" />
+            </Button>
+          </motion.div>
         </div>
+      </div>
 
-        {/* Active Game Card */}
-        <div className="max-w-4xl mx-auto">
-          <div className="glass-card p-8 md:p-12 rounded-3xl shadow-card">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Game Info */}
-              <div>
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-5xl">{activeGame.icon}</span>
-                  <div>
-                    <h3 className="font-display text-2xl font-bold text-foreground">
-                      {activeGame.name}
-                    </h3>
-                    <p className="text-muted-foreground">Game Server Hosting</p>
+      {/* Game Tabs with Thumbnails */}
+      <div className="absolute bottom-8 left-0 right-0 z-20">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center">
+            <div className="bg-zinc-900/80 backdrop-blur-lg border border-zinc-700/50 rounded-2xl p-2 flex gap-2 overflow-x-auto">
+              {games.map((game) => (
+                <motion.button
+                  key={game.id}
+                  onClick={() => setActiveGame(game)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 min-w-[140px] ${
+                    activeGame.id === game.id
+                      ? "bg-gradient-to-r from-red-600/30 to-orange-500/20 border border-red-500/50"
+                      : "hover:bg-zinc-800/50"
+                  }`}
+                >
+                  {/* Thumbnail */}
+                  <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                    <img
+                      src={game.thumbnail}
+                      alt={game.name}
+                      className="w-full h-full object-cover"
+                    />
+                    {activeGame.id === game.id && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="absolute inset-0 border-2 border-red-500 rounded-lg"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
                   </div>
-                </div>
-                <p className="text-muted-foreground mb-6">{activeGame.description}</p>
-
-                {/* Features */}
-                <div className="grid grid-cols-2 gap-3 mb-8">
-                  {activeGame.features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                        <span className="text-primary text-xs">✓</span>
-                      </div>
-                      <span className="text-sm text-foreground">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <Button variant="hero" size="lg" className="gap-2">
-                  Start Hosting <ArrowRight className="w-4 h-4" />
-                </Button>
-              </div>
-
-              {/* Pricing Card */}
-              <div className="bg-secondary/50 rounded-2xl p-6 border border-border/50">
-                <p className="text-sm text-muted-foreground mb-2">Starting at</p>
-                <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-4xl font-display font-bold text-gradient">
-                    ₹{activeGame.price}
+                  
+                  {/* Game Name */}
+                  <span
+                    className={`font-medium text-sm whitespace-nowrap transition-colors ${
+                      activeGame.id === game.id ? "text-white" : "text-zinc-400"
+                    }`}
+                  >
+                    {game.name}
                   </span>
-                  <span className="text-muted-foreground">/month</span>
-                </div>
 
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-primary" />
-                    <span className="text-foreground">Unlimited Player Slots</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <HardDrive className="w-5 h-5 text-primary" />
-                    <span className="text-foreground">NVMe SSD Storage</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Cpu className="w-5 h-5 text-primary" />
-                    <span className="text-foreground">Ryzen 9 CPU (4GHz+)</span>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-6 border-t border-border/50">
-                  <p className="text-xs text-muted-foreground">
-                    All plans include DDoS protection, instant setup, and 24/7 support.
-                  </p>
-                </div>
-              </div>
+                  {/* Active indicator line */}
+                  {activeGame.id === game.id && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-red-500 to-orange-400 rounded-full"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </motion.button>
+              ))}
             </div>
           </div>
         </div>
