@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Zap } from "lucide-react";
+import logo from "@/assets/logo.webp";
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -121,16 +121,11 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
               }}
               className="relative"
             >
-              <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-[0_0_80px_rgba(220,38,38,0.5)]">
-                <Flame className="w-14 h-14 text-white" />
-              </div>
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="absolute -top-2 -right-2"
-              >
-                <Zap className="w-8 h-8 text-orange-400 drop-shadow-[0_0_10px_rgba(251,146,60,0.8)]" />
-              </motion.div>
+              <img 
+                src={logo} 
+                alt="FrictionHost Logo" 
+                className="w-28 h-28 rounded-3xl shadow-[0_0_80px_rgba(220,38,38,0.5)]" 
+              />
             </motion.div>
           </div>
 
