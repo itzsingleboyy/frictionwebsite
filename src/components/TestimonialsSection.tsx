@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import TiltCard from "@/components/TiltCard";
 
 const testimonials = [
   {
@@ -127,36 +128,38 @@ const TestimonialsSection = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="group bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-6 rounded-2xl transition-all duration-500 hover:border-red-500/30 hover:shadow-[0_0_40px_rgba(220,38,38,0.15)]"
             >
-              <Quote className="w-8 h-8 text-red-500/30 mb-4 group-hover:text-red-500/50 transition-colors" />
-              <p className="text-white/90 mb-6 leading-relaxed">
-                "{testimonial.content}"
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-white">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-xs text-zinc-500">
-                      {testimonial.role}
-                    </p>
+              <TiltCard intensity={6}>
+                <div className="group bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-6 rounded-2xl transition-all duration-500 hover:border-red-500/30 hover:shadow-[0_0_40px_rgba(220,38,38,0.15)] h-full">
+                  <Quote className="w-8 h-8 text-red-500/30 mb-4 group-hover:text-red-500/50 transition-colors" />
+                  <p className="text-white/90 mb-6 leading-relaxed">
+                    "{testimonial.content}"
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold">
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-white">
+                          {testimonial.name}
+                        </p>
+                        <p className="text-xs text-zinc-500">
+                          {testimonial.role}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: testimonial.rating }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 text-yellow-500 fill-yellow-500"
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <div className="flex gap-0.5">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 text-yellow-500 fill-yellow-500"
-                    />
-                  ))}
-                </div>
-              </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

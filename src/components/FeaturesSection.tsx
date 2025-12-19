@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Shield, Headphones, RefreshCw, Cpu, Star, Clock, Zap, HardDrive } from "lucide-react";
+import TiltCard from "@/components/TiltCard";
 
 const features = [
   {
@@ -166,53 +167,49 @@ const FeaturesSection = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ 
-                scale: 1.03, 
-                y: -8,
-                transition: { duration: 0.3 }
-              }}
-              className={`group relative bg-zinc-900/50 backdrop-blur-lg border border-zinc-800 p-6 rounded-2xl transition-all duration-500 hover:border-red-500/40 hover:shadow-[0_0_50px_rgba(220,38,38,0.15)] ${
-                feature.glow ? "overflow-hidden" : ""
-              }`}
             >
-              {/* Glow effect for money back */}
-              {feature.glow && (
-                <motion.div
-                  animate={{
-                    opacity: [0.3, 0.6, 0.3],
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-green-500/30 blur-3xl"
-                />
-              )}
+              <TiltCard intensity={8}>
+                <div
+                  className={`group relative bg-zinc-900/50 backdrop-blur-lg border border-zinc-800 p-6 rounded-2xl transition-all duration-500 hover:border-red-500/40 hover:shadow-[0_0_50px_rgba(220,38,38,0.15)] h-full ${
+                    feature.glow ? "overflow-hidden" : ""
+                  }`}
+                >
+                  {/* Glow effect for money back */}
+                  {feature.glow && (
+                    <motion.div
+                      animate={{
+                        opacity: [0.3, 0.6, 0.3],
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-green-500/30 blur-3xl"
+                    />
+                  )}
 
-              {/* Icon */}
-              <motion.div
-                whileHover={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 0.5 }}
-                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 shadow-lg group-hover:shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-all duration-300`}
-              >
-                <feature.icon className="w-7 h-7 text-white" />
-              </motion.div>
+                  {/* Icon */}
+                  <motion.div
+                    whileHover={{ rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 0.5 }}
+                    className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 shadow-lg group-hover:shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-all duration-300`}
+                  >
+                    <feature.icon className="w-7 h-7 text-white" />
+                  </motion.div>
 
-              <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
-                {feature.title}
-              </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                {feature.description}
-              </p>
+                  <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
+                    {feature.title}
+                  </h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
 
-              {/* Hover indicator */}
-              <motion.div
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-red-500 to-orange-500"
-              />
+                  {/* Hover indicator */}
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-red-500 to-orange-500 group-hover:w-full transition-all duration-500" />
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

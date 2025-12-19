@@ -5,6 +5,8 @@ import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingParticles from "@/components/FloatingParticles";
+import TextReveal from "@/components/TextReveal";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Copy, Check, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -93,9 +95,9 @@ const Home = () => {
                   transition={{ delay: 0.4 }}
                   className="font-display text-6xl md:text-8xl font-bold mb-6"
                 >
-                  <span className="bg-gradient-to-r from-red-500 via-orange-400 to-red-500 bg-clip-text text-transparent">
+                  <TextReveal className="bg-gradient-to-r from-red-500 via-orange-400 to-red-500 bg-clip-text text-transparent" delay={0.5}>
                     FrictionHost
-                  </span>
+                  </TextReveal>
                 </motion.h1>
 
                 {/* Tagline */}
@@ -174,19 +176,30 @@ const Home = () => {
                   transition={{ delay: 1.2 }}
                   className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
                 >
-                  {[
-                    { value: "99.9%", label: "Uptime" },
-                    { value: "100+", label: "Servers" },
-                    { value: "24/7", label: "Support" },
-                    { value: "₹45", label: "Starting Price" },
-                  ].map((stat, index) => (
-                    <div key={index} className="text-center">
-                      <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
-                        {stat.value}
-                      </div>
-                      <div className="text-zinc-500 text-sm mt-1">{stat.label}</div>
+                  <div className="text-center">
+                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      <AnimatedCounter value={99.9} suffix="%" />
                     </div>
-                  ))}
+                    <div className="text-zinc-500 text-sm mt-1">Uptime</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      <AnimatedCounter value={100} suffix="+" />
+                    </div>
+                    <div className="text-zinc-500 text-sm mt-1">Servers</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      24/7
+                    </div>
+                    <div className="text-zinc-500 text-sm mt-1">Support</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      ₹<AnimatedCounter value={45} />
+                    </div>
+                    <div className="text-zinc-500 text-sm mt-1">Starting Price</div>
+                  </div>
                 </motion.div>
               </div>
             </div>
