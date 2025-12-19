@@ -64,7 +64,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-red-500/20"
+      className="fixed top-0 left-0 right-0 z-50 glass border-b border-primary/20"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
@@ -75,7 +75,7 @@ const Navbar = () => {
               className="flex items-center gap-2 cursor-pointer"
             >
               <img src={logo} alt="FrictionHost Logo" className="w-9 h-9 rounded-lg" />
-              <span className="font-display font-bold text-xl bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+              <span className="font-display font-bold text-xl gradient-text">
                 FrictionHost
               </span>
             </motion.div>
@@ -89,8 +89,8 @@ const Navbar = () => {
                 to={link.href}
                 className={`transition-colors duration-200 text-sm font-medium ${
                   isActive(link.href)
-                    ? "text-red-500"
-                    : "text-zinc-400 hover:text-white"
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {link.name}
@@ -103,20 +103,20 @@ const Navbar = () => {
             {user ? (
               <>
                 <Link to="/dashboard">
-                  <Button variant="ghost" size="sm" className="text-zinc-300 hover:text-white hover:bg-red-600/20 gap-2">
+                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-primary/20 gap-2">
                     <LayoutDashboard className="w-4 h-4" />
                     Dashboard
                   </Button>
                 </Link>
                 {isAdmin && (
                   <Link to="/admin">
-                    <Button variant="ghost" size="sm" className="text-orange-400 hover:text-orange-300 hover:bg-orange-600/20 gap-2">
+                    <Button variant="ghost" size="sm" className="text-accent hover:text-accent hover:bg-accent/20 gap-2">
                       <Shield className="w-4 h-4" />
                       Admin
                     </Button>
                   </Link>
                 )}
-                <div className="flex items-center gap-2 text-zinc-300 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <User className="w-4 h-4" />
                   <span className="max-w-[120px] truncate">{user.email}</span>
                 </div>
@@ -124,7 +124,7 @@ const Navbar = () => {
                   variant="ghost"
                   size="sm"
                   onClick={handleLogout}
-                  className="text-zinc-300 hover:text-white hover:bg-red-600/20 gap-2"
+                  className="text-muted-foreground hover:text-foreground hover:bg-primary/20 gap-2"
                 >
                   <LogOut className="w-4 h-4" />
                   Logout
@@ -133,7 +133,7 @@ const Navbar = () => {
             ) : (
               <>
                 <Link to="/auth">
-                  <Button variant="ghost" size="sm" className="text-zinc-300 hover:text-white hover:bg-red-600/20">
+                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-primary/20">
                     Login
                   </Button>
                 </Link>
@@ -148,7 +148,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-foreground"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -163,7 +163,7 @@ const Navbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden py-4 border-t border-red-500/20"
+              className="md:hidden py-4 border-t border-primary/20"
             >
               <div className="flex flex-col gap-4">
                 {navLinks.map((link) => (
@@ -172,32 +172,32 @@ const Navbar = () => {
                     to={link.href}
                     className={`transition-colors duration-200 text-sm font-medium py-2 ${
                       isActive(link.href)
-                        ? "text-red-500"
-                        : "text-zinc-400 hover:text-white"
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.name}
                   </Link>
                 ))}
-                <div className="flex flex-col gap-2 pt-4 border-t border-red-500/20">
+                <div className="flex flex-col gap-2 pt-4 border-t border-primary/20">
                   {user ? (
                     <>
                       <Link to="/dashboard" onClick={() => setIsOpen(false)}>
-                        <Button variant="ghost" size="sm" className="justify-start text-zinc-300 gap-2 w-full">
+                        <Button variant="ghost" size="sm" className="justify-start text-muted-foreground gap-2 w-full">
                           <LayoutDashboard className="w-4 h-4" />
                           Dashboard
                         </Button>
                       </Link>
                       {isAdmin && (
                         <Link to="/admin" onClick={() => setIsOpen(false)}>
-                          <Button variant="ghost" size="sm" className="justify-start text-orange-400 gap-2 w-full">
+                          <Button variant="ghost" size="sm" className="justify-start text-accent gap-2 w-full">
                             <Shield className="w-4 h-4" />
                             Admin
                           </Button>
                         </Link>
                       )}
-                      <div className="flex items-center gap-2 text-zinc-300 text-sm py-2">
+                      <div className="flex items-center gap-2 text-muted-foreground text-sm py-2">
                         <User className="w-4 h-4" />
                         <span className="truncate">{user.email}</span>
                       </div>
@@ -208,7 +208,7 @@ const Navbar = () => {
                           handleLogout();
                           setIsOpen(false);
                         }}
-                        className="justify-start text-zinc-300 gap-2"
+                        className="justify-start text-muted-foreground gap-2"
                       >
                         <LogOut className="w-4 h-4" />
                         Logout
@@ -217,7 +217,7 @@ const Navbar = () => {
                   ) : (
                     <>
                       <Link to="/auth" onClick={() => setIsOpen(false)}>
-                        <Button variant="ghost" size="sm" className="justify-start text-zinc-300 w-full">
+                        <Button variant="ghost" size="sm" className="justify-start text-muted-foreground w-full">
                           Login
                         </Button>
                       </Link>

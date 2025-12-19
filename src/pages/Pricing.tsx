@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import RamCalculator from "@/components/RamCalculator";
 import PaymentModal from "@/components/PaymentModal";
 import FloatingParticles from "@/components/FloatingParticles";
 import { Button } from "@/components/ui/button";
-import { Check, Sparkles, ArrowRight, Globe, Zap } from "lucide-react";
+import { Check, Sparkles, ArrowRight, Globe } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -184,14 +184,14 @@ const Pricing = () => {
         <meta name="description" content="Affordable game server hosting plans starting at ₹45/month. Choose the perfect plan for your community." />
       </Helmet>
 
-      <div className="min-h-screen bg-[#0a0a0a]">
+      <div className="min-h-screen bg-background">
         <Navbar />
         
         <main className="pt-24 pb-16">
           {/* Background Effects */}
           <div className="fixed inset-0 pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-red-600/10 blur-[150px]" />
-            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[120px]" />
+            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[150px]" />
+            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[120px]" />
             <FloatingParticles count={25} />
           </div>
 
@@ -203,17 +203,17 @@ const Pricing = () => {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto mb-12"
             >
-              <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
-                <Globe className="w-4 h-4 text-red-400" />
-                <span className="text-sm text-red-300">Proxy Services</span>
+              <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6">
+                <Globe className="w-4 h-4 text-primary" />
+                <span className="text-sm text-primary">Proxy Services</span>
               </div>
               <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
-                <span className="text-white">Minecraft </span>
-                <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                <span className="text-foreground">Minecraft </span>
+                <span className="gradient-text">
                   Proxy Plans
                 </span>
               </h1>
-              <p className="text-zinc-400 text-lg">
+              <p className="text-muted-foreground text-lg">
                 Fast, reliable proxies for your Minecraft servers.
               </p>
             </motion.div>
@@ -227,35 +227,35 @@ const Pricing = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + index * 0.1 }}
                   whileHover={{ y: -10 }}
-                  className="relative bg-zinc-900/50 backdrop-blur-lg rounded-2xl p-6 border border-zinc-800 hover:border-red-500/30 transition-all duration-300 max-w-sm w-full"
+                  className="relative glass rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 max-w-sm w-full"
                 >
                   <div className="text-center mb-6">
-                    <h3 className="font-display text-2xl font-bold text-white mb-2">
+                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">
                       {plan.name}
                     </h3>
-                    <p className="text-zinc-500 text-sm mb-4">{plan.description}</p>
+                    <p className="text-muted-foreground text-sm mb-4">{plan.description}</p>
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      <span className="text-4xl font-bold gradient-text">
                         ₹{plan.price}
                       </span>
-                      <span className="text-zinc-500">/mo</span>
+                      <span className="text-muted-foreground">/mo</span>
                     </div>
                   </div>
 
                   {/* Specs */}
-                  <div className="bg-zinc-800/50 rounded-xl p-4 mb-6">
+                  <div className="bg-secondary/50 rounded-xl p-4 mb-6">
                     <div className="grid grid-cols-3 gap-2 text-center">
                       <div>
-                        <div className="text-white font-semibold text-sm">{plan.ram}</div>
-                        <div className="text-zinc-500 text-xs">RAM</div>
+                        <div className="text-foreground font-semibold text-sm">{plan.ram}</div>
+                        <div className="text-muted-foreground text-xs">RAM</div>
                       </div>
                       <div>
-                        <div className="text-white font-semibold text-sm">{plan.cpu}</div>
-                        <div className="text-zinc-500 text-xs">CPU</div>
+                        <div className="text-foreground font-semibold text-sm">{plan.cpu}</div>
+                        <div className="text-muted-foreground text-xs">CPU</div>
                       </div>
                       <div>
-                        <div className="text-white font-semibold text-sm">{plan.storage}</div>
-                        <div className="text-zinc-500 text-xs">Storage</div>
+                        <div className="text-foreground font-semibold text-sm">{plan.storage}</div>
+                        <div className="text-muted-foreground text-xs">Storage</div>
                       </div>
                     </div>
                   </div>
@@ -263,8 +263,8 @@ const Pricing = () => {
                   {/* Features */}
                   <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-zinc-400">
-                        <Check className="w-4 h-4 text-red-500 flex-shrink-0" />
+                      <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -290,12 +290,12 @@ const Pricing = () => {
               className="text-center max-w-3xl mx-auto mb-12"
             >
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-white">Minecraft </span>
-                <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                <span className="text-foreground">Minecraft </span>
+                <span className="gradient-text">
                   Hosting Plans
                 </span>
               </h2>
-              <p className="text-zinc-400">
+              <p className="text-muted-foreground">
                 No hidden fees. No surprises. Choose the plan that fits your needs.
               </p>
             </motion.div>
@@ -309,16 +309,16 @@ const Pricing = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 + index * 0.1 }}
                   whileHover={{ y: -10 }}
-                  className={`relative bg-zinc-900/50 backdrop-blur-lg rounded-2xl p-6 border transition-all duration-300 ${
+                  className={`relative glass rounded-2xl p-6 transition-all duration-300 ${
                     plan.popular
-                      ? "border-red-500/50 shadow-[0_0_40px_rgba(220,38,38,0.2)]"
-                      : "border-zinc-800 hover:border-red-500/30"
+                      ? "border-primary/50 glow-primary"
+                      : "hover:border-primary/30"
                   }`}
                 >
                   {/* Popular Badge */}
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <div className="bg-gradient-to-r from-red-600 to-orange-500 text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
+                      <div className="bg-gradient-to-r from-primary to-accent text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
                         <Sparkles className="w-3 h-3" />
                         Most Popular
                       </div>
@@ -326,32 +326,32 @@ const Pricing = () => {
                   )}
 
                   <div className="text-center mb-6">
-                    <h3 className="font-display text-2xl font-bold text-white mb-2">
+                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">
                       {plan.name}
                     </h3>
-                    <p className="text-zinc-500 text-sm mb-4">{plan.description}</p>
+                    <p className="text-muted-foreground text-sm mb-4">{plan.description}</p>
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      <span className="text-4xl font-bold gradient-text">
                         ₹{plan.price}
                       </span>
-                      <span className="text-zinc-500">/mo</span>
+                      <span className="text-muted-foreground">/mo</span>
                     </div>
                   </div>
 
                   {/* Specs */}
-                  <div className="bg-zinc-800/50 rounded-xl p-4 mb-6">
+                  <div className="bg-secondary/50 rounded-xl p-4 mb-6">
                     <div className="grid grid-cols-3 gap-2 text-center">
                       <div>
-                        <div className="text-white font-semibold">{plan.ram}</div>
-                        <div className="text-zinc-500 text-xs">RAM</div>
+                        <div className="text-foreground font-semibold">{plan.ram}</div>
+                        <div className="text-muted-foreground text-xs">RAM</div>
                       </div>
                       <div>
-                        <div className="text-white font-semibold">{plan.cpu}</div>
-                        <div className="text-zinc-500 text-xs">CPU</div>
+                        <div className="text-foreground font-semibold">{plan.cpu}</div>
+                        <div className="text-muted-foreground text-xs">CPU</div>
                       </div>
                       <div>
-                        <div className="text-white font-semibold">{plan.storage}</div>
-                        <div className="text-zinc-500 text-xs">Storage</div>
+                        <div className="text-foreground font-semibold">{plan.storage}</div>
+                        <div className="text-muted-foreground text-xs">Storage</div>
                       </div>
                     </div>
                   </div>
@@ -359,8 +359,8 @@ const Pricing = () => {
                   {/* Features */}
                   <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-zinc-400">
-                        <Check className="w-4 h-4 text-red-500 flex-shrink-0" />
+                      <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -385,7 +385,7 @@ const Pricing = () => {
               transition={{ delay: 0.5 }}
               className="mt-16 text-center"
             >
-              <p className="text-zinc-500 mb-4">
+              <p className="text-muted-foreground mb-4">
                 Need a custom plan? Contact us for enterprise solutions.
               </p>
               <Button variant="outline" size="lg" className="gap-2">

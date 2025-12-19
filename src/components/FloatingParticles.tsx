@@ -38,8 +38,8 @@ const FloatingParticles = ({ count = 20, className = "" }: FloatingParticlesProp
             top: `${particle.y}%`,
             width: particle.size,
             height: particle.size,
-            background: "radial-gradient(circle, rgba(239,68,68,0.8) 0%, rgba(239,68,68,0.4) 50%, transparent 70%)",
-            boxShadow: `0 0 ${particle.size * 3}px rgba(239,68,68,0.6), 0 0 ${particle.size * 6}px rgba(239,68,68,0.3)`,
+            background: "radial-gradient(circle, hsl(262,83%,63%,0.8) 0%, hsl(262,83%,63%,0.4) 50%, transparent 70%)",
+            boxShadow: `0 0 ${particle.size * 3}px hsl(262,83%,63%,0.6), 0 0 ${particle.size * 6}px hsl(262,83%,63%,0.3)`,
           }}
           animate={{
             y: [-20, -100, -20],
