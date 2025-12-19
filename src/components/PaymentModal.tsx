@@ -23,6 +23,7 @@ const COUPONS: Coupon[] = [
   { code: "FRICTION20", discount: 20, description: "20% special discount" },
   { code: "SUMMER25", discount: 25, description: "25% summer sale" },
   { code: "MEGA50", discount: 50, description: "50% mega discount" },
+  { code: "CHRISTMAS2025", discount: 25, description: "25% Christmas special offer 🎄" },
 ];
 
 const UPI_ID = "shashankfan@axl";
