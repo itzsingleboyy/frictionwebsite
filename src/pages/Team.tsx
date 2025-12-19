@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Twitter, Linkedin, Github, Crown, Briefcase, Star } from "lucide-react";
 import luffyAvatar from "@/assets/luffy-avatar.png";
+import paxboltAvatar from "@/assets/paxbolt-avatar.png";
 
 const teamMembers = [
   {
@@ -24,7 +25,7 @@ const teamMembers = [
     role: "CEO",
     icon: Briefcase,
     description: "Strategic leader driving business growth and customer success.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    image: paxboltAvatar,
     gradient: "from-red-500 to-red-700",
     social: {
       twitter: "#",
