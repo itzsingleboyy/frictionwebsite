@@ -16,7 +16,6 @@ import rustThumb from "@/assets/rust-thumb.jpg";
 import palworldThumb from "@/assets/palworld-thumb.jpg";
 import gtavThumb from "@/assets/gtav-thumb.jpg";
 import terrariaThumb from "@/assets/terraria-thumb.jpg";
-import arkThumb from "@/assets/ark-thumb.jpg";
 
 const games = [
   {
@@ -87,8 +86,8 @@ const GamesSection = () => {
             className="w-full h-full object-cover"
           />
           {/* Overlay Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/40" />
         </motion.div>
       </AnimatePresence>
 
@@ -102,7 +101,7 @@ const GamesSection = () => {
             transition={{ delay: 0.2 }}
             className="mb-4"
           >
-            <span className="inline-block text-sm font-medium text-red-400 tracking-wider uppercase">
+            <span className="inline-block text-sm font-medium text-primary tracking-wider uppercase">
               Unlimited Slots, Storage, and Bandwidth
             </span>
           </motion.div>
@@ -115,7 +114,7 @@ const GamesSection = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="font-display text-4xl md:text-6xl font-bold text-white mb-4"
+              className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4"
             >
               {activeGame.title}
             </motion.h2>
@@ -131,11 +130,11 @@ const GamesSection = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="flex items-baseline gap-2 mb-6"
             >
-              <span className="text-zinc-400 text-sm">Starts at</span>
-              <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+              <span className="text-muted-foreground text-sm">Starts at</span>
+              <span className="text-4xl md:text-5xl font-bold gradient-text">
                 ₹{activeGame.price}
               </span>
-              <span className="text-zinc-400">/month</span>
+              <span className="text-muted-foreground">/month</span>
             </motion.div>
           </AnimatePresence>
 
@@ -147,7 +146,7 @@ const GamesSection = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="text-zinc-300 text-lg mb-8 max-w-lg"
+              className="text-muted-foreground text-lg mb-8 max-w-lg"
             >
               {activeGame.description}
             </motion.p>
@@ -170,7 +169,7 @@ const GamesSection = () => {
       <div className="absolute bottom-8 left-0 right-0 z-20">
         <div className="container mx-auto px-4">
           <div className="flex justify-center">
-            <div className="bg-zinc-900/80 backdrop-blur-lg border border-zinc-700/50 rounded-2xl p-2 flex gap-2 overflow-x-auto">
+            <div className="glass-strong rounded-2xl p-2 flex gap-2 overflow-x-auto">
               {games.map((game) => (
                 <motion.button
                   key={game.id}
@@ -179,8 +178,8 @@ const GamesSection = () => {
                   whileTap={{ scale: 0.98 }}
                   className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 min-w-[140px] ${
                     activeGame.id === game.id
-                      ? "bg-gradient-to-r from-red-600/30 to-orange-500/20 border border-red-500/50"
-                      : "hover:bg-zinc-800/50"
+                      ? "bg-gradient-to-r from-primary/30 to-accent/20 border border-primary/50"
+                      : "hover:bg-secondary/50"
                   }`}
                 >
                   {/* Thumbnail */}
@@ -193,7 +192,7 @@ const GamesSection = () => {
                     {activeGame.id === game.id && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="absolute inset-0 border-2 border-red-500 rounded-lg"
+                        className="absolute inset-0 border-2 border-primary rounded-lg"
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                       />
                     )}
@@ -202,7 +201,7 @@ const GamesSection = () => {
                   {/* Game Name */}
                   <span
                     className={`font-medium text-sm whitespace-nowrap transition-colors ${
-                      activeGame.id === game.id ? "text-white" : "text-zinc-400"
+                      activeGame.id === game.id ? "text-foreground" : "text-muted-foreground"
                     }`}
                   >
                     {game.name}
@@ -212,7 +211,7 @@ const GamesSection = () => {
                   {activeGame.id === game.id && (
                     <motion.div
                       layoutId="activeTab"
-                      className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-red-500 to-orange-400 rounded-full"
+                      className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}

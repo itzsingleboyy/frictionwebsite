@@ -80,10 +80,10 @@ const HeroSection = () => {
             style={{ backgroundImage: `url(${activeGame.image})` }}
           />
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-[#0a0a0a]/70 to-[#0a0a0a]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/90 via-transparent to-[#0a0a0a]/90" />
-          {/* Red tint overlay */}
-          <div className="absolute inset-0 bg-red-900/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-transparent to-background/90" />
+          {/* Purple tint overlay */}
+          <div className="absolute inset-0 bg-primary/10" />
         </motion.div>
       </AnimatePresence>
 
@@ -95,10 +95,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6"
+            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6"
           >
-            <Zap className="w-4 h-4 text-orange-400" />
-            <span className="text-sm text-red-200">{activeGame.tagline}</span>
+            <Zap className="w-4 h-4 text-accent" />
+            <span className="text-sm text-primary-foreground/80">{activeGame.tagline}</span>
           </motion.div>
 
           {/* Main Heading */}
@@ -111,11 +111,11 @@ const HeroSection = () => {
               transition={{ duration: 0.5 }}
             >
               <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-white via-red-100 to-white bg-clip-text text-transparent">
+                <span className="gradient-text">
                   {activeGame.name}
                 </span>
               </h1>
-              <h2 className="font-display text-2xl md:text-3xl text-red-200/80 mb-6">
+              <h2 className="font-display text-2xl md:text-3xl text-muted-foreground mb-6">
                 Server Hosting
               </h2>
             </motion.div>
@@ -128,11 +128,11 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-6"
           >
-            <span className="text-lg text-red-300">Starts at</span>
-            <span className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent ml-2">
+            <span className="text-lg text-muted-foreground">Starts at</span>
+            <span className="text-4xl md:text-5xl font-display font-bold gradient-text ml-2">
               ₹{activeGame.price}
             </span>
-            <span className="text-red-300">/month</span>
+            <span className="text-muted-foreground">/month</span>
           </motion.div>
 
           {/* Description */}
@@ -140,7 +140,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg text-zinc-400 max-w-2xl mx-auto mb-8"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8"
           >
             {activeGame.description}
           </motion.p>
@@ -169,8 +169,8 @@ const HeroSection = () => {
                 onClick={() => setActiveGame(game)}
                 className={`px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
                   activeGame.id === game.id
-                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-[0_0_30px_rgba(220,38,38,0.5)]"
-                    : "bg-zinc-900/80 text-zinc-400 border border-red-500/20 hover:bg-zinc-800 hover:border-red-500/40 backdrop-blur-sm"
+                    ? "bg-gradient-to-r from-primary to-accent text-white glow-primary"
+                    : "glass text-muted-foreground hover:text-foreground hover:border-primary/40"
                 }`}
               >
                 {game.name}
@@ -185,25 +185,25 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-16"
           >
-            <div className="inline-flex items-center gap-4 bg-gradient-to-r from-zinc-900/80 to-zinc-800/80 backdrop-blur-xl border border-red-500/30 px-6 py-4 rounded-2xl">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-2xl">
+            <div className="inline-flex items-center gap-4 glass-strong px-6 py-4 rounded-2xl">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl">
                 🔥
               </div>
               <div className="text-left">
-                <p className="text-sm text-zinc-400">Welcome Offer!</p>
-                <p className="font-semibold text-white">
-                  Get <span className="text-red-500">20% OFF</span> your first order.
+                <p className="text-sm text-muted-foreground">Welcome Offer!</p>
+                <p className="font-semibold text-foreground">
+                  Get <span className="text-primary">20% OFF</span> your first order.
                 </p>
               </div>
               <button
                 onClick={handleCopyCode}
-                className="flex items-center gap-2 bg-red-600/30 hover:bg-red-600 border border-red-500/50 px-4 py-2 rounded-lg transition-all duration-300"
+                className="flex items-center gap-2 bg-primary/30 hover:bg-primary border border-primary/50 px-4 py-2 rounded-lg transition-all duration-300"
               >
-                <code className="text-orange-400 font-mono font-bold">FRICTION20</code>
+                <code className="text-accent font-mono font-bold">FRICTION20</code>
                 {copied ? (
                   <Check className="w-4 h-4 text-green-400" />
                 ) : (
-                  <Copy className="w-4 h-4 text-zinc-400" />
+                  <Copy className="w-4 h-4 text-muted-foreground" />
                 )}
               </button>
             </div>
@@ -212,7 +212,7 @@ const HeroSection = () => {
       </div>
 
       {/* Bottom Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };

@@ -82,45 +82,21 @@ const RamCalculator = () => {
   const [showBreakdown, setShowBreakdown] = useState(false);
 
   const calculateRam = () => {
-    // Base RAM requirement
     let baseRam = 1.5;
-    
-    // Player impact (exponential scaling for large servers)
     const playerRam = players <= 20 
       ? players * 0.08 
       : 20 * 0.08 + (players - 20) * 0.12;
-    
-    // Mod impact (heavy for modded servers)
     const modRam = mods * 0.02;
-    
-    // Plugin impact
     const pluginRam = lightPlugins * 0.03 + mediumPlugins * 0.1 + heavyPlugins * 0.25;
-    
-    // World size impact
     const worldMultiplier = worldSizes.find(w => w.id === worldSize)?.multiplier || 1;
-    
-    // Server type multiplier
     const serverMultiplier = serverTypes.find(s => s.id === serverType)?.multiplier || 1;
-    
-    // Version multiplier
     const versionMultiplier = versions.find(v => v.id === version)?.multiplier || 1;
-    
-    // Network type multiplier
     const networkMultiplier = networkTypes.find(n => n.id === networkType)?.multiplier || 1;
-    
-    // View distance impact
     const viewDistanceRam = (viewDistance - 6) * 0.15;
-    
-    // Database overhead
     const databaseRam = useDatabase ? 0.5 : 0;
-    
-    // Optimized flags reduction
     const flagsMultiplier = useOptimizedFlags ? 0.92 : 1;
-    
-    // Tier multiplier
     const tierMultiplier = tiers.find(t => t.id === selectedTier)?.multiplier || 1;
     
-    // Calculate total
     let totalRam = (baseRam + playerRam + modRam + pluginRam + viewDistanceRam + databaseRam) 
       * worldMultiplier 
       * serverMultiplier 
@@ -218,10 +194,10 @@ const RamCalculator = () => {
   const storageEstimate = getStorageEstimate();
 
   return (
-    <section id="calculator" className="py-24 relative overflow-hidden bg-[#0a0a0a]">
+    <section id="calculator" className="py-24 relative overflow-hidden bg-background">
       {/* Background */}
-      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] rounded-full bg-red-600/10 blur-[120px]" />
-      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full bg-orange-500/10 blur-[100px]" />
+      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[120px]" />
+      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[100px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -232,17 +208,17 @@ const RamCalculator = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6">
-            <Calculator className="w-4 h-4 text-red-500" />
-            <span className="text-sm text-red-300">Advanced Calculator</span>
+          <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6">
+            <Calculator className="w-4 h-4 text-primary" />
+            <span className="text-sm text-primary">Advanced Calculator</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-white">Server Resource </span>
-            <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+            <span className="text-foreground">Server Resource </span>
+            <span className="gradient-text">
               Calculator
             </span>
           </h2>
-          <p className="text-zinc-400 text-lg">
+          <p className="text-muted-foreground text-lg">
             Get precise recommendations based on your server configuration.
           </p>
         </motion.div>
@@ -255,13 +231,13 @@ const RamCalculator = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="lg:col-span-3 bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-6 rounded-2xl space-y-6"
+              className="lg:col-span-3 glass p-6 rounded-2xl space-y-6"
             >
               {/* Quick Presets */}
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  <Zap className="w-4 h-4 text-red-500" />
-                  <span className="font-semibold text-white">Quick Presets</span>
+                  <Zap className="w-4 h-4 text-primary" />
+                  <span className="font-semibold text-foreground">Quick Presets</span>
                 </div>
                 <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
                   {presets.map((preset) => (
@@ -270,8 +246,8 @@ const RamCalculator = () => {
                       onClick={() => handlePreset(preset.id)}
                       className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-200 ${
                         selectedPreset === preset.id
-                          ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-500/20"
-                          : "bg-zinc-800/80 text-zinc-400 border border-red-500/20 hover:border-red-500/50 hover:text-white"
+                          ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg glow-primary"
+                          : "bg-secondary text-muted-foreground border border-border hover:border-primary/50 hover:text-foreground"
                       }`}
                     >
                       {preset.name}
@@ -284,16 +260,16 @@ const RamCalculator = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <Server className="w-3 h-3 text-red-500" />
-                    <span className="font-medium text-xs text-white">Server Type</span>
+                    <Server className="w-3 h-3 text-primary" />
+                    <span className="font-medium text-xs text-foreground">Server Type</span>
                   </div>
                   <select
                     value={serverType}
                     onChange={(e) => setServerType(e.target.value)}
-                    className="w-full bg-zinc-800/80 text-white px-3 py-2 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-xs"
+                    className="w-full bg-secondary text-foreground px-3 py-2 rounded-xl border border-border focus:border-primary focus:outline-none transition-colors text-xs"
                   >
                     {serverTypes.map((type) => (
-                      <option key={type.id} value={type.id} className="bg-zinc-900">
+                      <option key={type.id} value={type.id} className="bg-card">
                         {type.name}
                       </option>
                     ))}
@@ -301,16 +277,16 @@ const RamCalculator = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <HardDrive className="w-3 h-3 text-red-500" />
-                    <span className="font-medium text-xs text-white">Version</span>
+                    <HardDrive className="w-3 h-3 text-primary" />
+                    <span className="font-medium text-xs text-foreground">Version</span>
                   </div>
                   <select
                     value={version}
                     onChange={(e) => setVersion(e.target.value)}
-                    className="w-full bg-zinc-800/80 text-white px-3 py-2 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-xs"
+                    className="w-full bg-secondary text-foreground px-3 py-2 rounded-xl border border-border focus:border-primary focus:outline-none transition-colors text-xs"
                   >
                     {versions.map((v) => (
-                      <option key={v.id} value={v.id} className="bg-zinc-900">
+                      <option key={v.id} value={v.id} className="bg-card">
                         {v.name}
                       </option>
                     ))}
@@ -318,16 +294,16 @@ const RamCalculator = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <Globe className="w-3 h-3 text-red-500" />
-                    <span className="font-medium text-xs text-white">World Size</span>
+                    <Globe className="w-3 h-3 text-primary" />
+                    <span className="font-medium text-xs text-foreground">World Size</span>
                   </div>
                   <select
                     value={worldSize}
                     onChange={(e) => setWorldSize(e.target.value)}
-                    className="w-full bg-zinc-800/80 text-white px-3 py-2 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-xs"
+                    className="w-full bg-secondary text-foreground px-3 py-2 rounded-xl border border-border focus:border-primary focus:outline-none transition-colors text-xs"
                   >
                     {worldSizes.map((size) => (
-                      <option key={size.id} value={size.id} className="bg-zinc-900">
+                      <option key={size.id} value={size.id} className="bg-card">
                         {size.name}
                       </option>
                     ))}
@@ -335,16 +311,16 @@ const RamCalculator = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <Layers className="w-3 h-3 text-red-500" />
-                    <span className="font-medium text-xs text-white">Network</span>
+                    <Layers className="w-3 h-3 text-primary" />
+                    <span className="font-medium text-xs text-foreground">Network</span>
                   </div>
                   <select
                     value={networkType}
                     onChange={(e) => setNetworkType(e.target.value)}
-                    className="w-full bg-zinc-800/80 text-white px-3 py-2 rounded-xl border border-red-500/20 focus:border-red-500 focus:outline-none transition-colors text-xs"
+                    className="w-full bg-secondary text-foreground px-3 py-2 rounded-xl border border-border focus:border-primary focus:outline-none transition-colors text-xs"
                   >
                     {networkTypes.map((net) => (
-                      <option key={net.id} value={net.id} className="bg-zinc-900">
+                      <option key={net.id} value={net.id} className="bg-card">
                         {net.name}
                       </option>
                     ))}
@@ -358,10 +334,10 @@ const RamCalculator = () => {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-red-500" />
-                      <span className="font-medium text-sm text-white">Concurrent Players</span>
+                      <Users className="w-4 h-4 text-primary" />
+                      <span className="font-medium text-sm text-foreground">Concurrent Players</span>
                     </div>
-                    <span className="text-red-500 font-bold text-lg">{players}</span>
+                    <span className="text-primary font-bold text-lg">{players}</span>
                   </div>
                   <Slider
                     value={[players]}
@@ -371,7 +347,7 @@ const RamCalculator = () => {
                     step={1}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
                     <span>1</span>
                     <span>200</span>
                   </div>
@@ -381,10 +357,10 @@ const RamCalculator = () => {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Activity className="w-4 h-4 text-red-500" />
-                      <span className="font-medium text-sm text-white">View Distance</span>
+                      <Activity className="w-4 h-4 text-primary" />
+                      <span className="font-medium text-sm text-foreground">View Distance</span>
                     </div>
-                    <span className="text-red-500 font-bold text-lg">{viewDistance} chunks</span>
+                    <span className="text-primary font-bold text-lg">{viewDistance} chunks</span>
                   </div>
                   <Slider
                     value={[viewDistance]}
@@ -394,7 +370,7 @@ const RamCalculator = () => {
                     step={1}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
                     <span>4</span>
                     <span>32</span>
                   </div>
@@ -404,10 +380,10 @@ const RamCalculator = () => {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Puzzle className="w-4 h-4 text-red-500" />
-                      <span className="font-medium text-sm text-white">Mods Installed</span>
+                      <Puzzle className="w-4 h-4 text-primary" />
+                      <span className="font-medium text-sm text-foreground">Mods Installed</span>
                     </div>
-                    <span className="text-red-500 font-bold text-lg">{mods}</span>
+                    <span className="text-primary font-bold text-lg">{mods}</span>
                   </div>
                   <Slider
                     value={[mods]}
@@ -417,7 +393,7 @@ const RamCalculator = () => {
                     step={5}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
                     <span>0</span>
                     <span>300</span>
                   </div>
@@ -427,15 +403,15 @@ const RamCalculator = () => {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Cpu className="w-4 h-4 text-red-500" />
-                      <span className="font-medium text-sm text-white">Total Plugins</span>
+                      <Cpu className="w-4 h-4 text-primary" />
+                      <span className="font-medium text-sm text-foreground">Total Plugins</span>
                     </div>
-                    <span className="text-red-500 font-bold text-lg">{lightPlugins + mediumPlugins + heavyPlugins}</span>
+                    <span className="text-primary font-bold text-lg">{lightPlugins + mediumPlugins + heavyPlugins}</span>
                   </div>
                   <div className="flex gap-2 text-xs">
                     <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded">{lightPlugins} Light</span>
                     <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">{mediumPlugins} Medium</span>
-                    <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded">{heavyPlugins} Heavy</span>
+                    <span className="px-2 py-1 bg-accent/20 text-accent rounded">{heavyPlugins} Heavy</span>
                   </div>
                 </div>
               </div>
@@ -447,7 +423,7 @@ const RamCalculator = () => {
                   className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
                     useOptimizedFlags
                       ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                      : "bg-zinc-800/80 text-zinc-400 border border-zinc-700"
+                      : "bg-secondary text-muted-foreground border border-border"
                   }`}
                 >
                   <Gauge className="w-3 h-3" />
@@ -458,7 +434,7 @@ const RamCalculator = () => {
                   className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
                     useDatabase
                       ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                      : "bg-zinc-800/80 text-zinc-400 border border-zinc-700"
+                      : "bg-secondary text-muted-foreground border border-border"
                   }`}
                 >
                   <Database className="w-3 h-3" />
@@ -466,14 +442,14 @@ const RamCalculator = () => {
                 </button>
                 <button
                   onClick={() => setShowAdvanced(!showAdvanced)}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium bg-zinc-800/80 text-zinc-400 border border-zinc-700 hover:border-red-500/50 transition-all"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium bg-secondary text-muted-foreground border border-border hover:border-primary/50 transition-all"
                 >
                   <Settings className="w-3 h-3" />
                   {showAdvanced ? "Hide Plugins" : "Edit Plugins"}
                 </button>
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium bg-zinc-800/80 text-zinc-400 border border-zinc-700 hover:border-red-500/50 transition-all"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium bg-secondary text-muted-foreground border border-border hover:border-primary/50 transition-all"
                 >
                   <RotateCcw className="w-3 h-3" />
                   Reset All
@@ -487,13 +463,13 @@ const RamCalculator = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="border border-red-500/20 rounded-xl p-4 bg-zinc-800/30 overflow-hidden"
+                    className="border border-primary/20 rounded-xl p-4 bg-secondary/30 overflow-hidden"
                   >
                     <div className="space-y-4">
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-zinc-400">Light Plugins <span className="text-zinc-600">(EssentialsX, Vault, etc.)</span></span>
-                          <span className="text-red-400 font-medium">{lightPlugins}</span>
+                          <span className="text-sm text-muted-foreground">Light Plugins <span className="text-muted">(EssentialsX, Vault, etc.)</span></span>
+                          <span className="text-primary font-medium">{lightPlugins}</span>
                         </div>
                         <Slider
                           value={[lightPlugins]}
@@ -506,8 +482,8 @@ const RamCalculator = () => {
                       </div>
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-zinc-400">Medium Plugins <span className="text-zinc-600">(WorldEdit, FAWE, etc.)</span></span>
-                          <span className="text-red-400 font-medium">{mediumPlugins}</span>
+                          <span className="text-sm text-muted-foreground">Medium Plugins <span className="text-muted">(WorldEdit, FAWE, etc.)</span></span>
+                          <span className="text-primary font-medium">{mediumPlugins}</span>
                         </div>
                         <Slider
                           value={[mediumPlugins]}
@@ -520,8 +496,8 @@ const RamCalculator = () => {
                       </div>
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-zinc-400">Heavy Plugins <span className="text-zinc-600">(Dynmap, Citizens, etc.)</span></span>
-                          <span className="text-red-400 font-medium">{heavyPlugins}</span>
+                          <span className="text-sm text-muted-foreground">Heavy Plugins <span className="text-muted">(Dynmap, Citizens, etc.)</span></span>
+                          <span className="text-primary font-medium">{heavyPlugins}</span>
                         </div>
                         <Slider
                           value={[heavyPlugins]}
@@ -547,38 +523,38 @@ const RamCalculator = () => {
               className="lg:col-span-2 space-y-4"
             >
               {/* RAM Result Card */}
-              <div className="bg-gradient-to-br from-red-500/20 to-orange-500/10 backdrop-blur-lg border border-red-500/30 p-6 rounded-2xl">
+              <div className="bg-gradient-to-br from-primary/20 to-accent/10 backdrop-blur-lg border border-primary/30 p-6 rounded-2xl">
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 mb-2">
-                    <MemoryStick className="w-5 h-5 text-red-400" />
-                    <span className="text-zinc-400 text-sm">Recommended RAM</span>
+                    <MemoryStick className="w-5 h-5 text-primary" />
+                    <span className="text-muted-foreground text-sm">Recommended RAM</span>
                   </div>
-                  <div className="text-6xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                  <div className="text-6xl font-bold gradient-text">
                     {recommendedRam} GB
                   </div>
-                  <p className="text-zinc-500 text-sm mt-2">
+                  <p className="text-muted-foreground text-sm mt-2">
                     Based on your server configuration
                   </p>
                 </div>
               </div>
 
               {/* Performance Metrics */}
-              <div className="bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-4 rounded-2xl space-y-4">
+              <div className="glass p-4 rounded-2xl space-y-4">
                 <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-red-500" />
-                  <span className="font-semibold text-white text-sm">Performance Metrics</span>
+                  <Activity className="w-4 h-4 text-primary" />
+                  <span className="font-semibold text-foreground text-sm">Performance Metrics</span>
                 </div>
                 
                 <div className="space-y-3">
                   {/* Performance Score */}
                   <div>
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="text-zinc-500">Performance Score</span>
+                      <span className="text-muted-foreground">Performance Score</span>
                       <span className={`font-medium ${performanceScore >= 70 ? 'text-green-400' : performanceScore >= 40 ? 'text-yellow-400' : 'text-red-400'}`}>
                         {performanceScore}/100
                       </span>
                     </div>
-                    <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${performanceScore}%` }}
@@ -589,7 +565,7 @@ const RamCalculator = () => {
 
                   {/* TPS Estimate */}
                   <div className="flex items-center justify-between">
-                    <span className="text-zinc-500 text-xs">Est. TPS</span>
+                    <span className="text-muted-foreground text-xs">Est. TPS</span>
                     <span className={`font-medium text-sm ${tpsEstimate.color}`}>
                       {tpsEstimate.tps} ({tpsEstimate.status})
                     </span>
@@ -597,15 +573,15 @@ const RamCalculator = () => {
 
                   {/* Storage Estimate */}
                   <div className="flex items-center justify-between">
-                    <span className="text-zinc-500 text-xs">Est. Storage</span>
-                    <span className="font-medium text-sm text-white">{storageEstimate} GB</span>
+                    <span className="text-muted-foreground text-xs">Est. Storage</span>
+                    <span className="font-medium text-sm text-foreground">{storageEstimate} GB</span>
                   </div>
                 </div>
               </div>
 
               {/* Tier Selection */}
-              <div className="bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-4 rounded-2xl">
-                <span className="text-sm text-zinc-400 mb-3 block">Optimization Tier</span>
+              <div className="glass p-4 rounded-2xl">
+                <span className="text-sm text-muted-foreground mb-3 block">Optimization Tier</span>
                 <div className="grid grid-cols-3 gap-2">
                   {tiers.map((tier) => (
                     <button
@@ -613,8 +589,8 @@ const RamCalculator = () => {
                       onClick={() => setSelectedTier(tier.id)}
                       className={`py-2 px-2 rounded-xl text-xs font-medium transition-all ${
                         selectedTier === tier.id
-                          ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-500/20"
-                          : "bg-zinc-800/80 text-zinc-400 hover:text-white border border-red-500/20 hover:border-red-500/40"
+                          ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg glow-primary"
+                          : "bg-secondary text-muted-foreground hover:text-foreground border border-border hover:border-primary/40"
                       }`}
                     >
                       <span className="block text-base mb-1">{tier.icon}</span>
@@ -626,34 +602,34 @@ const RamCalculator = () => {
 
               {/* Recommended Plan */}
               {mainPlan && (
-                <div className="bg-gradient-to-b from-red-500/20 to-red-900/10 backdrop-blur-lg border border-red-500 p-5 rounded-2xl shadow-lg shadow-red-500/20">
+                <div className="bg-gradient-to-b from-primary/20 to-primary/5 backdrop-blur-lg border border-primary p-5 rounded-2xl glow-primary">
                   <div className="flex items-center gap-2 mb-3">
-                    <Shield className="w-4 h-4 text-red-400" />
-                    <span className="text-xs text-red-300 font-medium">BEST MATCH</span>
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span className="text-xs text-primary font-medium">BEST MATCH</span>
                   </div>
-                  <h4 className="font-bold text-xl text-white mb-2">{mainPlan.name} Plan</h4>
+                  <h4 className="font-bold text-xl text-foreground mb-2">{mainPlan.name} Plan</h4>
                   <div className="grid grid-cols-3 gap-2 mb-4 text-center">
-                    <div className="bg-zinc-800/50 rounded-lg p-2">
-                      <div className="text-white font-semibold text-sm">{mainPlan.ram} GB</div>
-                      <div className="text-zinc-500 text-[10px]">RAM</div>
+                    <div className="bg-secondary/50 rounded-lg p-2">
+                      <div className="text-foreground font-semibold text-sm">{mainPlan.ram} GB</div>
+                      <div className="text-muted-foreground text-[10px]">RAM</div>
                     </div>
-                    <div className="bg-zinc-800/50 rounded-lg p-2">
-                      <div className="text-white font-semibold text-sm">{mainPlan.cpu}</div>
-                      <div className="text-zinc-500 text-[10px]">CPU</div>
+                    <div className="bg-secondary/50 rounded-lg p-2">
+                      <div className="text-foreground font-semibold text-sm">{mainPlan.cpu}</div>
+                      <div className="text-muted-foreground text-[10px]">CPU</div>
                     </div>
-                    <div className="bg-zinc-800/50 rounded-lg p-2">
-                      <div className="text-white font-semibold text-sm">{mainPlan.storage}</div>
-                      <div className="text-zinc-500 text-[10px]">Storage</div>
+                    <div className="bg-secondary/50 rounded-lg p-2">
+                      <div className="text-foreground font-semibold text-sm">{mainPlan.storage}</div>
+                      <div className="text-muted-foreground text-[10px]">Storage</div>
                     </div>
                   </div>
                   <div className="flex items-end justify-between">
                     <div>
-                      <span className="text-3xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                      <span className="text-3xl font-bold gradient-text">
                         ₹{mainPlan.price}
                       </span>
-                      <span className="text-zinc-500 text-sm">/mo</span>
+                      <span className="text-muted-foreground text-sm">/mo</span>
                     </div>
-                    <Button className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white">
+                    <Button variant="hero">
                       Select Plan <ChevronRight className="w-4 h-4 ml-1" />
                     </Button>
                   </div>
@@ -663,7 +639,7 @@ const RamCalculator = () => {
               {/* Breakdown Toggle */}
               <button
                 onClick={() => setShowBreakdown(!showBreakdown)}
-                className="w-full text-center text-sm text-red-400 hover:text-red-300 transition-colors flex items-center justify-center gap-1 py-2"
+                className="w-full text-center text-sm text-primary hover:text-accent transition-colors flex items-center justify-center gap-1 py-2"
               >
                 <Info className="w-4 h-4" />
                 {showBreakdown ? "Hide" : "Show"} Calculation Breakdown
@@ -677,63 +653,63 @@ const RamCalculator = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="bg-zinc-900/50 backdrop-blur-lg border border-red-500/10 p-4 rounded-2xl overflow-hidden"
+                    className="glass p-4 rounded-2xl overflow-hidden"
                   >
-                    <h4 className="font-semibold text-white text-sm mb-3">RAM Calculation Breakdown</h4>
+                    <h4 className="font-semibold text-foreground text-sm mb-3">RAM Calculation Breakdown</h4>
                     <div className="space-y-2 text-xs">
                       <div className="flex justify-between">
-                        <span className="text-zinc-500">Base RAM</span>
-                        <span className="text-white">{breakdown.base.toFixed(2)} GB</span>
+                        <span className="text-muted-foreground">Base RAM</span>
+                        <span className="text-foreground">{breakdown.base.toFixed(2)} GB</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-zinc-500">Players ({players})</span>
-                        <span className="text-white">+{breakdown.players.toFixed(2)} GB</span>
+                        <span className="text-muted-foreground">Players ({players})</span>
+                        <span className="text-foreground">+{breakdown.players.toFixed(2)} GB</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-zinc-500">Mods ({mods})</span>
-                        <span className="text-white">+{breakdown.mods.toFixed(2)} GB</span>
+                        <span className="text-muted-foreground">Mods ({mods})</span>
+                        <span className="text-foreground">+{breakdown.mods.toFixed(2)} GB</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-zinc-500">Plugins ({lightPlugins + mediumPlugins + heavyPlugins})</span>
-                        <span className="text-white">+{breakdown.plugins.toFixed(2)} GB</span>
+                        <span className="text-muted-foreground">Plugins ({lightPlugins + mediumPlugins + heavyPlugins})</span>
+                        <span className="text-foreground">+{breakdown.plugins.toFixed(2)} GB</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-zinc-500">View Distance ({viewDistance})</span>
-                        <span className="text-white">+{breakdown.viewDistance.toFixed(2)} GB</span>
+                        <span className="text-muted-foreground">View Distance ({viewDistance})</span>
+                        <span className="text-foreground">+{breakdown.viewDistance.toFixed(2)} GB</span>
                       </div>
                       {useDatabase && (
                         <div className="flex justify-between">
-                          <span className="text-zinc-500">Database</span>
-                          <span className="text-white">+{breakdown.database.toFixed(2)} GB</span>
+                          <span className="text-muted-foreground">Database</span>
+                          <span className="text-foreground">+{breakdown.database.toFixed(2)} GB</span>
                         </div>
                       )}
-                      <div className="border-t border-zinc-800 pt-2 mt-2">
+                      <div className="border-t border-border pt-2 mt-2">
                         <div className="flex justify-between">
-                          <span className="text-zinc-500">World Size</span>
-                          <span className="text-white">×{breakdown.worldMultiplier.toFixed(2)}</span>
+                          <span className="text-muted-foreground">World Size</span>
+                          <span className="text-foreground">×{breakdown.worldMultiplier.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-zinc-500">Server Type</span>
-                          <span className="text-white">×{breakdown.serverMultiplier.toFixed(2)}</span>
+                          <span className="text-muted-foreground">Server Type</span>
+                          <span className="text-foreground">×{breakdown.serverMultiplier.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-zinc-500">Version</span>
-                          <span className="text-white">×{breakdown.versionMultiplier.toFixed(2)}</span>
+                          <span className="text-muted-foreground">Version</span>
+                          <span className="text-foreground">×{breakdown.versionMultiplier.toFixed(2)}</span>
                         </div>
                         {useOptimizedFlags && (
                           <div className="flex justify-between">
-                            <span className="text-zinc-500">JVM Optimization</span>
+                            <span className="text-muted-foreground">JVM Optimization</span>
                             <span className="text-green-400">×{breakdown.flagsMultiplier.toFixed(2)}</span>
                           </div>
                         )}
                         <div className="flex justify-between">
-                          <span className="text-zinc-500">Tier ({selectedTier})</span>
-                          <span className="text-white">×{breakdown.tierMultiplier.toFixed(2)}</span>
+                          <span className="text-muted-foreground">Tier ({selectedTier})</span>
+                          <span className="text-foreground">×{breakdown.tierMultiplier.toFixed(2)}</span>
                         </div>
                       </div>
-                      <div className="border-t border-zinc-800 pt-2 mt-2 flex justify-between font-semibold">
-                        <span className="text-white">Final Result</span>
-                        <span className="text-red-400">{recommendedRam} GB</span>
+                      <div className="border-t border-border pt-2 mt-2 flex justify-between font-semibold">
+                        <span className="text-foreground">Final Result</span>
+                        <span className="text-primary">{recommendedRam} GB</span>
                       </div>
                     </div>
                   </motion.div>

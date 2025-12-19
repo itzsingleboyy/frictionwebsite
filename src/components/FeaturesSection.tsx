@@ -8,7 +8,7 @@ const features = [
     title: "24/7 - 365 Support",
     description:
       "Help and support available day and night. Our friendly support team is always happy to help you.",
-    color: "from-red-500 to-red-700",
+    color: "from-primary to-accent",
     delay: 0,
   },
   {
@@ -33,7 +33,7 @@ const features = [
     title: "Powerful Hardware",
     description:
       "All servers run on high performance Ryzen CPUs at 4GHz+, paired with NVMe SSDs.",
-    color: "from-orange-500 to-red-600",
+    color: "from-accent to-primary",
     delay: 0.3,
   },
   {
@@ -41,7 +41,7 @@ const features = [
     title: "DDoS Protection",
     description:
       "Enterprise-grade DDoS protection included with all plans to keep your server online 24/7.",
-    color: "from-red-600 to-rose-700",
+    color: "from-primary to-violet-600",
     delay: 0.4,
   },
   {
@@ -49,7 +49,7 @@ const features = [
     title: "Instant Activation",
     description:
       "Your server is automatically activated within minutes of payment. Start playing immediately.",
-    color: "from-rose-500 to-red-600",
+    color: "from-violet-500 to-primary",
     delay: 0.5,
   },
 ];
@@ -87,13 +87,13 @@ const itemVariants = {
 
 const FeaturesSection = () => {
   return (
-    <section id="features" className="py-24 relative overflow-hidden bg-[#0a0a0a]">
+    <section id="features" className="py-24 relative overflow-hidden bg-background">
       {/* Background Effects */}
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-red-600/10 blur-[120px]" />
-      <div className="absolute top-0 left-1/4 w-[300px] h-[300px] rounded-full bg-orange-500/5 blur-[100px]" />
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]" />
+      <div className="absolute top-0 left-1/4 w-[300px] h-[300px] rounded-full bg-accent/5 blur-[100px]" />
 
       {/* Animated Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--primary)/0.02)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary)/0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Stats Bar */}
@@ -115,12 +115,12 @@ const FeaturesSection = () => {
               className="text-center"
             >
               <div className="flex items-center justify-center gap-2 mb-1">
-                <stat.icon className="w-5 h-5 text-red-500" />
-                <span className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+                <stat.icon className="w-5 h-5 text-primary" />
+                <span className="text-3xl md:text-4xl font-display font-bold gradient-text">
                   {stat.value}
                 </span>
               </div>
-              <span className="text-zinc-500 text-sm">{stat.label}</span>
+              <span className="text-muted-foreground text-sm">{stat.label}</span>
             </motion.div>
           ))}
         </motion.div>
@@ -138,19 +138,19 @@ const FeaturesSection = () => {
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm border border-red-500/30 px-4 py-2 rounded-full mb-6"
+            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6"
           >
-            <Shield className="w-4 h-4 text-red-500" />
-            <span className="text-sm text-red-300">Why Choose Us</span>
+            <Shield className="w-4 h-4 text-primary" />
+            <span className="text-sm text-primary">Why Choose Us</span>
           </motion.div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            <span className="text-white">Why </span>
-            <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+            <span className="text-foreground">Why </span>
+            <span className="gradient-text">
               FrictionHost
             </span>
-            <span className="text-white">?</span>
+            <span className="text-foreground">?</span>
           </h2>
-          <p className="text-zinc-400 text-lg">
+          <p className="text-muted-foreground text-lg">
             Experience unparalleled performance, reliability, and support.
           </p>
         </motion.div>
@@ -170,7 +170,7 @@ const FeaturesSection = () => {
             >
               <TiltCard intensity={8}>
                 <div
-                  className={`group relative bg-zinc-900/50 backdrop-blur-lg border border-zinc-800 p-6 rounded-2xl transition-all duration-500 hover:border-red-500/40 hover:shadow-[0_0_50px_rgba(220,38,38,0.15)] h-full ${
+                  className={`group relative glass p-6 rounded-2xl transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_50px_hsl(var(--primary)/0.15)] h-full ${
                     feature.glow ? "overflow-hidden" : ""
                   }`}
                 >
@@ -194,20 +194,20 @@ const FeaturesSection = () => {
                   <motion.div
                     whileHover={{ rotate: [0, -10, 10, 0] }}
                     transition={{ duration: 0.5 }}
-                    className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 shadow-lg group-hover:shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-all duration-300`}
+                    className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 shadow-lg group-hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] transition-all duration-300`}
                   >
                     <feature.icon className="w-7 h-7 text-white" />
                   </motion.div>
 
-                  <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
+                  <h3 className="font-display text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     {feature.description}
                   </p>
 
                   {/* Hover indicator */}
-                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-red-500 to-orange-500 group-hover:w-full transition-all duration-500" />
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-500" />
                 </div>
               </TiltCard>
             </motion.div>
