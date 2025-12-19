@@ -60,65 +60,6 @@ const Home = () => {
               <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
             </div>
 
-            {/* Floating Hosting Objects */}
-            <motion.div
-              animate={{ y: [-20, 20, -20], rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[15%] left-[10%] w-20 h-14 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center"
-            >
-              <div className="flex gap-1">
-                <div className="w-1 h-6 bg-white/20 rounded" />
-                <div className="w-1 h-6 bg-white/20 rounded" />
-                <div className="w-1 h-6 bg-white/20 rounded" />
-              </div>
-            </motion.div>
-            <motion.div
-              animate={{ y: [20, -20, 20], rotate: [0, -3, 3, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[20%] right-[15%] w-16 h-20 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 flex flex-col items-center justify-center gap-1"
-            >
-              <div className="w-8 h-1.5 bg-white/20 rounded" />
-              <div className="w-8 h-1.5 bg-white/20 rounded" />
-              <div className="w-8 h-1.5 bg-white/20 rounded" />
-              <div className="w-2 h-2 bg-green-500/50 rounded-full mt-1" />
-            </motion.div>
-            <motion.div
-              animate={{ y: [-15, 25, -15], scale: [1, 1.05, 1] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[25%] left-[8%] w-24 h-16 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center"
-            >
-              <div className="grid grid-cols-4 gap-1">
-                {[...Array(8)].map((_, i) => (
-                  <div key={i} className="w-2 h-2 bg-white/15 rounded-sm" />
-                ))}
-              </div>
-            </motion.div>
-            <motion.div
-              animate={{ y: [15, -25, 15], rotate: [0, 360] }}
-              transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[30%] right-[10%] w-12 h-12 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center"
-            >
-              <div className="w-6 h-6 border-2 border-white/20 rounded" />
-            </motion.div>
-            <motion.div
-              animate={{ y: [-10, 30, -10], x: [-10, 10, -10] }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[40%] left-[5%] w-14 h-10 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center gap-1"
-            >
-              <div className="w-1 h-4 bg-white/20 rounded" />
-              <div className="w-1 h-4 bg-white/20 rounded" />
-            </motion.div>
-            <motion.div
-              animate={{ y: [25, -15, 25], rotate: [0, -10, 10, 0] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[60%] right-[8%] w-18 h-12 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center"
-            >
-              <div className="flex gap-0.5">
-                <div className="w-3 h-6 bg-white/10 rounded-sm border border-white/10" />
-                <div className="w-3 h-6 bg-white/10 rounded-sm border border-white/10" />
-                <div className="w-3 h-6 bg-white/10 rounded-sm border border-white/10" />
-              </div>
-            </motion.div>
 
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-4xl mx-auto text-center">
