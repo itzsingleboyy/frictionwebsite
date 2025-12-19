@@ -26,6 +26,14 @@ const supportChannels = [
     highlight: false,
   },
   {
+    icon: Headphones,
+    title: "Live Chat",
+    description: "Chat with our support team in real-time through our panel.",
+    link: "#",
+    linkText: "Open Live Chat",
+    highlight: false,
+  },
+  {
     icon: FileText,
     title: "Knowledge Base",
     description: "Browse our documentation and tutorials for self-help.",
