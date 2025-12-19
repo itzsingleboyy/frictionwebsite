@@ -21,18 +21,19 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
+        const next = prev + 15 + Math.random() * 10;
+        if (next >= 100) {
           clearInterval(interval);
-          setTimeout(onLoadingComplete, 500);
+          setTimeout(onLoadingComplete, 300);
           return 100;
         }
-        return prev + Math.random() * 12;
+        return next;
       });
-    }, 150);
+    }, 100);
 
     const tipInterval = setInterval(() => {
       setTipIndex((prev) => (prev + 1) % loadingTips.length);
-    }, 2000);
+    }, 1500);
 
     return () => {
       clearInterval(interval);
