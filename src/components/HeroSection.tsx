@@ -135,16 +135,18 @@ const HeroSection = () => {
             <span className="text-muted-foreground">/month</span>
           </motion.div>
 
-          {/* Description */}
+          {/* Game Info Box */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="max-w-3xl mx-auto mb-8"
+            className="max-w-2xl mx-auto mb-8"
           >
-            <p className="glass-strong px-6 py-4 md:px-8 md:py-5 rounded-2xl text-xl md:text-2xl text-foreground/75 font-semibold leading-relaxed drop-shadow-[0_2px_6px_hsl(var(--background)/0.9)]">
-              {activeGame.description}
-            </p>
+            <div className="glass-strong px-6 py-4 md:px-8 md:py-5 rounded-2xl">
+              <p className="text-xl md:text-2xl text-foreground/90 font-semibold leading-relaxed">
+                {activeGame.name} Server Hosting starting at <span className="gradient-text">₹{activeGame.price}</span>/month
+              </p>
+            </div>
           </motion.div>
 
           {/* CTA Button */}
