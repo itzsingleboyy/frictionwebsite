@@ -10,6 +10,7 @@ import Pricing from "./pages/Pricing";
 import Team from "./pages/Team";
 import Support from "./pages/Support";
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import Terms from "./pages/Terms";
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/team" element={<Team />} />
             <Route path="/support" element={<Support />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/terms" element={<Terms />} />
