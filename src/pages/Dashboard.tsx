@@ -175,7 +175,7 @@ const Dashboard = () => {
                             <span>CPU: {order.cpu}</span>
                             <span>Storage: {order.storage}</span>
                           </div>
-                          <p className="text-xs text-muted mt-2">
+                          <p className="text-xs text-muted-foreground mt-2">
                             Ordered: {new Date(order.created_at).toLocaleDateString()}
                           </p>
                         </div>
@@ -185,7 +185,7 @@ const Dashboard = () => {
                             <div className="text-2xl font-bold gradient-text">
                               ₹{order.plan_price}
                             </div>
-                            <div className="text-xs text-muted">/month</div>
+                            <div className="text-xs text-muted-foreground">/month</div>
                           </div>
                           
                           {order.status === "approved" && order.panel_link && (
