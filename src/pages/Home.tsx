@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import FloatingParticles from "@/components/FloatingParticles";
 import TextReveal from "@/components/TextReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import ReviewsSection from "@/components/ReviewsSection";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Copy, Check, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -204,6 +205,9 @@ const Home = () => {
               </div>
             </div>
           </section>
+
+          {/* Reviews Section */}
+          <ReviewsSection />
         </main>
 
         <Footer />
