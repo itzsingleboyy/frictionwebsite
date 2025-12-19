@@ -14,8 +14,10 @@ import logo from "@/assets/logo.webp";
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
 
+type AuthMode = "login" | "signup" | "forgot";
+
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [mode, setMode] = useState<AuthMode>("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -48,9 +50,11 @@ const Auth = () => {
       newErrors.email = emailResult.error.errors[0].message;
     }
 
-    const passwordResult = passwordSchema.safeParse(password);
-    if (!passwordResult.success) {
-      newErrors.password = passwordResult.error.errors[0].message;
+    if (mode !== "forgot") {
+      const passwordResult = passwordSchema.safeParse(password);
+      if (!passwordResult.success) {
+        newErrors.password = passwordResult.error.errors[0].message;
+      }
     }
 
     setErrors(newErrors);
@@ -65,7 +69,17 @@ const Auth = () => {
     setLoading(true);
 
     try {
-      if (isLogin) {
+      if (mode === "forgot") {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password`,
+        });
+        if (error) throw error;
+        toast({
+          title: "Check your email",
+          description: "We've sent you a password reset link.",
+        });
+        setMode("login");
+      } else if (mode === "login") {
         const { error } = await supabase.auth.signInWithPassword({
           email,
           password,
@@ -107,10 +121,26 @@ const Auth = () => {
     }
   };
 
+  const getTitle = () => {
+    switch (mode) {
+      case "login": return "Login";
+      case "signup": return "Create Account";
+      case "forgot": return "Reset Password";
+    }
+  };
+
+  const getButtonText = () => {
+    switch (mode) {
+      case "login": return "Login to Client Area";
+      case "signup": return "Create Account";
+      case "forgot": return "Send Reset Link";
+    }
+  };
+
   return (
     <>
       <Helmet>
-        <title>{isLogin ? "Login" : "Create Account"} - FrictionHost</title>
+        <title>{getTitle()} - FrictionHost</title>
         <meta name="description" content="Access your FrictionHost client area to manage your game servers." />
       </Helmet>
 
@@ -158,36 +188,48 @@ const Auth = () => {
               <h1 className="font-display text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
                 FrictionHost
               </h1>
-              <p className="text-zinc-500 text-sm mt-1">Client Area</p>
+              <p className="text-zinc-500 text-sm mt-1">
+                {mode === "forgot" ? "Password Recovery" : "Client Area"}
+              </p>
             </div>
 
-            {/* Toggle */}
-            <div className="flex bg-zinc-800/50 rounded-xl p-1 mb-6">
-              <button
-                onClick={() => setIsLogin(true)}
-                className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
-                  isLogin
-                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                Login
-              </button>
-              <button
-                onClick={() => setIsLogin(false)}
-                className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
-                  !isLogin
-                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                Create Account
-              </button>
-            </div>
+            {/* Toggle - only show for login/signup */}
+            {mode !== "forgot" && (
+              <div className="flex bg-zinc-800/50 rounded-xl p-1 mb-6">
+                <button
+                  onClick={() => setMode("login")}
+                  className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                    mode === "login"
+                      ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => setMode("signup")}
+                  className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                    mode === "signup"
+                      ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  Create Account
+                </button>
+              </div>
+            )}
+
+            {/* Forgot Password Header */}
+            {mode === "forgot" && (
+              <div className="text-center mb-6">
+                <h2 className="text-lg font-semibold text-white mb-2">Forgot your password?</h2>
+                <p className="text-zinc-400 text-sm">Enter your email and we'll send you a reset link.</p>
+              </div>
+            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-              {!isLogin && (
+              {mode === "signup" && (
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-zinc-300">Full Name</Label>
                   <div className="relative">
@@ -227,28 +269,43 @@ const Auth = () => {
                 )}
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-zinc-300">Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      setErrors((prev) => ({ ...prev, password: undefined }));
-                    }}
-                    className={`pl-10 bg-zinc-800/50 border-zinc-700 focus:border-red-500 text-white placeholder:text-zinc-500 ${
-                      errors.password ? "border-red-500" : ""
-                    }`}
-                  />
+              {mode !== "forgot" && (
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-zinc-300">Password</Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        setErrors((prev) => ({ ...prev, password: undefined }));
+                      }}
+                      className={`pl-10 bg-zinc-800/50 border-zinc-700 focus:border-red-500 text-white placeholder:text-zinc-500 ${
+                        errors.password ? "border-red-500" : ""
+                      }`}
+                    />
+                  </div>
+                  {errors.password && (
+                    <p className="text-red-500 text-xs">{errors.password}</p>
+                  )}
                 </div>
-                {errors.password && (
-                  <p className="text-red-500 text-xs">{errors.password}</p>
-                )}
-              </div>
+              )}
+
+              {/* Forgot Password Link */}
+              {mode === "login" && (
+                <div className="text-right">
+                  <button
+                    type="button"
+                    onClick={() => setMode("forgot")}
+                    className="text-sm text-red-400 hover:text-red-300 transition-colors"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+              )}
 
               <Button
                 type="submit"
@@ -257,12 +314,21 @@ const Auth = () => {
               >
                 {loading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
-                ) : isLogin ? (
-                  "Login to Client Area"
                 ) : (
-                  "Create Account"
+                  getButtonText()
                 )}
               </Button>
+
+              {/* Back to Login from Forgot */}
+              {mode === "forgot" && (
+                <button
+                  type="button"
+                  onClick={() => setMode("login")}
+                  className="w-full text-sm text-zinc-400 hover:text-white transition-colors mt-2"
+                >
+                  Back to Login
+                </button>
+              )}
             </form>
 
             {/* Footer */}
