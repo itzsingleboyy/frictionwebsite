@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Zap, Copy, Check } from "lucide-react";
@@ -57,6 +58,7 @@ const games = [
 const AUTO_ROTATE_INTERVAL = 4000; // 4 seconds
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -179,7 +181,12 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Button variant="hero" size="xl" className="text-lg px-12">
+            <Button 
+              variant="hero" 
+              size="xl" 
+              className="text-lg px-12"
+              onClick={() => navigate('/pricing')}
+            >
               {activeGame.name}
             </Button>
           </motion.div>
