@@ -1,14 +1,18 @@
 import { motion } from "framer-motion";
 import { Users, Crown, Briefcase, Target, Twitter, MessageCircle } from "lucide-react";
+import jaythAvatar from "@/assets/jayth-avatar.png";
+import paxboltAvatar from "@/assets/paxbolt-avatar.png";
+import singleAvatar from "@/assets/single-avatar.png";
 
 const teamMembers = [
   {
-    name: "Luffy",
+    name: "Jayth",
     role: "Founder",
     description: "Visionary leader who started FrictionHost with a dream to provide the best gaming experience.",
     icon: Crown,
     color: "from-yellow-500 to-orange-500",
     socials: { twitter: "#", discord: "#" },
+    avatar: jaythAvatar,
   },
   {
     name: "Paxbolt",
@@ -17,6 +21,7 @@ const teamMembers = [
     icon: Briefcase,
     color: "from-red-500 to-red-700",
     socials: { twitter: "#", discord: "#" },
+    avatar: paxboltAvatar,
   },
   {
     name: "Single",
@@ -25,6 +30,7 @@ const teamMembers = [
     icon: Target,
     color: "from-orange-500 to-red-600",
     socials: { twitter: "#", discord: "#" },
+    avatar: singleAvatar,
   },
 ];
 
@@ -144,8 +150,12 @@ const TeamSection = () => {
                   transition={{ duration: 0.5 }}
                   className="relative z-10 mb-6"
                 >
-                  <div className={`w-28 h-28 mx-auto rounded-2xl bg-gradient-to-br ${member.color} flex items-center justify-center shadow-lg group-hover:shadow-[0_0_50px_rgba(220,38,38,0.4)] transition-all duration-500`}>
-                    <member.icon className="w-14 h-14 text-white" />
+                  <div className={`w-28 h-28 mx-auto rounded-2xl bg-gradient-to-br ${member.color} overflow-hidden shadow-lg group-hover:shadow-[0_0_50px_rgba(220,38,38,0.4)] transition-all duration-500`}>
+                    <img 
+                      src={member.avatar} 
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   
                   {/* Ring animation */}
