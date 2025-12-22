@@ -81,7 +81,7 @@ const Navbar = () => {
                   FrictionHost
                 </span>
                 <span className="text-[9px] text-foreground/60 tracking-wide leading-tight">
-                  India's best hosting
+                  India's Future Hosting
                 </span>
               </div>
             </motion.div>
