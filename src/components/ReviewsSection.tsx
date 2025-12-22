@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, MessageSquare, User as UserIcon } from "lucide-react";
+import { Star, MessageSquare, User as UserIcon, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import ReviewForm from "./ReviewForm";
 import TiltCard from "./TiltCard";
+import { toast } from "sonner";
 import type { User } from "@supabase/supabase-js";
 
 interface Review {
@@ -41,6 +42,7 @@ const itemVariants = {
 const ReviewsSection = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [user, setUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -57,21 +59,54 @@ const ReviewsSection = () => {
     setIsLoading(false);
   };
 
+  const checkAdminRole = async (userId: string) => {
+    const { data } = await supabase.rpc('has_role', {
+      _user_id: userId,
+      _role: 'admin'
+    });
+    setIsAdmin(data === true);
+  };
+
   useEffect(() => {
     fetchReviews();
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+      if (session?.user) {
+        checkAdminRole(session.user.id);
+      }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_, session) => {
         setUser(session?.user ?? null);
+        if (session?.user) {
+          checkAdminRole(session.user.id);
+        } else {
+          setIsAdmin(false);
+        }
       }
     );
 
     return () => subscription.unsubscribe();
   }, []);
+
+  const handleDeleteReview = async (reviewId: string) => {
+    if (!confirm("Kya aap is review ko delete karna chahte hain?")) return;
+    
+    const { error } = await supabase
+      .from("reviews")
+      .delete()
+      .eq("id", reviewId);
+
+    if (error) {
+      toast.error("Review delete nahi ho saka");
+      console.error(error);
+    } else {
+      toast.success("Review delete ho gaya");
+      fetchReviews();
+    }
+  };
 
   const getDisplayName = (review: Review) => {
     if (review.user_name) return review.user_name;
@@ -198,18 +233,30 @@ const ReviewsSection = () => {
                     </p>
 
                     {/* User Info */}
-                    <div className="flex items-center gap-3 mt-auto">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">
-                        {getInitial(review)}
+                    <div className="flex items-center justify-between mt-auto">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">
+                          {getInitial(review)}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-foreground">
+                            {getDisplayName(review)}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {formatDate(review.created_at)}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-semibold text-foreground">
-                          {getDisplayName(review)}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {formatDate(review.created_at)}
-                        </p>
-                      </div>
+                      {isAdmin && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDeleteReview(review.id)}
+                          className="text-destructive hover:bg-destructive/10"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </TiltCard>
