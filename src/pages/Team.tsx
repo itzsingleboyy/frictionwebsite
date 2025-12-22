@@ -3,17 +3,17 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Twitter, Linkedin, Github, Crown, Briefcase, Star } from "lucide-react";
-import luffyAvatar from "@/assets/luffy-avatar.png";
+import jaythAvatar from "@/assets/jayth-avatar.png";
 import paxboltAvatar from "@/assets/paxbolt-avatar.png";
 import singleAvatar from "@/assets/single-avatar.png";
 
 const teamMembers = [
   {
-    name: "Luffy",
+    name: "Jayth",
     role: "Founder",
     icon: Crown,
     description: "Visionary founder leading FrictionHost to revolutionize game hosting in India.",
-    image: luffyAvatar,
+    image: jaythAvatar,
     gradient: "from-primary to-accent",
     social: {
       twitter: "#",
