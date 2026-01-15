@@ -84,7 +84,7 @@ const HeroSection = () => {
   }, []);
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText("FRICTION20");
+    navigator.clipboard.writeText("AIZYNODES25");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -236,7 +236,7 @@ const HeroSection = () => {
                 onClick={handleCopyCode}
                 className="flex items-center gap-2 bg-primary/30 hover:bg-primary border border-primary/50 px-4 py-2 rounded-lg transition-all duration-300"
               >
-                <code className="text-accent font-mono font-bold">FRICTION20</code>
+                <code className="text-accent font-mono font-bold">AIZYNODES25</code>
                 {copied ? (
                   <Check className="w-4 h-4 text-green-400" />
                 ) : (

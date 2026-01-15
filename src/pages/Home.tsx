@@ -16,7 +16,7 @@ import logo from "@/assets/logo.webp";
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [copied, setCopied] = useState(false);
-  const offerCode = "FRICTION20";
+  const offerCode = "AIZYNODES25";
 
   useEffect(() => {
     setIsLoading(true);

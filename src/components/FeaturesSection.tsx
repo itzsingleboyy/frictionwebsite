@@ -198,7 +198,7 @@ const FeaturesSection = () => {
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             <span className="text-foreground">Why </span>
             <span className="gradient-text">
-              FrictionHost
+              AizyNodes
             </span>
             <span className="text-foreground">?</span>
           </h2>
