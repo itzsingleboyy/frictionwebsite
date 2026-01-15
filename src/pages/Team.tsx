@@ -2,10 +2,8 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Twitter, Linkedin, Github, Crown, Briefcase, Star } from "lucide-react";
+import { Twitter, Linkedin, Github, Crown } from "lucide-react";
 import jaythAvatar from "@/assets/jayth-avatar.png";
-import paxboltAvatar from "@/assets/paxbolt-avatar.png";
-import singleAvatar from "@/assets/single-avatar.png";
 
 const teamMembers = [
   {
@@ -15,31 +13,6 @@ const teamMembers = [
     description: "Visionary founder leading AizyNodes to revolutionize game hosting in India.",
     image: jaythAvatar,
     gradient: "from-primary to-accent",
-    social: {
-      twitter: "#",
-      linkedin: "#",
-      github: "#",
-    },
-  },
-  {
-    name: "Paxbolt",
-    role: "CEO",
-    icon: Briefcase,
-    description: "Strategic leader driving business growth and customer success.",
-    image: paxboltAvatar,
-    gradient: "from-accent to-primary",
-    social: {
-      twitter: "#",
-      linkedin: "#",
-    },
-  },
-  {
-    name: "Single",
-    role: "Director",
-    icon: Star,
-    description: "Operations mastermind ensuring 99.9% uptime and seamless service delivery.",
-    image: singleAvatar,
-    gradient: "from-primary via-accent to-primary",
     social: {
       twitter: "#",
       linkedin: "#",
