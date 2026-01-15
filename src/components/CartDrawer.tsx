@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ShoppingCart, Plus, Minus, Trash2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
-import { useNavigate } from "react-router-dom";
 
 interface CartDrawerProps {
   onCheckout?: () => void;
@@ -10,7 +9,6 @@ interface CartDrawerProps {
 
 const CartDrawer = ({ onCheckout }: CartDrawerProps) => {
   const { items, isCartOpen, setCartOpen, removeItem, updateQuantity, totalPrice, totalItems, clearCart } = useCart();
-  const navigate = useNavigate();
 
   return (
     <AnimatePresence>
@@ -121,16 +119,16 @@ const CartDrawer = ({ onCheckout }: CartDrawerProps) => {
                 </div>
                 
                 <div className="space-y-2">
-                  <a
-                    href="https://discord.gg/dHyeVaCuxC"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setCartOpen(false)}
-                    className="w-full gap-2 inline-flex items-center justify-center bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-[gradient_3s_ease-in-out_infinite] text-white font-semibold px-8 py-3 rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] transition-all duration-300"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Payment on Discord - Join Now
-                  </a>
+                  <Button asChild variant="hero" className="w-full gap-2">
+                    <a
+                      href="https://discord.com/invite/dHyeVaCuxC"
+                      rel="noopener noreferrer"
+                      onClick={() => setCartOpen(false)}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Payment on Discord - Join Now
+                    </a>
+                  </Button>
                   <Button
                     variant="outline"
                     className="w-full"
