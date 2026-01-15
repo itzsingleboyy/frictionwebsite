@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ShoppingCart, Plus, Minus, Trash2, CreditCard } from "lucide-react";
+import { X, ShoppingCart, Plus, Minus, Trash2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
@@ -126,15 +126,11 @@ const CartDrawer = ({ onCheckout }: CartDrawerProps) => {
                     className="w-full gap-2"
                     onClick={() => {
                       setCartOpen(false);
-                      if (onCheckout) {
-                        onCheckout();
-                      } else {
-                        navigate("/pricing");
-                      }
+                      window.open("https://discord.gg/dHyeVaCuxC", "_blank");
                     }}
                   >
-                    <CreditCard className="w-4 h-4" />
-                    Proceed to Payment
+                    <ExternalLink className="w-4 h-4" />
+                    Payment on Discord - Join Now
                   </Button>
                   <Button
                     variant="outline"
