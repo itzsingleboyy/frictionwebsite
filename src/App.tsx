@@ -12,6 +12,7 @@ import SingaporeVps from "./pages/pricing/SingaporeVps";
 import DubaiVps from "./pages/pricing/DubaiVps";
 import JapanVps from "./pages/pricing/JapanVps";
 import IndiaVps from "./pages/pricing/IndiaVps";
+import MinecraftHosting from "./pages/pricing/MinecraftHosting";
 import Team from "./pages/Team";
 import Support from "./pages/Support";
 import Auth from "./pages/Auth";
@@ -46,6 +47,7 @@ const App = () => (
               <Route path="/pricing/dubai-vps" element={<DubaiVps />} />
               <Route path="/pricing/japan-vps" element={<JapanVps />} />
               <Route path="/pricing/india-vps" element={<IndiaVps />} />
+              <Route path="/pricing/minecraft" element={<MinecraftHosting />} />
               <Route path="/team" element={<Team />} />
               <Route path="/support" element={<Support />} />
               <Route path="/auth" element={<Auth />} />
