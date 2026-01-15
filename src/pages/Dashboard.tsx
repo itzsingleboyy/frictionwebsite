@@ -96,7 +96,7 @@ const Dashboard = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard - FrictionHost</title>
+        <title>Dashboard - AizyNodes</title>
         <meta name="description" content="View and manage your game servers" />
       </Helmet>
 

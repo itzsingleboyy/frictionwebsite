@@ -92,8 +92,8 @@ const ResetPassword = () => {
   return (
     <>
       <Helmet>
-        <title>Reset Password - FrictionHost</title>
-        <meta name="description" content="Set a new password for your FrictionHost account." />
+        <title>Reset Password - AizyNodes</title>
+        <meta name="description" content="Set a new password for your AizyNodes account." />
       </Helmet>
 
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center relative overflow-hidden">
@@ -133,12 +133,12 @@ const ResetPassword = () => {
                 />
                 <img 
                   src={logo} 
-                  alt="FrictionHost Logo" 
+                  alt="AizyNodes Logo" 
                   className="w-16 h-16 rounded-2xl shadow-[0_0_40px_rgba(220,38,38,0.5)]" 
                 />
               </div>
               <h1 className="font-display text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
-                FrictionHost
+                AizyNodes
               </h1>
               <p className="text-zinc-500 text-sm mt-1">Set New Password</p>
             </div>

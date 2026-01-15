@@ -89,13 +89,13 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="FrictionHost Logo" className="w-10 h-10 rounded-xl" />
+              <img src={logo} alt="AizyNodes Logo" className="w-10 h-10 rounded-xl" />
               <div className="flex flex-col items-start">
                 <span className="font-display font-bold text-xl gradient-text leading-tight">
-                  FrictionHost
+                  AizyNodes
                 </span>
                 <span className="text-[9px] text-foreground/60 tracking-wide leading-tight">
-                  India's best hosting
+                  India's Future Hosting
                 </span>
               </div>
             </Link>
@@ -179,7 +179,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-primary/10 flex justify-center items-center">
           <p className="text-muted-foreground text-sm">
-            © {currentYear} FrictionHost. All rights reserved.
+            © {currentYear} AizyNodes. All rights reserved.
           </p>
         </div>
       </div>

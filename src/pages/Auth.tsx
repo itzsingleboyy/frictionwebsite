@@ -140,8 +140,8 @@ const Auth = () => {
   return (
     <>
       <Helmet>
-        <title>{getTitle()} - FrictionHost</title>
-        <meta name="description" content="Access your FrictionHost client area to manage your game servers." />
+        <title>{getTitle()} - AizyNodes</title>
+        <meta name="description" content="Access your AizyNodes client area to manage your game servers." />
       </Helmet>
 
       <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
@@ -181,12 +181,12 @@ const Auth = () => {
                 />
                 <img 
                   src={logo} 
-                  alt="FrictionHost Logo" 
+                  alt="AizyNodes Logo" 
                   className="w-16 h-16 rounded-2xl glow-primary" 
                 />
               </div>
               <h1 className="font-display text-2xl font-bold gradient-text">
-                FrictionHost
+                AizyNodes
               </h1>
               <p className="text-muted-foreground text-sm mt-1">
                 {mode === "forgot" ? "Password Recovery" : "Client Area"}
