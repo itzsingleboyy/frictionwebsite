@@ -5,10 +5,73 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingParticles from "@/components/FloatingParticles";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Gamepad2, Server } from "lucide-react";
+import { ArrowLeft, Gamepad2, Cpu, HardDrive, Server, Shield, Clock, Database } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+
+const plans = [
+  {
+    name: "Dirt Plan",
+    cpu: "100%",
+    ram: "2GB",
+    storage: "6GB SSD",
+    priceINR: 60,
+    pricePKR: 200,
+  },
+  {
+    name: "Stone Plan",
+    cpu: "150%",
+    ram: "4GB",
+    storage: "10GB SSD",
+    priceINR: 105,
+    pricePKR: 350,
+  },
+  {
+    name: "Iron Plan",
+    cpu: "300%",
+    ram: "10GB",
+    storage: "15GB SSD",
+    priceINR: 180,
+    pricePKR: 600,
+  },
+  {
+    name: "Redstone Plan",
+    cpu: "350%",
+    ram: "15GB",
+    storage: "20GB SSD",
+    priceINR: 300,
+    pricePKR: 1000,
+  },
+  {
+    name: "Gold Plan",
+    cpu: "500%",
+    ram: "20GB",
+    storage: "25GB SSD",
+    priceINR: 600,
+    pricePKR: 2000,
+  },
+  {
+    name: "Emerald Plan",
+    cpu: "600%",
+    ram: "32GB",
+    storage: "50GB SSD",
+    priceINR: 900,
+    pricePKR: 3000,
+  },
+];
 
 const SingaporeMinecraft = () => {
   const navigate = useNavigate();
+  const { addItem } = useCart();
+
+  const handleSelectPlan = (plan: typeof plans[0]) => {
+    addItem({
+      name: `${plan.name} - Singapore`,
+      price: plan.priceINR,
+      ram: plan.ram,
+      cpu: plan.cpu,
+      storage: plan.storage,
+    });
+  };
 
   return (
     <>
@@ -61,19 +124,76 @@ const SingaporeMinecraft = () => {
               </p>
             </motion.div>
 
+            {/* Plans Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {plans.map((plan, index) => (
+                <motion.div
+                  key={plan.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="glass rounded-2xl p-6 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] transition-all duration-300"
+                >
+                  <h3 className="font-display text-2xl font-bold text-foreground mb-4">
+                    {plan.name}
+                  </h3>
+                  
+                  <div className="space-y-3 mb-6">
+                    <div className="flex items-center gap-3 text-muted-foreground">
+                      <Cpu className="w-4 h-4 text-primary" />
+                      <span>CPU: {plan.cpu}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-muted-foreground">
+                      <Server className="w-4 h-4 text-primary" />
+                      <span>RAM: {plan.ram}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-muted-foreground">
+                      <HardDrive className="w-4 h-4 text-primary" />
+                      <span>Storage: {plan.storage}</span>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-white/10 pt-4 mb-6">
+                    <p className="text-sm text-muted-foreground mb-1">Price:</p>
+                    <p className="text-xl font-bold text-foreground">
+                      ₹{plan.priceINR} / month
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      ₨{plan.pricePKR} PKR / month
+                    </p>
+                  </div>
+
+                  <Button 
+                    className="w-full"
+                    onClick={() => handleSelectPlan(plan)}
+                  >
+                    Select Plan
+                  </Button>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Guarantees */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="glass rounded-2xl p-12 text-center max-w-2xl mx-auto"
+              transition={{ delay: 0.6 }}
+              className="glass rounded-2xl p-8"
             >
-              <Server className="w-16 h-16 text-primary mx-auto mb-6" />
-              <h2 className="font-display text-2xl font-bold text-foreground mb-4">
-                Plans Coming Soon
-              </h2>
-              <p className="text-muted-foreground">
-                We're preparing amazing Singapore Minecraft hosting plans. Check back soon!
-              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div className="flex flex-col items-center gap-3">
+                  <Clock className="w-8 h-8 text-primary" />
+                  <p className="font-semibold text-foreground">99.9% Uptime Guarantee</p>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <Shield className="w-8 h-8 text-primary" />
+                  <p className="font-semibold text-foreground">Advanced DDoS Protection</p>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <Database className="w-8 h-8 text-primary" />
+                  <p className="font-semibold text-foreground">No Data Loss Guarantee</p>
+                </div>
+              </div>
             </motion.div>
           </div>
         </main>
