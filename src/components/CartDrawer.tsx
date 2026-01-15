@@ -2,13 +2,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ShoppingCart, Plus, Minus, Trash2, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 
 interface CartDrawerProps {
-  onCheckout: () => void;
+  onCheckout?: () => void;
 }
 
 const CartDrawer = ({ onCheckout }: CartDrawerProps) => {
   const { items, isCartOpen, setCartOpen, removeItem, updateQuantity, totalPrice, totalItems, clearCart } = useCart();
+  const navigate = useNavigate();
 
   return (
     <AnimatePresence>
@@ -124,7 +126,11 @@ const CartDrawer = ({ onCheckout }: CartDrawerProps) => {
                     className="w-full gap-2"
                     onClick={() => {
                       setCartOpen(false);
-                      onCheckout();
+                      if (onCheckout) {
+                        onCheckout();
+                      } else {
+                        navigate("/pricing");
+                      }
                     }}
                   >
                     <CreditCard className="w-4 h-4" />
