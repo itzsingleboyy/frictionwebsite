@@ -21,8 +21,8 @@ const supportChannels = [
     icon: Mail,
     title: "Email Support",
     description: "Send us an email and we'll respond within 24 hours.",
-    link: "mailto:support@aizynodes.com",
-    linkText: "support@aizynodes.com",
+    link: "mailto:aizyextra@gmail.com",
+    linkText: "aizyextra@gmail.com",
     highlight: false,
   },
   {
