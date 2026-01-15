@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import { Shield, Clock, CheckCircle, XCircle, Users, Server, DollarSign, Trash2, Edit } from "lucide-react";
+import { Shield, Clock, CheckCircle, XCircle, Users, Server, DollarSign, Trash2, Edit, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -214,13 +214,21 @@ const Admin = () => {
               animate={{ opacity: 1, y: 0 }}
               className="mb-12"
             >
-              <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 flex items-center gap-3">
-                <Shield className="w-10 h-10 text-primary" />
-                <span className="text-foreground">Admin </span>
-                <span className="gradient-text">
-                  Panel
-                </span>
-              </h1>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <h1 className="font-display text-4xl md:text-5xl font-bold flex items-center gap-3">
+                  <Shield className="w-10 h-10 text-primary" />
+                  <span className="text-foreground">Admin </span>
+                  <span className="gradient-text">Panel</span>
+                </h1>
+                <Button
+                  variant="hero"
+                  onClick={() => navigate("/admin/editor")}
+                  className="w-fit"
+                >
+                  <Palette className="w-4 h-4 mr-2" />
+                  Site Editor
+                </Button>
+              </div>
             </motion.div>
 
             {/* Stats */}
