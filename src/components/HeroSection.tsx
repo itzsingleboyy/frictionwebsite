@@ -224,7 +224,7 @@ const HeroSection = () => {
           >
             <div className="inline-flex items-center gap-4 glass-strong px-6 py-4 rounded-2xl">
               <div className="w-12 h-12 rounded-xl overflow-hidden">
-                <img src={promoLogo} alt="FrictionHost" className="w-full h-full object-cover" />
+                <img src={promoLogo} alt="AizyNodes" className="w-full h-full object-cover" />
               </div>
               <div className="text-left">
                 <p className="text-sm text-muted-foreground">Welcome Offer!</p>

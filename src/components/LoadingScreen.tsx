@@ -124,7 +124,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             >
               <img 
                 src={logo} 
-                alt="FrictionHost Logo" 
+                alt="AizyNodes Logo" 
                 className="w-28 h-28 rounded-3xl glow-primary" 
               />
             </motion.div>
@@ -138,7 +138,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             className="font-display text-5xl font-bold mb-2"
           >
             <span className="gradient-text">
-              FrictionHost
+              AizyNodes
             </span>
           </motion.h1>
           <motion.p

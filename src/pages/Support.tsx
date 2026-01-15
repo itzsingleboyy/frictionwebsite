@@ -21,8 +21,8 @@ const supportChannels = [
     icon: Mail,
     title: "Email Support",
     description: "Send us an email and we'll respond within 24 hours.",
-    link: "mailto:support@frictionhost.com",
-    linkText: "support@frictionhost.com",
+    link: "mailto:support@aizynodes.com",
+    linkText: "support@aizynodes.com",
     highlight: false,
   },
   {
@@ -53,8 +53,8 @@ const Support = () => {
   return (
     <>
       <Helmet>
-        <title>Support - FrictionHost</title>
-        <meta name="description" content="Get help from FrictionHost. Join our Discord, email us, or use live chat for instant support." />
+        <title>Support - AizyNodes</title>
+        <meta name="description" content="Get help from AizyNodes. Join our Discord, email us, or use live chat for instant support." />
       </Helmet>
 
       <div className="min-h-screen bg-background">

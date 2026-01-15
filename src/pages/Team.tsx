@@ -12,7 +12,7 @@ const teamMembers = [
     name: "Jayth",
     role: "Founder",
     icon: Crown,
-    description: "Visionary founder leading FrictionHost to revolutionize game hosting in India.",
+    description: "Visionary founder leading AizyNodes to revolutionize game hosting in India.",
     image: jaythAvatar,
     gradient: "from-primary to-accent",
     social: {
@@ -74,10 +74,10 @@ const Team = () => {
   return (
     <>
       <Helmet>
-        <title>Our Team - FrictionHost</title>
+        <title>Our Team - AizyNodes</title>
         <meta
           name="description"
-          content="Meet the team behind FrictionHost - passionate gamers and tech experts dedicated to providing the best game server hosting experience."
+          content="Meet the team behind AizyNodes - passionate gamers and tech experts dedicated to providing the best game server hosting experience."
         />
       </Helmet>
 
@@ -108,7 +108,7 @@ const Team = () => {
                 </span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                The passionate leaders behind FrictionHost, dedicated to delivering
+                The passionate leaders behind AizyNodes, dedicated to delivering
                 the ultimate gaming experience.
               </p>
             </motion.div>
@@ -216,7 +216,7 @@ const Team = () => {
                   We're always looking for talented individuals passionate about gaming and technology.
                 </p>
                 <a
-                  href="mailto:careers@frictionhost.com"
+                  href="mailto:careers@aizynodes.com"
                   className="px-6 py-3 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-semibold rounded-xl transition-all glow-primary"
                 >
                   Contact Us

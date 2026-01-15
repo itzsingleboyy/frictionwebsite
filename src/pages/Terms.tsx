@@ -9,14 +9,14 @@ const sections = [
   {
     icon: Scale,
     title: "1. Acceptance of Terms",
-    content: `By accessing and using FrictionHost services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing our services.
+    content: `By accessing and using AizyNodes services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing our services.
 
 These terms apply to all users, including visitors, registered users, and paying customers. We reserve the right to modify these terms at any time, and your continued use of our services constitutes acceptance of any changes.`
   },
   {
     icon: Server,
     title: "2. Service Description",
-    content: `FrictionHost provides premium game server hosting and VPS services including:
+    content: `AizyNodes provides premium game server hosting and VPS services including:
 
 • **Game Server Hosting**: Dedicated resources for Minecraft, Rust, Palworld, GTA V/FiveM, Terraria, ARK, and other popular games
 • **VPS Hosting**: Virtual Private Servers with full root access
@@ -205,7 +205,7 @@ All services are provided on an "as is" basis with 99.9% uptime guarantee.`
 • We are not responsible for data loss - maintain your own backups
 
 **Indemnification:**
-• You agree to indemnify FrictionHost against claims arising from your use of services
+• You agree to indemnify AizyNodes against claims arising from your use of services
 • This includes legal fees and damages
 
 **Dispute Resolution:**
@@ -219,8 +219,8 @@ const Terms = () => {
   return (
     <>
       <Helmet>
-        <title>Terms of Service - FrictionHost</title>
-        <meta name="description" content="Read FrictionHost's Terms of Service. Understand our policies for game server hosting, VPS services, payments, and more." />
+        <title>Terms of Service - AizyNodes</title>
+        <meta name="description" content="Read AizyNodes's Terms of Service. Understand our policies for game server hosting, VPS services, payments, and more." />
       </Helmet>
 
       <div className="min-h-screen bg-background">

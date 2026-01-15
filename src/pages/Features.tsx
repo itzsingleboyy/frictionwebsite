@@ -91,7 +91,7 @@ const Features = () => {
   return (
     <>
       <Helmet>
-        <title>Features - FrictionHost</title>
+        <title>Features - AizyNodes</title>
         <meta name="description" content="Discover our premium features: AMD Ryzen CPUs, NVMe storage, DDoS protection, and more." />
       </Helmet>
 

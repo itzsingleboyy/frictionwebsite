@@ -75,10 +75,10 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               className="flex items-center gap-2 cursor-pointer"
             >
-              <img src={logo} alt="FrictionHost Logo" className="w-9 h-9 rounded-lg" />
+              <img src={logo} alt="AizyNodes Logo" className="w-9 h-9 rounded-lg" />
               <div className="flex flex-col items-start">
                 <span className="font-display font-bold text-xl gradient-text leading-tight">
-                  FrictionHost
+                  AizyNodes
                 </span>
                 <span className="text-[9px] text-foreground/60 tracking-wide leading-tight">
                   India's Future Hosting

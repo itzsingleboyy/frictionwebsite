@@ -211,7 +211,7 @@ const Pricing = () => {
   return (
     <>
       <Helmet>
-        <title>Pricing - FrictionHost</title>
+        <title>Pricing - AizyNodes</title>
         <meta name="description" content="Affordable game server hosting plans starting at ₹45/month. Choose the perfect plan for your community." />
       </Helmet>
 

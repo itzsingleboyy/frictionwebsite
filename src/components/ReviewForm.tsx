@@ -129,7 +129,7 @@ const ReviewForm = ({ user, onReviewSubmitted }: ReviewFormProps) => {
         <Textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Share your experience with FrictionHost..."
+          placeholder="Share your experience with AizyNodes..."
           className="bg-zinc-800/50 border-zinc-700 text-white placeholder:text-zinc-500 min-h-[100px]"
           maxLength={500}
         />

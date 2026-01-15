@@ -195,7 +195,7 @@ const Admin = () => {
   return (
     <>
       <Helmet>
-        <title>Admin Panel - FrictionHost</title>
+        <title>Admin Panel - AizyNodes</title>
         <meta name="description" content="Admin dashboard for managing orders" />
       </Helmet>
 
