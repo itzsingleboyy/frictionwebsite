@@ -121,17 +121,16 @@ const CartDrawer = ({ onCheckout }: CartDrawerProps) => {
                 </div>
                 
                 <div className="space-y-2">
-                  <Button
-                    variant="hero"
-                    className="w-full gap-2"
-                    onClick={() => {
-                      setCartOpen(false);
-                      window.open("https://discord.gg/dHyeVaCuxC", "_blank");
-                    }}
+                  <a
+                    href="https://discord.gg/dHyeVaCuxC"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setCartOpen(false)}
+                    className="w-full gap-2 inline-flex items-center justify-center bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-[gradient_3s_ease-in-out_infinite] text-white font-semibold px-8 py-3 rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] transition-all duration-300"
                   >
                     <ExternalLink className="w-4 h-4" />
                     Payment on Discord - Join Now
-                  </Button>
+                  </a>
                   <Button
                     variant="outline"
                     className="w-full"
