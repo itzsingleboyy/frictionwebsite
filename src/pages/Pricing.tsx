@@ -101,7 +101,21 @@ const Pricing = () => {
                   <div className="relative z-10">
                     {/* Flag and Location */}
                     <div className="flex items-center gap-4 mb-4">
-                      <span className="text-5xl">{category.flag}</span>
+                      <motion.span 
+                        className="text-5xl inline-block"
+                        animate={{ 
+                          y: [0, -8, 0],
+                          rotate: [0, 5, -5, 0]
+                        }}
+                        transition={{ 
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.2
+                        }}
+                      >
+                        {category.flag}
+                      </motion.span>
                       <div>
                         <h3 className="font-display text-2xl font-bold text-foreground">
                           {category.name}
