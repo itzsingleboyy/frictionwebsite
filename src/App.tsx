@@ -28,6 +28,8 @@ import NotFound from "./pages/NotFound";
 import CursorGlow from "./components/CursorGlow";
 import ScrollProgress from "./components/ScrollProgress";
 import NoiseOverlay from "./components/NoiseOverlay";
+import FloatingCartButton from "./components/FloatingCartButton";
+import CartDrawer from "./components/CartDrawer";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +44,8 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <FloatingCartButton />
+            <CartDrawer />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/features" element={<Features />} />
