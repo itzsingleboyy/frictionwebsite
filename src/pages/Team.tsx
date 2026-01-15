@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Twitter, Linkedin, Github, Crown } from "lucide-react";
-import jaythAvatar from "@/assets/jayth-avatar.png";
+import aizyAvatar from "@/assets/aizy-avatar.png";
 
 const teamMembers = [
   {
-    name: "Jayth",
+    name: "Aizy_OG",
     role: "Founder",
     icon: Crown,
     description: "Visionary founder leading AizyNodes to revolutionize game hosting in India.",
-    image: jaythAvatar,
+    image: aizyAvatar,
     gradient: "from-primary to-accent",
     social: {
       twitter: "#",
@@ -91,7 +91,7 @@ const Team = () => {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+              className="flex justify-center max-w-5xl mx-auto"
             >
               {teamMembers.map((member) => {
                 const IconComponent = member.icon;
