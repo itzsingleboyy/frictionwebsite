@@ -115,6 +115,18 @@ const MinecraftHosting = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Coming Soon Notice */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-center mt-12"
+            >
+              <p className="text-muted-foreground">
+                Plans coming soon for all locations!
+              </p>
+            </motion.div>
           </div>
         </main>
         <Footer />
