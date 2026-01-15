@@ -13,6 +13,9 @@ import DubaiVps from "./pages/pricing/DubaiVps";
 import JapanVps from "./pages/pricing/JapanVps";
 import IndiaVps from "./pages/pricing/IndiaVps";
 import MinecraftHosting from "./pages/pricing/MinecraftHosting";
+import SingaporeMinecraft from "./pages/pricing/minecraft/SingaporeMinecraft";
+import UAEMinecraft from "./pages/pricing/minecraft/UAEMinecraft";
+import IndiaMinecraft from "./pages/pricing/minecraft/IndiaMinecraft";
 import Team from "./pages/Team";
 import Support from "./pages/Support";
 import Auth from "./pages/Auth";
@@ -48,6 +51,9 @@ const App = () => (
               <Route path="/pricing/japan-vps" element={<JapanVps />} />
               <Route path="/pricing/india-vps" element={<IndiaVps />} />
               <Route path="/pricing/minecraft" element={<MinecraftHosting />} />
+              <Route path="/pricing/minecraft/singapore" element={<SingaporeMinecraft />} />
+              <Route path="/pricing/minecraft/uae" element={<UAEMinecraft />} />
+              <Route path="/pricing/minecraft/india" element={<IndiaMinecraft />} />
               <Route path="/team" element={<Team />} />
               <Route path="/support" element={<Support />} />
               <Route path="/auth" element={<Auth />} />
