@@ -19,6 +19,8 @@ interface Order {
   status: "pending" | "approved" | "rejected" | "cancelled";
   upi_transaction_id: string | null;
   panel_link: string | null;
+  panel_id: string | null;
+  panel_password: string | null;
   server_created: boolean;
   created_at: string;
 }
@@ -189,12 +191,23 @@ const Dashboard = () => {
                           </div>
                           
                           {order.status === "approved" && order.panel_link && (
-                            <Button variant="hero" size="sm" asChild>
-                              <a href={order.panel_link} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="w-4 h-4 mr-2" />
-                                Open Panel
-                              </a>
-                            </Button>
+                            <div className="flex flex-col gap-2">
+                              <div className="glass-dark rounded-lg p-3 text-sm">
+                                <div className="text-muted-foreground mb-1">Panel Credentials:</div>
+                                <div className="text-foreground">
+                                  <span className="text-primary">ID:</span> {order.panel_id || "N/A"}
+                                </div>
+                                <div className="text-foreground">
+                                  <span className="text-primary">Password:</span> {order.panel_password || "N/A"}
+                                </div>
+                              </div>
+                              <Button variant="hero" size="sm" asChild>
+                                <a href={order.panel_link} target="_blank" rel="noopener noreferrer">
+                                  <ExternalLink className="w-4 h-4 mr-2" />
+                                  Open Panel
+                                </a>
+                              </Button>
+                            </div>
                           )}
                         </div>
                       </div>
