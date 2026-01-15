@@ -147,7 +147,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             transition={{ delay: 0.5 }}
             className="text-muted-foreground text-sm mb-10"
           >
-            World's Best Hosting
+            Premium Game Hosting
           </motion.p>
 
           {/* Progress Bar Container */}
