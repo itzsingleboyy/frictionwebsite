@@ -15,15 +15,15 @@ const Footer = () => {
       { name: "Terraria", href: "/#games", isExternal: false },
     ],
     company: [
-      { name: "About Us", href: "/#features", isExternal: false },
+      { name: "About Us", href: "/features", isExternal: false },
       { name: "Our Team", href: "/team", isExternal: false },
       { name: "Pricing", href: "/pricing", isExternal: false },
       { name: "Features", href: "/features", isExternal: false },
     ],
     support: [
       { name: "Help Center", href: "/support", isExternal: false },
-      { name: "Contact Us", href: "/support", isExternal: false },
-      { name: "Live Chat", href: "/support", isExternal: false },
+      { name: "Contact Us", href: "/support#contact", isExternal: false },
+      { name: "Live Chat", href: "/support#chat", isExternal: false },
       { name: "Discord", href: "https://discord.gg/93mRrFkutF", isExternal: true },
     ],
     legal: [
