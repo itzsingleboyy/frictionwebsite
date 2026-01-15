@@ -57,7 +57,13 @@ const DubaiVps = () => {
                 <span className="text-sm text-primary">Dubai VPS</span>
               </div>
               <div className="flex items-center justify-center gap-4 mb-6">
-                <span className="text-6xl">🇦🇪</span>
+                <motion.span 
+                  className="text-6xl inline-block"
+                  animate={{ y: [0, -8, 0], rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  🇦🇪
+                </motion.span>
                 <h1 className="font-display text-5xl md:text-6xl font-bold">
                   <span className="gradient-text">Dubai VPS</span>
                 </h1>
