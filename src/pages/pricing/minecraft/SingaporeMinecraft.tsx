@@ -134,7 +134,7 @@ const SingaporeMinecraft = () => {
                   transition={{ delay: index * 0.1 }}
                   className="glass rounded-2xl p-6 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] transition-all duration-300"
                 >
-                  <h3 className="font-display text-2xl font-bold text-foreground mb-4">
+                  <h3 className="font-display text-2xl font-bold gradient-text mb-4">
                     {plan.name}
                   </h3>
                   
