@@ -131,7 +131,7 @@ const Home = () => {
                   <div className="inline-flex flex-col items-center gap-3 glass-strong rounded-2xl p-6">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-accent" />
-                      <span className="text-sm text-muted-foreground">Welcome Offer - 20% OFF</span>
+                      <span className="text-sm text-muted-foreground">Welcome Offer - 25% OFF</span>
                       <Sparkles className="w-5 h-5 text-accent" />
                     </div>
                     <div className="flex items-center gap-3">

@@ -229,7 +229,7 @@ const HeroSection = () => {
               <div className="text-left">
                 <p className="text-sm text-muted-foreground">Welcome Offer!</p>
                 <p className="font-semibold text-foreground">
-                  Get <span className="text-primary">20% OFF</span> your first order.
+                  Get <span className="text-primary">25% OFF</span> your first order.
                 </p>
               </div>
               <button
