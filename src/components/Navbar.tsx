@@ -81,7 +81,7 @@ const Navbar = () => {
                   AizyNodes
                 </span>
                 <span className="text-[9px] text-foreground/60 tracking-wide leading-tight">
-                  India's Future Hosting
+                  World's Best Hosting
                 </span>
               </div>
             </motion.div>
