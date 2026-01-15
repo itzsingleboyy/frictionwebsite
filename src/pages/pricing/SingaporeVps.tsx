@@ -56,18 +56,9 @@ const SingaporeVps = () => {
                 <Server className="w-4 h-4 text-primary" />
                 <span className="text-sm text-primary">Singapore VPS</span>
               </div>
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <motion.span 
-                  className="text-6xl inline-block"
-                  animate={{ y: [0, -8, 0], rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  🇸🇬
-                </motion.span>
-                <h1 className="font-display text-5xl md:text-6xl font-bold">
-                  <span className="gradient-text">Singapore VPS</span>
-                </h1>
-              </div>
+              <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
+                <span className="gradient-text">Singapore VPS</span>
+              </h1>
               <div className="flex items-center justify-center gap-2 text-muted-foreground mb-4">
                 <MapPin className="w-4 h-4" />
                 <span>Singapore</span>

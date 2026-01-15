@@ -10,7 +10,6 @@ const vpsCategories = [
   {
     name: "Singapore VPS",
     location: "Singapore",
-    flag: "🇸🇬",
     description: "Low latency servers for Southeast Asian users with premium bandwidth.",
     route: "/pricing/singapore-vps",
     color: "from-red-500/20 to-primary/20",
@@ -18,7 +17,6 @@ const vpsCategories = [
   {
     name: "Dubai VPS",
     location: "Dubai, UAE",
-    flag: "🇦🇪",
     description: "High-performance servers in the Middle East with excellent connectivity.",
     route: "/pricing/dubai-vps",
     color: "from-amber-500/20 to-primary/20",
@@ -26,7 +24,6 @@ const vpsCategories = [
   {
     name: "Japan VPS",
     location: "Tokyo, Japan",
-    flag: "🇯🇵",
     description: "Ultra-fast servers with low ping for Asian gaming communities.",
     route: "/pricing/japan-vps",
     color: "from-pink-500/20 to-primary/20",
@@ -34,7 +31,6 @@ const vpsCategories = [
   {
     name: "India VPS",
     location: "Mumbai, India",
-    flag: "🇮🇳",
     description: "Blazing fast servers optimized for Indian users with local support.",
     route: "/pricing/india-vps",
     color: "from-orange-500/20 to-primary/20",
@@ -99,31 +95,14 @@ const Pricing = () => {
                   <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   
                   <div className="relative z-10">
-                    {/* Flag and Location */}
-                    <div className="flex items-center gap-4 mb-4">
-                      <motion.span 
-                        className="text-5xl inline-block"
-                        animate={{ 
-                          y: [0, -8, 0],
-                          rotate: [0, 5, -5, 0]
-                        }}
-                        transition={{ 
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.2
-                        }}
-                      >
-                        {category.flag}
-                      </motion.span>
-                      <div>
-                        <h3 className="font-display text-2xl font-bold text-foreground">
-                          {category.name}
-                        </h3>
-                        <div className="flex items-center gap-1 text-muted-foreground text-sm">
-                          <MapPin className="w-3 h-3" />
-                          {category.location}
-                        </div>
+                    {/* Name and Location */}
+                    <div className="mb-4">
+                      <h3 className="font-display text-2xl font-bold text-foreground">
+                        {category.name}
+                      </h3>
+                      <div className="flex items-center gap-1 text-muted-foreground text-sm mt-1">
+                        <MapPin className="w-3 h-3" />
+                        {category.location}
                       </div>
                     </div>
 
