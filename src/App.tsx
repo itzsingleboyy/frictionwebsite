@@ -40,6 +40,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         <TooltipProvider>
+          <SmoothScroll />
           <CursorGlow />
           <ScrollProgress />
           <NoiseOverlay />
