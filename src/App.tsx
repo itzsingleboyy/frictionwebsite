@@ -28,6 +28,7 @@ import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import CursorGlow from "./components/CursorGlow";
 import ScrollProgress from "./components/ScrollProgress";
+import SmoothScroll from "./components/SmoothScroll";
 import NoiseOverlay from "./components/NoiseOverlay";
 import FloatingCartButton from "./components/FloatingCartButton";
 import CartDrawer from "./components/CartDrawer";
@@ -39,6 +40,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         <TooltipProvider>
+          <SmoothScroll />
           <CursorGlow />
           <ScrollProgress />
           <NoiseOverlay />
